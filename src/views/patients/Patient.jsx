@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { api } from '../../Api'
 import { CButton, CRow, CCol, CAvatar } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPlus } from '@coreui/icons'
+import { cilPlus, cilPencil } from '@coreui/icons'
 
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 
@@ -31,24 +31,26 @@ const PatientsDashboard = () => {
 
   return (
     <>
-      <CRow>
-        <div className="d-sm-flex justify-content-between mb-3 align-items-center">
-          <div className="row row-cols-auto d-flex align-items-center">
-            <CAvatar size="xl" src={avatar5} className="p-0" />
-            <div className="ms-1">
-              <h5 className="m-0">Nome Utente</h5>
-              <small className="m-0">Idade</small>
-            </div>
-          </div>
-          <div className="d-grid gap-2">
-            <CButton color="primary">
-              <CIcon icon={cilPlus} />
-              &ensp;Adicionar despesa
-            </CButton>
-          </div>
-        </div>
+      <CRow className="d-sm-flex justify-content-between mb-3 align-items-center">
+        <CCol sm="auto" className="d-flex align-items-center">
+          <CAvatar size="xl" src={avatar5} className="p-0" />
+          <CCol className="ms-3">
+            <h5 className="m-0">Nome Utente</h5>
+            <small className="m-0">Idade</small>
+          </CCol>
+        </CCol>
+        <CCol sm="auto" className="ms-auto">
+          <CButton size="sm" variant="outline" color="primary" className="me-2">
+            <CIcon icon={cilPencil} /> &thinsp;Alterar dados
+          </CButton>
+          <CButton size="sm" color="primary">
+            <CIcon icon={cilPlus} /> &thinsp;Adicionar despesa
+          </CButton>
+        </CCol>
       </CRow>
-      <CRow>as</CRow>
+      <CRow>
+        <CCol></CCol>
+      </CRow>
     </>
   )
 }
