@@ -36,17 +36,17 @@ const AppHeader = () => {
         </CHeaderBrand>
         <CHeaderNav className="d-none d-sm-flex me-auto">
           <CNavItem>
-            <CNavLink to="/" component={NavLink} className="fw-bold fs-14">
+            <CNavLink to="/" component={NavLink} className="fs-14">
               Início
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink to="/utentes" component={NavLink} className="fw-bold fs-14">
+            <CNavLink to="/utentes" component={NavLink} className="fs-14">
               Utentes
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink to="/despesas" component={NavLink} className="fw-bold fs-14">
+            <CNavLink to="/despesas" component={NavLink} className="fs-14">
               Despesas
             </CNavLink>
           </CNavItem>

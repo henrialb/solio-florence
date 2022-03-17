@@ -44,7 +44,7 @@ const PatientsTable = ({ patients }) => {
               <CTableDataCell className="text-center">
                 <CAvatar size="md" src={avatar5} />
               </CTableDataCell>
-              <CTableDataCell>{patient.name}</CTableDataCell>
+              <CTableDataCell className="fw-semibold">{patient.name}</CTableDataCell>
               <CTableDataCell className="text-center">{age(patient.dob)}</CTableDataCell>
               <CTableDataCell className="text-center">
                 <CBadge color="light" className="text-secondary">

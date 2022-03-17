@@ -51,7 +51,7 @@ const PatientsDashboard = () => {
             <CCardBody>
               <CRow>
                 <CCol sm={7}>
-                  <p>{patient.fullName}</p>
+                  <p className="fw-semibold">{patient.fullName}</p>
                   <p>Nº CC: {patient.citizenNo}</p>
                   <p>NIF: {patient.nifNo}</p>
                   <p>Nº SS: {patient.socialSecurityNo}</p>
