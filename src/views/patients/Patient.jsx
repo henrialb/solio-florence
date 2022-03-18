@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { api } from '../../Api'
+import { api } from 'src/Api'
 import {
   CButton,
   CRow,
@@ -111,7 +111,7 @@ const PatientsDashboard = () => {
           </CNav>
         </CCol>
         <CCol sm="auto" className="ms-auto">
-          <CButton size="sm" variant="outline" color="primary" className="me-2">
+          <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
             <CIcon icon={cilPencil} /> &thinsp;Alterar dados
           </CButton>
           <CButton size="sm" color="primary">
