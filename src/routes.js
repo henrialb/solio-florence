@@ -9,6 +9,7 @@ const Patient = React.lazy(() => import('./views/patients/Patient'))
 const routes = [
   { path: '/utentes', name: 'Utentes', element: PatientsDashboard, exact: true },
   { path: '/utentes/:id', name: 'Utente', element: Patient },
+  { path: '/utentes/:id/:tab', name: 'Utente', element: Patient },
 
   { path: '/', exact: true, name: '' },
   { path: '/inicio', name: '', element: Dashboard },

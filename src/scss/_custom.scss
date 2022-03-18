@@ -1,7 +1,42 @@
+a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .pointer {
   cursor: pointer;
 }
 
 .fs-14 {
   font-size: 14px;
+}
+
+.tab-item {
+  a {
+    color: $dark;
+    font-weight: 400;
+  }
+
+  .icon {
+    color: $secondary;
+  }
+
+  a:hover {
+    border-bottom: 2px solid $secondary;
+    color: $dark;
+  }
+
+  .active {
+    border-bottom: 2px solid #fd8c73;
+    font-weight: 600;
+    color: $dark;
+
+    .icon {
+      color: $dark;
+    }
+  }
+
+  .active:hover {
+    border-bottom: 2px solid #fd8c73;
+  }
 }

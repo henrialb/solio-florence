@@ -10,6 +10,7 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CButton,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilMenu, cilBell } from '@coreui/icons'
@@ -54,20 +55,19 @@ const AppHeader = () => {
         <CHeaderNav className="ms-3 align-items-center">
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
+              <CIcon icon={cilBell} />
             </CNavLink>
           </CNavItem>
-          <CNavItem>
-            <AddDropdownMenu />
-          </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav className="ms-3">
+          <AddDropdownMenu />
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />
       <CContainer fluid>
         <AppBreadcrumb />
+        <CButton size="sm" variant="outline" color="danger" className="fw-normal">
+          &thinsp;Emergência
+        </CButton>
       </CContainer>
     </CHeader>
   )
