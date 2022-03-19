@@ -47,13 +47,16 @@ const PatientsDashboard = () => {
 
   switch (tab) {
     case 'despesas':
-      var tabContent = <PatientExpenses />
+      var tabContent = <PatientExpenses patientId={patient.id} />
+      activeTab = 2
       break
     case 'contas':
       var tabContent = <PatientReceivables />
+      activeTab = 3
       break
     // case 'contactos':
     //   var tabContent = <PatientContacts />
+    // activeTab = 4
     //   break
     default:
       var tabContent = <PatientData patient={patient} />
