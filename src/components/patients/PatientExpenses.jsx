@@ -18,9 +18,10 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilTrash, cilShortText } from '@coreui/icons'
+import { groupBy } from 'src/functions'
 
 const PatientExpenses = ({ patientId }) => {
-  const [expenses, setPatient] = useState([])
+  const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
 
   useEffect(() => {
@@ -28,13 +29,20 @@ const PatientExpenses = ({ patientId }) => {
       api
         .get(`/patient_expenses/patient/${patientId}`)
         .then((response) => {
-          setPatient(response.data)
+          setExpenses(response.data)
         })
         .catch((error) => {
           setError(error)
         })
     }
   }, [patientId])
+
+  const groupByReceivable = groupBy('patientReceivableId')
+  const sortedExpenses = groupByReceivable(expenses)
+
+  // var indexOfUndefined = sortedExpenses.indexOf(undefined)
+  console.log(expenses)
+  console.log(sortedExpenses[undefined])
 
   return (
     <>
