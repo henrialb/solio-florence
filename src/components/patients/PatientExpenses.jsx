@@ -17,7 +17,7 @@ import {
   CBadge,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilTrash, cilShortText } from '@coreui/icons'
+import { cilTrash, cilShortText, cilMoney } from '@coreui/icons'
 import { groupBy } from 'src/functions'
 
 const PatientExpenses = ({ patientId }) => {
@@ -38,11 +38,15 @@ const PatientExpenses = ({ patientId }) => {
   }, [patientId])
 
   const groupByReceivable = groupBy('patientReceivableId')
-  const sortedExpenses = groupByReceivable(expenses)
+  const sortedExpenses = Object.entries(groupByReceivable(expenses))
 
   // var indexOfUndefined = sortedExpenses.indexOf(undefined)
-  console.log(expenses)
-  console.log(sortedExpenses[undefined])
+  // console.log(expenses)
+  // if (sortedExpenses[undefined]) {
+  //   const openExpenses = sortedExpenses.splice(1)
+  // }
+
+  console.log(Object.entries(sortedExpenses))
 
   return (
     <>
@@ -50,7 +54,6 @@ const PatientExpenses = ({ patientId }) => {
         <CCol md={9}>
           <CCard>
             <CCardBody>
-              Despesas
               <CTable align="middle" className="mb-2 border bg-white" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
@@ -66,9 +69,17 @@ const PatientExpenses = ({ patientId }) => {
                       <CTableDataCell>{expense.date}</CTableDataCell>
                       <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
                       <CTableDataCell className="text-center">{expense.amount}</CTableDataCell>
-                      <CTableDataCell className="text-end pe-4">
-                        <CIcon icon={cilShortText} className="me-2" />
-                        <CIcon icon={cilTrash} />
+                      <CTableDataCell className="text-end pe-4 text-secondary">
+                        {expense.note && <CIcon icon={cilShortText} />}
+                        {expense.patientReceivableId && (
+                          <CIcon
+                            icon={cilMoney}
+                            className={`ms-2 ${
+                              expense.receivableStatus === 'paid' && 'text-success'
+                            }`}
+                          />
+                        )}
+                        {!expense.patientReceivableId && <CIcon icon={cilTrash} className="ms-2" />}
                       </CTableDataCell>
                     </CTableRow>
                   ))}
