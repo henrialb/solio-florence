@@ -39,6 +39,6 @@ const PatientData = ({ patient }) => {
   )
 }
 
-PatientData.propTypes = { patient: PropTypes.array }
+PatientData.propTypes = { patient: PropTypes.object }
 
 export default PatientData

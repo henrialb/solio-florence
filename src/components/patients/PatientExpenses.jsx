@@ -46,13 +46,18 @@ const PatientExpenses = ({ patientId }) => {
   //   const openExpenses = sortedExpenses.splice(1)
   // }
 
-  console.log(sortedExpenses)
+  console.log(sortedExpenses[undefined])
+
+  if (expenses.length === 0) {
+    return null
+  }
 
   return (
     <>
       <CRow>
         <CCol md={9}>
           <CCard>
+            <CCardBody>Despesas</CCardBody>
             <CCardBody>
               <CTable align="middle" className="mb-2 border bg-white" hover responsive>
                 <CTableHead color="light">
@@ -64,7 +69,7 @@ const PatientExpenses = ({ patientId }) => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {expenses.map((expense, index) => (
+                  {sortedExpenses[undefined].map((expense, index) => (
                     <CTableRow className="pointer" key={index}>
                       <CTableDataCell>{expense.date}</CTableDataCell>
                       <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>

@@ -17,7 +17,7 @@ const PatientReceivables = React.lazy(() => import('src/components/patients/Pati
 const PatientsDashboard = () => {
   const { id } = useParams()
   const { tab } = useParams()
-  const [patient, setPatient] = useState([])
+  const [patient, setPatient] = useState({})
   const [error, setError] = useState(null) // TODO: handle errors
   var [activeTab, setActiveTab] = useState(1)
 
