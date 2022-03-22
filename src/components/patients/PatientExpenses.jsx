@@ -38,15 +38,15 @@ const PatientExpenses = ({ patientId }) => {
   }, [patientId])
 
   const groupByReceivable = groupBy('patientReceivableId')
-  const sortedExpenses = Object.entries(groupByReceivable(expenses))
+  const sortedExpenses = groupByReceivable(expenses)
+  // const sortedExpenses = Object.entries(groupByReceivable(expenses))
 
-  // var indexOfUndefined = sortedExpenses.indexOf(undefined)
   // console.log(expenses)
   // if (sortedExpenses[undefined]) {
   //   const openExpenses = sortedExpenses.splice(1)
   // }
 
-  console.log(Object.entries(sortedExpenses))
+  console.log(sortedExpenses)
 
   return (
     <>
