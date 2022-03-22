@@ -2,18 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api } from 'src/Api'
-import {
-  CButton,
-  CRow,
-  CCol,
-  CAvatar,
-  CCard,
-  CCardBody,
-  CContainer,
-  CNav,
-  CNavItem,
-  CNavLink,
-} from '@coreui/react'
+import { CButton, CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus, cilPencil, cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
 import { age } from 'src/functions'
@@ -56,7 +45,7 @@ const PatientsDashboard = () => {
       break
     // case 'contactos':
     //   var tabContent = <PatientContacts />
-    // activeTab = 4
+    //   activeTab = 4
     //   break
     default:
       var tabContent = <PatientData patient={patient} />
