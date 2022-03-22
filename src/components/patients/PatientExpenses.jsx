@@ -6,7 +6,6 @@ import {
   CCard,
   CCardBody,
   CContainer,
-  CAvatar,
   CCol,
   CTable,
   CTableBody,
@@ -14,11 +13,9 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-  CBadge,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilTrash, cilShortText, cilMoney } from '@coreui/icons'
-import { groupBy } from 'src/functions'
 
 const PatientExpenses = ({ patientId }) => {
   const [expenses, setExpenses] = useState([])
@@ -37,17 +34,6 @@ const PatientExpenses = ({ patientId }) => {
     }
   }, [patientId])
 
-  const groupByReceivable = groupBy('patientReceivableId')
-  const sortedExpenses = groupByReceivable(expenses)
-  // const sortedExpenses = Object.entries(groupByReceivable(expenses))
-
-  // console.log(expenses)
-  // if (sortedExpenses[undefined]) {
-  //   const openExpenses = sortedExpenses.splice(1)
-  // }
-
-  console.log(sortedExpenses[undefined])
-
   if (expenses.length === 0) {
     return null
   }
@@ -57,7 +43,6 @@ const PatientExpenses = ({ patientId }) => {
       <CRow>
         <CCol md={9}>
           <CCard>
-            <CCardBody>Despesas</CCardBody>
             <CCardBody>
               <CTable align="middle" className="mb-2 border bg-white" hover responsive>
                 <CTableHead color="light">
@@ -69,7 +54,7 @@ const PatientExpenses = ({ patientId }) => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {sortedExpenses[undefined].map((expense, index) => (
+                  {expenses.map((expense, index) => (
                     <CTableRow className="pointer" key={index}>
                       <CTableDataCell>{expense.date}</CTableDataCell>
                       <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>

@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { NavLink, useParams, Routes, Route, Navigate } from 'react-router-dom'
 import { api } from 'src/Api'
 import { CButton, CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -19,7 +19,7 @@ const PatientsDashboard = () => {
   const { tab } = useParams()
   const [patient, setPatient] = useState({})
   const [error, setError] = useState(null) // TODO: handle errors
-  var [activeTab, setActiveTab] = useState(1)
+  // var [activeTab, setActiveTab] = useState(1)
 
   useEffect(() => {
     if (id) {
@@ -34,23 +34,6 @@ const PatientsDashboard = () => {
     }
   }, [id])
 
-  switch (tab) {
-    case 'despesas':
-      var tabContent = <PatientExpenses patientId={patient.id} />
-      activeTab = 2
-      break
-    case 'contas':
-      var tabContent = <PatientReceivables />
-      activeTab = 3
-      break
-    // case 'contactos':
-    //   var tabContent = <PatientContacts />
-    //   activeTab = 4
-    //   break
-    default:
-      var tabContent = <PatientData patient={patient} />
-  }
-
   return (
     <>
       <CRow className="d-md-flex justify-content-between mb-3 align-items-center">
@@ -64,39 +47,22 @@ const PatientsDashboard = () => {
         <CCol className="ms-md-4">
           <CNav className="justify-content-start">
             <CNavItem className="tab-item">
-              <CNavLink
-                href={`#/utentes/${id}`}
-                active={activeTab === 1}
-                onClick={() => setActiveTab(1)}
-              >
+              <CNavLink to="dados" component={NavLink}>
                 <CIcon icon={cilUser} className="me-1" /> Dados
               </CNavLink>
             </CNavItem>
             <CNavItem className="tab-item">
-              <CNavLink
-                href={`#/utentes/${id}/despesas`}
-                active={activeTab === 2}
-                onClick={() => setActiveTab(2)}
-              >
+              <CNavLink to="despesas" component={NavLink}>
                 <CIcon icon={cilDescription} className="me-1" /> Despesas
               </CNavLink>
             </CNavItem>
             <CNavItem className="tab-item">
-              <CNavLink
-                href={`#/utentes/${id}/contas`}
-                active={activeTab === 3}
-                onClick={() => setActiveTab(3)}
-              >
+              <CNavLink to="contas" component={NavLink}>
                 <CIcon icon={cilEuro} className="me-1" /> Contas
               </CNavLink>
             </CNavItem>
             <CNavItem className="tab-item">
-              <CNavLink
-                href={`#/utentes/${id}/contactos`}
-                active={activeTab === 4}
-                onClick={() => setActiveTab(4)}
-                disabled
-              >
+              <CNavLink to="contactos" component={NavLink} disabled>
                 <CIcon icon={cilAddressBook} className="me-1" /> Contactos
               </CNavLink>
             </CNavItem>
@@ -111,7 +77,12 @@ const PatientsDashboard = () => {
           </CButton>
         </CCol>
       </CRow>
-      {tabContent}
+      <Routes>
+        <Route path="/" element={<Navigate replace to="dados" />} />
+        <Route path="dados" element={<PatientData patient={patient} />} />
+        <Route path="despesas" element={<PatientExpenses patientId={patient.id} />} />
+        <Route path="contas" element={<PatientReceivables />} />
+      </Routes>
     </>
   )
 }
