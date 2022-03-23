@@ -116,8 +116,8 @@ const PatientExpenses = ({ patientId }) => {
                 {withoutOpenExpenses && <ExpensesTableHead />}
                 <CTableBody>
                   {closedExpenses.map(({ id, expenses }) => (
-                    <>
-                      <CTableRow className="bg-light">
+                    <React.Fragment key={id}>
+                      <CTableRow className="bg-light" key={id}>
                         <th colSpan="4">
                           Conta <span className="small fw-normal text-muted ms-1">#{id}</span>
                         </th>
@@ -139,7 +139,7 @@ const PatientExpenses = ({ patientId }) => {
                           </CTableDataCell>
                         </CTableRow>
                       ))}
-                    </>
+                    </React.Fragment>
                   ))}
                 </CTableBody>
               </CTable>
