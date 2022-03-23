@@ -44,7 +44,7 @@ const PatientsDashboard = () => {
             <small className="text-medium-emphasis">{age(patient.dob)} anos</small>
           </CCol>
         </CCol>
-        <CCol className="ms-md-4">
+        <CCol className="ms-md-5">
           <CNav className="justify-content-start">
             <CNavItem className="tab-item">
               <CNavLink to="dados" component={NavLink}>
@@ -67,14 +67,6 @@ const PatientsDashboard = () => {
               </CNavLink>
             </CNavItem>
           </CNav>
-        </CCol>
-        <CCol sm="auto" className="ms-auto">
-          <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
-            <CIcon icon={cilPencil} /> &thinsp;Alterar dados
-          </CButton>
-          <CButton size="sm" color="primary">
-            <CIcon icon={cilPlus} /> &thinsp;Adicionar despesa
-          </CButton>
         </CCol>
       </CRow>
       <Routes>
