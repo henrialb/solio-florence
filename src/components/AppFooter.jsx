@@ -11,7 +11,11 @@ const AppFooter = () => {
         <span className="ms-1 small">&copy; Sólio Lar Lda.</span>
       </div>
       <div className="ms-auto">
-        <span className="me-1 small">Reportar erro ou sugestão</span>
+        <span className="me-1 small">
+          <a href="mailto:someone@companyname.com?&subject=Reportar erro (v0.1.0)">
+            Reportar erro ou sugestão
+          </a>
+        </span>
       </div>
     </CFooter>
   )
