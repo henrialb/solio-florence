@@ -48,7 +48,7 @@ const PatientsTable = ({ patients }) => {
               <CTableDataCell className="text-center">{age(patient.dob)}</CTableDataCell>
               <CTableDataCell className="text-center">
                 <CBadge color="light" className="text-secondary">
-                  {patient.covenant !== 'personal' ? patient.covenant.toUpperCase() : ''}
+                  {patient.covenant !== 'personal' && patient.covenant.toUpperCase()}
                 </CBadge>
               </CTableDataCell>
             </CTableRow>
