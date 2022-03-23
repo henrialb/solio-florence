@@ -1,3 +1,4 @@
 import AppHeaderDropdown from './AppHeaderDropdown'
+import AddDropdownMenu from './AddDropdownMenu'
 
-export { AppHeaderDropdown }
+export { AppHeaderDropdown, AddDropdownMenu }

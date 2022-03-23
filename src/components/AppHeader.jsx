@@ -10,12 +10,13 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CButton,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
+import { cilMenu, cilBell } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown } from './header/index'
+import { AppHeaderDropdown, AddDropdownMenu } from './header/index'
 import { logo } from 'src/assets/brand/logo'
 
 const AppHeader = () => {
@@ -31,46 +32,42 @@ const AppHeader = () => {
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-        <CHeaderBrand className="mx-auto d-md-none" to="/">
+        <CHeaderBrand className="d-none" to="/">
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
-        <CHeaderNav className="d-none d-md-flex me-auto">
+        <CHeaderNav className="d-none d-sm-flex me-auto">
           <CNavItem>
-            <CNavLink to="/dashboard" component={NavLink}>
-              Dashboard
+            <CNavLink to="/" component={NavLink} className="fs-14">
+              Início
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="/#/utentes">Utentes</CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
-          </CNavItem>
-        </CHeaderNav>
-        <CHeaderNav>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
+            <CNavLink to="/utentes" component={NavLink} className="fs-14">
+              Utentes
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
+            <CNavLink to="/despesas" component={NavLink} className="fs-14">
+              Despesas
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
-        <CHeaderNav className="ms-3">
+        <CHeaderNav className="ms-3 align-items-center">
+          <CNavItem>
+            <CNavLink href="#">
+              <CIcon icon={cilBell} />
+            </CNavLink>
+          </CNavItem>
+          <AddDropdownMenu />
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />
       <CContainer fluid>
         <AppBreadcrumb />
+        <CButton size="sm" variant="outline" color="danger" className="fw-normal">
+          &thinsp;Emergência
+        </CButton>
       </CContainer>
     </CHeader>
   )

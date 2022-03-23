@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner, CRow, CCol } from '@coreui/react'
-import { DocsCallout } from 'src/components'
+import { FlorenceBetaCallout } from 'src/components'
 
 // routes config
 import routes from '../routes'
@@ -9,11 +9,11 @@ import routes from '../routes'
 const AppContent = () => {
   return (
     <CContainer lg>
-      <CRow>
+      {/* <CRow>
         <CCol xs={12}>
-          <DocsCallout name="Badges" href="components/badge" />
+          <FlorenceBetaCallout name="Florence" href="" />
         </CCol>
-      </CRow>
+      </CRow> */}
       <Suspense fallback={<CSpinner color="primary" />}>
         <Routes>
           {routes.map((route, idx) => {
@@ -29,7 +29,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="/" element={<Navigate to="inicio" replace />} />
         </Routes>
       </Suspense>
     </CContainer>
