@@ -23,4 +23,8 @@ const organiseExpenses = (expenses) => {
   return [withReceivable, withoutReceivable]
 }
 
-export { age, organiseExpenses }
+const dateFormatted = (date) => {
+  return new Date(date).toLocaleDateString()
+}
+
+export { age, organiseExpenses, dateFormatted }

@@ -19,7 +19,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus, cilTrash, cilShortText, cilMoney } from '@coreui/icons'
-import { organiseExpenses } from 'src/functions'
+import { organiseExpenses, dateFormatted } from 'src/functions'
 
 
 const ExpensesTableHead = () => {
@@ -44,7 +44,7 @@ const OpenExpensesTable = ({ expenses }) => {
         <CTableBody>
           {expenses.map((expense) => (
             <CTableRow className="pointer" key={expense.id}>
-              <CTableDataCell>{expense.date}</CTableDataCell>
+              <CTableDataCell>{dateFormatted(expense.date)}</CTableDataCell>
               <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
               <CTableDataCell className="text-center">{expense.amount}</CTableDataCell>
               <CTableDataCell className="text-end pe-4 text-secondary">
@@ -124,7 +124,7 @@ const PatientExpenses = ({ patientId }) => {
                       </CTableRow>
                       {expenses.map((expense) => (
                         <CTableRow className="pointer" key={expense.id}>
-                          <CTableDataCell>{expense.date}</CTableDataCell>
+                          <CTableDataCell>{dateFormatted(expense.date)}</CTableDataCell>
                           <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
                           <CTableDataCell className="text-center">{expense.amount}</CTableDataCell>
                           <CTableDataCell className="text-end pe-4 text-secondary">
