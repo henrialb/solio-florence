@@ -14,6 +14,8 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPencil } from '@coreui/icons'
+import { dateFormatted } from 'src/functions'
+
 
 const PatientData = ({ patient }) => {
   const covenant = (patient.covenant !== 'personal') ? patient.covenant : false
@@ -27,7 +29,7 @@ const PatientData = ({ patient }) => {
               <CRow className="mb-3">
                 <CCol className="me-1">
                   <CCardTitle>{patient.fullName}</CCardTitle>
-                  <CCardSubtitle className="mb-2 text-medium-emphasis small">{new Date(patient.dob).toLocaleDateString()}</CCardSubtitle>
+                  <CCardSubtitle className="mb-2 text-medium-emphasis small">{dateFormatted(patient.dob)}</CCardSubtitle>
                 </CCol>
                 {covenant && (
                   <CCol>
