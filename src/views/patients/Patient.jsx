@@ -52,7 +52,7 @@ const PatientsDashboard = () => {
               </CNavLink>
             </CNavItem>
             <CNavItem className="tab-item">
-              <CNavLink to="despesas" component={NavLink}>
+              <CNavLink to="despesas" component={NavLink} disabled={patient.covenant === 'scml'}>
                 <CIcon icon={cilDescription} className="me-1" /> Despesas
               </CNavLink>
             </CNavItem>
