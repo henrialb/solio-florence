@@ -34,6 +34,8 @@ const PatientsDashboard = () => {
     }
   }, [id])
 
+  const patientScml = patient.covenant === 'scml'
+
   return (
     <>
       <CRow className="d-md-flex justify-content-between mb-3 align-items-center">
@@ -52,7 +54,7 @@ const PatientsDashboard = () => {
               </CNavLink>
             </CNavItem>
             <CNavItem className="tab-item">
-              <CNavLink to="despesas" component={NavLink} disabled={patient.covenant === 'scml'}>
+              <CNavLink to="despesas" component={NavLink} disabled={patientScml}>
                 <CIcon icon={cilDescription} className="me-1" /> Despesas
               </CNavLink>
             </CNavItem>
@@ -73,7 +75,10 @@ const PatientsDashboard = () => {
         <Route path="/" element={<Navigate replace to="dados" />} />
         <Route path="dados" element={<PatientData patient={patient} />} />
         <Route path="despesas" element={<PatientExpenses patientId={patient.id} />} />
-        <Route path="contas" element={<PatientReceivables />} />
+        <Route
+          path="contas"
+          element={<PatientReceivables patientId={patient.id} patientScml={patientScml} />}
+        />
       </Routes>
     </>
   )

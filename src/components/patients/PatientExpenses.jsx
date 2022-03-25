@@ -19,7 +19,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus, cilTrash, cilShortText, cilMoney } from '@coreui/icons'
-import { organiseExpenses, dateFormatted } from 'src/functions'
+import { organiseExpenses, dateFormat, currencyFormat } from 'src/functions'
 
 
 const ExpensesTableHead = () => {
@@ -28,7 +28,7 @@ const ExpensesTableHead = () => {
       <CTableRow>
         <CTableHeaderCell>Data</CTableHeaderCell>
         <CTableHeaderCell>Descrição</CTableHeaderCell>
-        <CTableHeaderCell className="text-center">Valor</CTableHeaderCell>
+        <CTableHeaderCell className="text-end">Valor</CTableHeaderCell>
         <CTableHeaderCell></CTableHeaderCell>
       </CTableRow>
     </CTableHead>
@@ -44,9 +44,9 @@ const OpenExpensesTable = ({ expenses }) => {
         <CTableBody>
           {expenses.map((expense) => (
             <CTableRow className="pointer" key={expense.id}>
-              <CTableDataCell>{dateFormatted(expense.date)}</CTableDataCell>
+              <CTableDataCell>{dateFormat(expense.date)}</CTableDataCell>
               <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-              <CTableDataCell className="text-center">{expense.amount}</CTableDataCell>
+              <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
               <CTableDataCell className="text-end pe-4 text-secondary">
                 {expense.note && <CIcon icon={cilShortText} />}
                 {expense.patientReceivableId && (
@@ -83,22 +83,21 @@ const PatientExpenses = ({ patientId }) => {
     }
   }, [patientId])
 
-  console.log(closedExpenses)
-
   if (expenses.length === 0) {
     return null
   }
 
   const withoutOpenExpenses = (openExpenses.length === 0) ? true : false
+
   return (
     <>
       <CRow>
         <CCol md={9}>
           <CCard>
             <CCardBody>
-              <CRow>
+              <CRow className="mb-2">
                 <CCol sm="auto" className="ms-auto">
-                  <CButton size="sm" variant="outline" color="primary" className="me-2"  disabled={withoutOpenExpenses}>
+                  <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
                     <CIcon icon={cilMoney} /> &thinsp;Fazer conta
                   </CButton>
                   <CButton size="sm" color="primary">
@@ -124,9 +123,9 @@ const PatientExpenses = ({ patientId }) => {
                       </CTableRow>
                       {expenses.map((expense) => (
                         <CTableRow className="pointer" key={expense.id}>
-                          <CTableDataCell>{dateFormatted(expense.date)}</CTableDataCell>
+                          <CTableDataCell>{dateFormat(expense.date)}</CTableDataCell>
                           <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-                          <CTableDataCell className="text-center">{expense.amount}</CTableDataCell>
+                          <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
                           <CTableDataCell className="text-end pe-4 text-secondary">
                             {expense.note && <CIcon icon={cilShortText} />}
                             <CIcon
