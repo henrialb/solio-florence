@@ -114,11 +114,11 @@ const PatientExpenses = ({ patientId }) => {
               <CTable align="middle" className="mb-2 border bg-white" hover responsive>
                 {withoutOpenExpenses && <ExpensesTableHead />}
                 <CTableBody>
-                  {closedExpenses.map(({ id, expenses }) => (
-                    <React.Fragment key={id}>
-                      <CTableRow className="bg-light" key={id}>
+                  {closedExpenses.map(({ receivableId, receivableStatus, expenses }) => (
+                    <React.Fragment key={receivableId}>
+                      <CTableRow className="bg-light" key={receivableId}>
                         <th colSpan="4">
-                          Conta <span className="small fw-normal text-muted ms-1">#{id}</span>
+                          Conta <span className="small fw-normal text-muted ms-1">#{receivableId} {receivableStatus}</span>
                         </th>
                       </CTableRow>
                       {expenses.map((expense) => (

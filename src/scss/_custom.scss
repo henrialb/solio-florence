@@ -40,3 +40,12 @@ a {
     border-bottom: 2px solid #fd8c73;
   }
 }
+
+.dashed {
+  border-width: 1px;
+  border-style: dashed;
+}
+
+.border-success-dark {
+  border: $success-dark 1px solid;
+}
