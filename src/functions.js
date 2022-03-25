@@ -6,6 +6,16 @@ const age = (dob) => {
   return Math.abs(age_dt.getUTCFullYear() - 1970)
 }
 
+const dateFormat = (date) => {
+  return new Date(date).toLocaleDateString()
+}
+
+const currencyFormat = (num, decimals = 2) =>
+  Number(num).toLocaleString('pt-PT', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })
+
 const organiseExpenses = (expenses) => {
   const patientReceivableIds = expenses.map((receivable) => receivable.patientReceivableId)
   const uniquePatientReceivableIds = Array.from(new Set(patientReceivableIds))
@@ -23,8 +33,35 @@ const organiseExpenses = (expenses) => {
   return [withReceivable, withoutReceivable]
 }
 
-const dateFormatted = (date) => {
-  return new Date(date).toLocaleDateString()
+const organiseReceivables = (receivables) => {
+  const expensesReceivables = receivables.filter(function (receivable) {
+    return receivable.source === 'expenses'
+  })
+
+  const monthlyFeeReceivables = receivables.filter(function (receivable) {
+    return receivable.source === 'monthly_fee'
+  })
+
+  return [expensesReceivables, monthlyFeeReceivables]
 }
 
-export { age, organiseExpenses, dateFormatted }
+const organiseReceivablesScml = (receivables) => {
+  const personalReceivables = receivables.filter(function (receivable) {
+    return receivable.accountable === 'personal'
+  })
+
+  const scmlReceivables = receivables.filter(function (receivable) {
+    return receivable.accountable === 'scml'
+  })
+
+  return [personalReceivables, scmlReceivables]
+}
+
+export {
+  age,
+  dateFormat,
+  currencyFormat,
+  organiseExpenses,
+  organiseReceivables,
+  organiseReceivablesScml,
+}

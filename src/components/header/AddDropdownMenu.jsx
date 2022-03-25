@@ -8,7 +8,7 @@ import {
   CDropdownMenu,
   CDropdownToggle,
 } from '@coreui/react'
-import { cilPlus, cilDescription, cilNotes, cilPin } from '@coreui/icons'
+import { cilPlus, cilEuro, cilMoney, cilDescription, cilNotes, cilPin } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
 const AppHeaderDropdown = () => {
@@ -21,6 +21,14 @@ const AppHeaderDropdown = () => {
         <CDropdownItem href="#" className="mt-2">
           <CIcon icon={cilDescription} className="me-2" />
           Adicionar despesa
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <CIcon icon={cilEuro} className="me-2" />
+          Adicionar conta
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <CIcon icon={cilMoney} className="me-2" />
+          Registar pagamento
         </CDropdownItem>
         <CDropdownDivider />
         <CDropdownItem href="#" disabled>
