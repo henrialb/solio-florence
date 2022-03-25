@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 import { organiseReceivables, currencyFormat } from 'src/functions'
 import ReceivableStatusBadge from './ReceivableStatusBadge'
 import ReceivablesTableHead from './ReceivablesTableHead'
+import ReceivableOptions from './ReceivableOptions'
 
 const ReceivablesTables = ({ receivables, patientScml }) => {
   const [receivables1, receivables2] = organiseReceivables(receivables, patientScml)
@@ -31,8 +32,8 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
               <CTableDataCell className="text-end font-monospace">
                 {currencyFormat(receivable.amount, title === 'Mensalidades' ? 0 : 2)}
               </CTableDataCell>
-              <CTableDataCell className="text-end pe-4 text-secondary">
-                {receivable.status}
+              <CTableDataCell className="text-end text-secondary">
+                <ReceivableOptions />
               </CTableDataCell>
             </CTableRow>
           ))}

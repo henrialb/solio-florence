@@ -65,9 +65,10 @@ const AppHeader = () => {
       <CHeaderDivider />
       <CContainer fluid>
         <AppBreadcrumb />
-        <CButton size="sm" variant="outline" color="danger" className="fw-normal">
+        {/* TODO: use button here? */}
+        {/* <CButton size="sm" variant="outline" color="danger" className="fw-normal">
           &thinsp;Emergência
-        </CButton>
+        </CButton> */}
       </CContainer>
     </CHeader>
   )
