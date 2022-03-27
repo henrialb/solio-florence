@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   CBadge,
   CDropdown,
@@ -9,39 +10,42 @@ import {
   CDropdownToggle,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilMoney, cilOptions, cilDescription, cilEuro, cilPin, cilNotes } from '@coreui/icons'
+import {
+  cilMoney,
+  cilOptions,
+  cilDescription,
+  cilEuro,
+  cilPin,
+  cilNotes,
+  cilTrash,
+  cilCheckAlt,
+  cilPencil,
+} from '@coreui/icons'
 
-const ReceivableOptions = () => {
+const ReceivableOptions = ({ hasNote }) => {
   return (
     <CDropdown alignment="end">
-      <CDropdownToggle color="transparent" caret={false} className="p-0">
-        <CIcon icon={cilOptions} className="text-high-emphasis" />
+      <CDropdownToggle color="transparent" caret={false} className="p-1">
+        <CIcon icon={cilOptions} className="text-high-emphasis ms-2" />
       </CDropdownToggle>
-      <CDropdownMenu className="pt-0" placement="bottom-end pt-4">
-        <CDropdownItem href="#" className="mt-2">
-          <CIcon icon={cilDescription} className="me-2" />
-          Adicionar despesa
+      <CDropdownMenu className="py-2" placement="bottom-end">
+        <CDropdownItem href="#">
+          <CIcon icon={cilCheckAlt} className="me-2" />
+          Marcar pago
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilEuro} className="me-2" />
-          Adicionar conta
+          <CIcon icon={cilPencil} className="me-2" />
+          {hasNote ? 'Alterar nota' : 'Escrever nota'}
         </CDropdownItem>
-        <CDropdownItem href="#">
-          <CIcon icon={cilMoney} className="me-2" />
-          Registar pagamento
-        </CDropdownItem>
-        <CDropdownDivider />
-        <CDropdownItem href="#" disabled>
-          <CIcon icon={cilPin} className="me-2" />
-          Aviso enfermagem
-        </CDropdownItem>
-        <CDropdownItem href="#" disabled>
-          <CIcon icon={cilNotes} className="me-2" />
-          Resumo diário
+        <CDropdownItem href="#" className="">
+          <CIcon icon={cilTrash} className="me-2" />
+          Eliminar
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
   )
 }
+
+ReceivableOptions.propTypes = { hasNote: PropTypes.bool }
 
 export default ReceivableOptions

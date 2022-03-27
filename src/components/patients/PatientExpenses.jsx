@@ -2,68 +2,12 @@
 import React, { useState, useEffect } from 'react'
 import { api } from 'src/Api'
 import PropTypes from 'prop-types'
-import {
-  CRow,
-  CCard,
-  CCardBody,
-  CContainer,
-  CCol,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-  CCardTitle,
-  CButton,
-} from '@coreui/react'
+import { CRow, CCard, CCardBody, CContainer, CCol, CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPlus, cilTrash, cilShortText, cilMoney } from '@coreui/icons'
-import { organiseExpenses, dateFormat, currencyFormat } from 'src/functions'
-
-
-const ExpensesTableHead = () => {
-  return (
-    <CTableHead color="light">
-      <CTableRow>
-        <CTableHeaderCell>Data</CTableHeaderCell>
-        <CTableHeaderCell>Descrição</CTableHeaderCell>
-        <CTableHeaderCell className="text-end">Valor</CTableHeaderCell>
-        <CTableHeaderCell></CTableHeaderCell>
-      </CTableRow>
-    </CTableHead>
-  )
-}
-
-const OpenExpensesTable = ({ expenses }) => {
-  return (
-    <>
-      <CCardTitle>Em aberto</CCardTitle>
-      <CTable align="middle" className="mb-2 border bg-white" hover responsive>
-        <ExpensesTableHead />
-        <CTableBody>
-          {expenses.map((expense) => (
-            <CTableRow className="pointer" key={expense.id}>
-              <CTableDataCell>{dateFormat(expense.date)}</CTableDataCell>
-              <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-              <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
-              <CTableDataCell className="text-end pe-4 text-secondary">
-                {expense.note && <CIcon icon={cilShortText} />}
-                {expense.patientReceivableId && (
-                  <CIcon
-                    icon={cilMoney}
-                    className={`ms-2 ${expense.receivableStatus === 'paid' && 'text-success'}`}
-                  />
-                )}
-                {!expense.patientReceivableId && <CIcon icon={cilTrash} className="ms-2" />}
-              </CTableDataCell>
-            </CTableRow>
-          ))}
-        </CTableBody>
-      </CTable>
-    </>
-  )
-}
+import { cilPlus, cilMoney } from '@coreui/icons'
+import { organiseExpenses } from 'src/functions'
+import OpenExpensesTable from './expenses/OpenExpensesTable'
+import ClosedExpensesTable from './expenses/ClosedExpensesTable'
 
 const PatientExpenses = ({ patientId }) => {
   const [expenses, setExpenses] = useState([])
@@ -87,7 +31,8 @@ const PatientExpenses = ({ patientId }) => {
     return null
   }
 
-  const withoutOpenExpenses = (openExpenses.length === 0) ? true : false
+  const withoutOpenExpenses = openExpenses.length === 0 ? true : false
+  const withClosedExpenses = closedExpenses.length !== 0 ? true : false
 
   return (
     <>
@@ -110,38 +55,9 @@ const PatientExpenses = ({ patientId }) => {
               ) : (
                 <OpenExpensesTable expenses={openExpenses} />
               )}
-              <CCardTitle className="mt-4">Em contas</CCardTitle>
-              <CTable align="middle" className="mb-2 border bg-white" hover responsive>
-                {withoutOpenExpenses && <ExpensesTableHead />}
-                <CTableBody>
-                  {closedExpenses.map(({ receivableId, receivableStatus, expenses }) => (
-                    <React.Fragment key={receivableId}>
-                      <CTableRow className="bg-light" key={receivableId}>
-                        <th colSpan="4">
-                          Conta <span className="small fw-normal text-muted ms-1">#{receivableId} {receivableStatus}</span>
-                        </th>
-                      </CTableRow>
-                      {expenses.map((expense) => (
-                        <CTableRow className="pointer" key={expense.id}>
-                          <CTableDataCell>{dateFormat(expense.date)}</CTableDataCell>
-                          <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-                          <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
-                          <CTableDataCell className="text-end pe-4 text-secondary">
-                            {expense.note && <CIcon icon={cilShortText} />}
-                            <CIcon
-                              icon={cilMoney}
-                              className={`ms-2 ${
-                                expense.receivableStatus === 'paid' && 'text-success'
-                              }`}
-                            />
-                            {!expense.patientReceivableId && <CIcon icon={cilTrash} className="ms-2" />}
-                          </CTableDataCell>
-                        </CTableRow>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </CTableBody>
-              </CTable>
+              {withClosedExpenses && (
+                <ClosedExpensesTable expenses={closedExpenses} includeTableHeader={withoutOpenExpenses} />
+              )}
             </CCardBody>
           </CCard>
         </CCol>

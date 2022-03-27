@@ -7,7 +7,10 @@ import {
   CTableBody,
   CTableDataCell,
   CCardTitle,
+  CPopover,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilNotes } from '@coreui/icons'
 import PropTypes from 'prop-types'
 import { organiseReceivables, currencyFormat } from 'src/functions'
 import ReceivableStatusBadge from './ReceivableStatusBadge'
@@ -20,7 +23,7 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
   const ReceivablesTable = ({ title, receivables }) => (
     <CCol>
       <CCardTitle>{title}</CCardTitle>
-      <CTable align="middle" className="mb-2 border bg-white" hover responsive>
+      <CTable align="middle" className="mb-2 bg-white" hover>
         <ReceivablesTableHead />
         <CTableBody>
           {receivables.map((receivable) => (
@@ -33,7 +36,12 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
                 {currencyFormat(receivable.amount, title === 'Mensalidades' ? 0 : 2)}
               </CTableDataCell>
               <CTableDataCell className="text-end text-secondary">
-                <ReceivableOptions />
+                {receivable.note && (
+                  <CPopover content={receivable.note}>
+                    <CIcon icon={cilNotes} />
+                  </CPopover>
+                )}
+                <ReceivableOptions hasNote={typeof receivable.note !== 'undefined'} />
               </CTableDataCell>
             </CTableRow>
           ))}
@@ -43,7 +51,7 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
   )
 
   return (
-    <CRow>
+    <CRow className="gx-5">
       <ReceivablesTable title={!patientScml ? 'Despesas' : 'Utente'} receivables={receivables1} />
       <ReceivablesTable title={!patientScml ? 'Mensalidades' : 'SCML'} receivables={receivables2} />
     </CRow>
