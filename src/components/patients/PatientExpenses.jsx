@@ -8,10 +8,12 @@ import { cilPlus, cilMoney } from '@coreui/icons'
 import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
+import AddExpenseModal from './expenses/AddExpenseModal'
 
 const PatientExpenses = ({ patientId }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
+  const [addExpenseVisible, setAddExpenseVisible] = useState(false)
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
 
   useEffect(() => {
@@ -45,9 +47,7 @@ const PatientExpenses = ({ patientId }) => {
                   <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
                     <CIcon icon={cilMoney} /> &thinsp;Fazer conta
                   </CButton>
-                  <CButton size="sm" color="primary">
-                    <CIcon icon={cilPlus} /> &thinsp;Adicionar despesa
-                  </CButton>
+                  <AddExpenseModal />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
