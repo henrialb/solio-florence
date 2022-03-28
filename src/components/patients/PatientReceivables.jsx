@@ -31,7 +31,7 @@ const PatientReceivables = ({ patientId, patientScml }) => {
             <CRow className="mb-2">
               <CCol sm="auto" className="ms-auto">
                 <CButton size="sm" color="primary">
-                  <CIcon icon={cilMoney} /> &thinsp;Registar pagamennto
+                  <CIcon icon={cilMoney} /> &thinsp;Registar pagamento
                 </CButton>
               </CCol>
             </CRow>
