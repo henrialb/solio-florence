@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const age = (dob) => {
   var dobdate = new Date(dob)
   var diff_ms = Date.now() - dobdate.getTime()
@@ -17,14 +18,19 @@ const currencyFormat = (num, decimals = 2) =>
   })
 
 const organiseExpenses = (expenses) => {
-  const patientReceivableIds = expenses.map((receivable) => receivable.patientReceivableId)
+  const patientReceivableIds = expenses.map((expense) => expense.patientReceivableId)
   const uniquePatientReceivableIds = Array.from(new Set(patientReceivableIds))
-  const sortedIds = uniquePatientReceivableIds.sort().reverse().filter(Boolean)
+  const sortedReceivableIds = uniquePatientReceivableIds.sort().reverse().filter(Boolean)
 
-  const withReceivable = sortedIds.map((id) => {
+  const withReceivable = sortedReceivableIds.map((receivableId) => {
+    const receivableExpenses = expenses.filter(
+      (expense) => expense.patientReceivableId === receivableId,
+    )
+
     return {
-      id,
-      expenses: expenses.filter((expense) => expense.patientReceivableId === id),
+      receivableId,
+      receivableStatus: receivableExpenses[0].receivableStatus,
+      expenses: receivableExpenses,
     }
   })
 
@@ -33,28 +39,28 @@ const organiseExpenses = (expenses) => {
   return [withReceivable, withoutReceivable]
 }
 
-const organiseReceivables = (receivables) => {
-  const expensesReceivables = receivables.filter(function (receivable) {
-    return receivable.source === 'expenses'
-  })
+const organiseReceivables = (receivables, patientScml) => {
+  const receivables1 = !patientScml ? (
+    receivables.filter(function (receivable) {
+      return receivable.source === 'expenses'
+    })
+  ) : (
+    receivables.filter(function (receivable) {
+      return receivable.accountable === 'personal'
+    })
+  )
 
-  const monthlyFeeReceivables = receivables.filter(function (receivable) {
-    return receivable.source === 'monthly_fee'
-  })
+  const receivables2 = !patientScml ? (
+    receivables.filter(function (receivable) {
+      return receivable.source === 'monthly_fee'
+    })
+  ) : (
+    receivables.filter(function (receivable) {
+      return receivable.accountable === 'scml'
+    })
+  )
 
-  return [expensesReceivables, monthlyFeeReceivables]
-}
-
-const organiseReceivablesScml = (receivables) => {
-  const personalReceivables = receivables.filter(function (receivable) {
-    return receivable.accountable === 'personal'
-  })
-
-  const scmlReceivables = receivables.filter(function (receivable) {
-    return receivable.accountable === 'scml'
-  })
-
-  return [personalReceivables, scmlReceivables]
+  return [receivables1, receivables2]
 }
 
 export {
@@ -63,5 +69,4 @@ export {
   currencyFormat,
   organiseExpenses,
   organiseReceivables,
-  organiseReceivablesScml,
 }
