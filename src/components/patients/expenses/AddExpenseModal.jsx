@@ -12,6 +12,7 @@ import {
   CFormLabel,
   CFormInput,
   CFormSelect,
+  CFormTextarea,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
@@ -32,23 +33,37 @@ const AddExpenseModal = () => {
         <CModalBody>
           <CForm className="row g-3">
             <CCol md={12}>
-              <CFormLabel htmlFor="inputEmail4">Utente</CFormLabel>
-              <CFormSelect id="inputState">
+              <CFormLabel htmlFor="inputPatient" className="fw-bold">
+                Utente
+              </CFormLabel>
+              <CFormSelect id="inputPatient">
                 <option>Escolher...</option>
                 <option>...</option>
               </CFormSelect>
             </CCol>
             <CCol md={12}>
-              <CFormLabel htmlFor="inputCity">Descrição</CFormLabel>
-              <CFormInput id="inputCity" />
+              <CFormLabel htmlFor="inputDescription" className="fw-bold">
+                Descrição
+              </CFormLabel>
+              <CFormInput id="inputDescription" />
             </CCol>
             <CCol md={6}>
-              <CFormLabel htmlFor="inputEmail4">Valor</CFormLabel>
-              <CFormInput type="decimal" id="inputEmail4" className="font-monospace" />
+              <CFormLabel htmlFor="inputAmount" className="fw-bold">
+                Valor
+              </CFormLabel>
+              <CFormInput type="decimal" id="inputAmount" className="font-monospace" />
             </CCol>
             <CCol md={6}>
-              <CFormLabel htmlFor="inputPassword4">Data</CFormLabel>
+              <CFormLabel htmlFor="inputDate" className="fw-bold">
+                Data
+              </CFormLabel>
               <PickDate />
+            </CCol>
+            <CCol md={12}>
+              <CFormLabel htmlFor="inputNote" className="fw-bold">
+                Nota
+              </CFormLabel>
+              <CFormTextarea />
             </CCol>
           </CForm>
         </CModalBody>
