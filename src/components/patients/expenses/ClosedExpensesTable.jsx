@@ -5,7 +5,7 @@ import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover } f
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilCheckAlt } from '@coreui/icons'
 import ExpensesTableHead from './ExpensesTableHead'
-import { dateFormat, currencyFormat } from 'src/functions'
+import ExpensesDetailsModal from './ExpensesDetailsModal'
 
 const ClosedExpensesTable = ({ expenses, includeTableHeader }) => {
   return (
@@ -25,18 +25,7 @@ const ClosedExpensesTable = ({ expenses, includeTableHeader }) => {
                 </CTableDataCell>
               </CTableRow>
               {expenses.map((expense) => (
-                <CTableRow className="pointer" key={expense.id}>
-                  <CTableDataCell className="font-monospace small text-dark">{dateFormat(expense.date)}</CTableDataCell>
-                  <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-                  <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
-                  <CTableDataCell className="text-end pe-2 text-secondary">
-                    {expense.note && (
-                      <CPopover content={expense.note}>
-                        <CIcon icon={cilNotes} className="me-1" />
-                      </CPopover>
-                    )}
-                  </CTableDataCell>
-                </CTableRow>
+                <ExpensesDetailsModal expense={expense} key={expense.id} />
               ))}
             </React.Fragment>
           ))}
