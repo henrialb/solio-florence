@@ -74,7 +74,10 @@ const PatientsDashboard = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="dados" />} />
         <Route path="dados" element={<PatientData patient={patient} />} />
-        <Route path="despesas" element={<PatientExpenses patientId={patient.id} />} />
+        <Route
+          path="despesas"
+          element={<PatientExpenses patientId={patient.id} patientFullName={patient.fullName} />}
+        />
         <Route
           path="contas"
           element={<PatientReceivables patientId={patient.id} patientScml={patientScml} />}

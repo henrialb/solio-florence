@@ -10,7 +10,7 @@ import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
 import AddExpenseModal from './expenses/AddExpenseModal'
 
-const PatientExpenses = ({ patientId }) => {
+const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
@@ -46,7 +46,7 @@ const PatientExpenses = ({ patientId }) => {
                   <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
                     <CIcon icon={cilMoney} /> &thinsp;Fazer conta
                   </CButton>
-                  <AddExpenseModal />
+                  <AddExpenseModal patientId={patientId} patientFullName={patientFullName} />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
@@ -72,6 +72,6 @@ const PatientExpenses = ({ patientId }) => {
 }
 
 PatientExpenses.propTypes = { patientId: PropTypes.number }
-OpenExpensesTable.propTypes = { expenses: PropTypes.array }
+PatientExpenses.propTypes = { patientFullName: PropTypes.string }
 
 export default PatientExpenses
