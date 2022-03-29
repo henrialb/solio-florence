@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import pt from 'date-fns/locale/pt'
-
 import 'react-datepicker/dist/react-datepicker.css'
 registerLocale('pt', pt)
 setDefaultLocale('pt')

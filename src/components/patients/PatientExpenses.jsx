@@ -4,7 +4,7 @@ import { api } from 'src/Api'
 import PropTypes from 'prop-types'
 import { CRow, CCard, CCardBody, CContainer, CCol, CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPlus, cilMoney } from '@coreui/icons'
+import { cilMoney } from '@coreui/icons'
 import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
@@ -13,7 +13,6 @@ import AddExpenseModal from './expenses/AddExpenseModal'
 const PatientExpenses = ({ patientId }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
-  const [addExpenseVisible, setAddExpenseVisible] = useState(false)
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
 
   useEffect(() => {
