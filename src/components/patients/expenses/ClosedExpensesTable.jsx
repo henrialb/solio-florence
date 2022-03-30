@@ -31,7 +31,7 @@ const ClosedExpensesTable = ({ expenses, includeTableHeader }) => {
                   <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>
                   <CTableDataCell className="text-end pe-2 text-secondary">
                     {expense.note && (
-                      <CPopover content={expense.note}>
+                      <CPopover content={expense.note} trigger={['hover', 'click']}>
                         <CIcon icon={cilNotes} className="me-1" />
                       </CPopover>
                     )}

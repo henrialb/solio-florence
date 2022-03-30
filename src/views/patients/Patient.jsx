@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useParams, Routes, Route, Navigate } from 'react-router-dom'
 import { api } from 'src/Api'
-import { CButton, CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
+import { CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPlus, cilPencil, cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
+import { cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
 import { age } from 'src/functions'
 
 import avatar3 from 'src/assets/images/avatars/3.jpg'
@@ -18,7 +18,6 @@ const PatientsDashboard = () => {
   const { id } = useParams()
   const [patient, setPatient] = useState({})
   const [error, setError] = useState(null) // TODO: handle errors
-  // var [activeTab, setActiveTab] = useState(1)
 
   useEffect(() => {
     if (id) {
@@ -34,8 +33,6 @@ const PatientsDashboard = () => {
   }, [id])
 
   const patientScml = patient.covenant === 'scml'
-
-  console.log(patient)
 
   return (
     <>
@@ -77,23 +74,11 @@ const PatientsDashboard = () => {
         <Route path="dados" element={<PatientData patient={patient} />} />
         <Route
           path="despesas"
-          element={
-            <PatientExpenses
-              patientId={patient.id}
-              patientFiles={patient.files}
-              patientFullName={patient.fullName}
-            />
-          }
+          element={<PatientExpenses patientId={patient.id} patientFullName={patient.fullName} />}
         />
         <Route
           path="contas"
-          element={
-            <PatientReceivables
-              patientId={patient.id}
-              patientFiles={patient.files}
-              patientScml={patientScml}
-            />
-          }
+          element={<PatientReceivables patientId={patient.id} patientScml={patientScml} />}
         />
       </Routes>
     </>

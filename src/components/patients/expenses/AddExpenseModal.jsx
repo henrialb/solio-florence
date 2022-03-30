@@ -20,14 +20,14 @@ import { cilPlus } from '@coreui/icons'
 // import PickDate from 'src/components/PickDate'
 import { api } from 'src/Api'
 
-const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFileId = null, patientFullName = null }) => {
+const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName = null }) => {
   const [visible, setVisible] = useState(false)
   const [patients, setPatients] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
 
   const date = new Date()
   const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()
-  const [expense, setExpense] = useState({patientId: patientId, patientFileId: patientFileId, date: today})
+  const [expense, setExpense] = useState({patientId: patientId, date: today})
 
   useEffect(() => {
     if (patientFullName === null) {
@@ -45,12 +45,12 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFileId = 
   // It was a make shift solution to display the patients list in the select menu.
 
   const handleChange = (event) => {
-    setExpense((prevalue) => {
-      return {
-        ...prevalue,
-        [event.target.name]: event.target.value,
-      }
-    })
+      setExpense((prevalue) => {
+        return {
+          ...prevalue,
+          [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
+        }
+      })
   }
 
   const handleSubmit = () => {
@@ -73,7 +73,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFileId = 
         visible={visible}
         onClose={() => [
           setVisible(false),
-          setExpense({ patientId: patientId, patientFileId: patientFileId, date: today }),
+          setExpense({ patientId: patientId, date: today }),
         ]}
       >
         <CModalHeader>
@@ -139,7 +139,6 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFileId = 
 }
 
 AddExpenseModal.propTypes = { patientId: PropTypes.number }
-AddExpenseModal.propTypes = { patientFileId: PropTypes.number }
 AddExpenseModal.propTypes = { patientFullName: PropTypes.string }
 AddExpenseModal.propTypes = { setUpdateExpenses: PropTypes.func }
 

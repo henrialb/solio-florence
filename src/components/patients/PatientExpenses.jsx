@@ -8,10 +8,9 @@ import { cilMoney } from '@coreui/icons'
 import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
-// import AddExpenseModal from './expenses/AddExpenseModal'
-const AddExpenseModal = React.lazy(() => import('./expenses/AddExpenseModal'))
+import AddExpenseModal from './expenses/AddExpenseModal'
 
-const PatientExpenses = ({ patientId, patientFiles, patientFullName }) => {
+const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
@@ -37,8 +36,6 @@ const PatientExpenses = ({ patientId, patientFiles, patientFullName }) => {
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false
 
-  console.log(patientFiles)
-
   return (
     <>
       <CRow>
@@ -50,7 +47,7 @@ const PatientExpenses = ({ patientId, patientFiles, patientFullName }) => {
                   <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
                     <CIcon icon={cilMoney} /> &thinsp;Fazer conta
                   </CButton>
-                  <AddExpenseModal patientId={patientId} patientFileId={patientFiles.pop()} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
+                  <AddExpenseModal patientId={patientId} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
@@ -76,7 +73,6 @@ const PatientExpenses = ({ patientId, patientFiles, patientFullName }) => {
 }
 
 PatientExpenses.propTypes = { patientId: PropTypes.number }
-PatientExpenses.propTypes = { patientFiles: PropTypes.array }
 PatientExpenses.propTypes = { patientFullName: PropTypes.string }
 
 export default PatientExpenses
