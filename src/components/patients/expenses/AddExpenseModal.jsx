@@ -61,8 +61,6 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName 
     })
   }
 
-  console.log(expense)
-
   return (
     <>
       <CButton size="sm" color="primary" onClick={() => setVisible(true)}>

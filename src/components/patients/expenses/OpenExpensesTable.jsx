@@ -25,7 +25,7 @@ const OpenExpensesTable = ({ expenses }) => {
               </CTableDataCell>
               <CTableDataCell className="text-end pe-2 text-secondary">
                 {expense.note && (
-                  <CPopover content={expense.note} trigger={['hover', 'click']}>
+                  <CPopover content={expense.note} trigger="hover">
                     <CIcon icon={cilNotes} />
                   </CPopover>
                 )}

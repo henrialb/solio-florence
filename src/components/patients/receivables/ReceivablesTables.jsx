@@ -37,7 +37,7 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
               </CTableDataCell>
               <CTableDataCell className="text-end text-secondary">
                 {receivable.note && (
-                  <CPopover content={receivable.note} trigger={['hover', 'click']}>
+                  <CPopover content={receivable.note} trigger="hover">
                     <CIcon icon={cilNotes} />
                   </CPopover>
                 )}
