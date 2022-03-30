@@ -7,7 +7,7 @@ import ExpensesTableHead from './ExpensesTableHead'
 import { dateFormat, currencyFormat } from 'src/functions'
 import ExpenseOptions from './ExpenseOptions'
 
-const OpenExpensesTable = ({ expenses }) => {
+const OpenExpensesTable = ({ expenses, setUpdateExpenses }) => {
   return (
     <>
       <CCardTitle>Em aberto</CCardTitle>
@@ -29,7 +29,7 @@ const OpenExpensesTable = ({ expenses }) => {
                     <CIcon icon={cilNotes} />
                   </CPopover>
                 )}
-                <ExpenseOptions />
+                <ExpenseOptions expenseId={expense.id} setUpdateExpenses={setUpdateExpenses} />
               </CTableDataCell>
             </CTableRow>
           ))}
@@ -40,5 +40,6 @@ const OpenExpensesTable = ({ expenses }) => {
 }
 
 OpenExpensesTable.propTypes = { expenses: PropTypes.array }
+OpenExpensesTable.propTypes = { setUpdateExpenses: PropTypes.func }
 
 export default OpenExpensesTable

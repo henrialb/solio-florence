@@ -53,7 +53,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
               {withoutOpenExpenses ? (
                 <p className="text-center text-secondary my-5">Sem despesas em aberto</p>
               ) : (
-                <OpenExpensesTable expenses={openExpenses} />
+                <OpenExpensesTable expenses={openExpenses} setUpdateExpenses={setUpdateExpenses} />
               )}
               {withClosedExpenses && (
                 <ClosedExpensesTable expenses={closedExpenses} includeTableHeader={withoutOpenExpenses} />

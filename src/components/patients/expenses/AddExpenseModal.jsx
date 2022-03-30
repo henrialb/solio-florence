@@ -45,12 +45,12 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName 
   // It was a make shift solution to display the patients list in the select menu.
 
   const handleChange = (event) => {
-      setExpense((prevalue) => {
-        return {
-          ...prevalue,
-          [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
-        }
-      })
+    setExpense((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
+      }
+    })
   }
 
   const handleSubmit = () => {
