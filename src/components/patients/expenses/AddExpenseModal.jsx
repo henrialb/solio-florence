@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -16,13 +17,17 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
-import PickDate from 'src/components/PickDate'
+// import PickDate from 'src/components/PickDate'
 import { api } from 'src/Api'
 
-const AddExpenseModal = ({ patientId = null, patientFullName = null }) => {
+const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFileId = null, patientFullName = null }) => {
   const [visible, setVisible] = useState(false)
   const [patients, setPatients] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
+
+  const date = new Date()
+  const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()
+  const [expense, setExpense] = useState({patientId: patientId, patientFileId: patientFileId, date: today})
 
   useEffect(() => {
     if (patientFullName === null) {
@@ -39,12 +44,38 @@ const AddExpenseModal = ({ patientId = null, patientFullName = null }) => {
   }, [visible]) // TODO: this requests the API every time the modal visibility changes.
   // It was a make shift solution to display the patients list in the select menu.
 
+  const handleChange = (event) => {
+    setExpense((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: event.target.value,
+      }
+    })
+  }
+
+  const handleSubmit = () => {
+    api.post('/patient_expenses', expense).then((response) => {
+      setExpense(response.data)
+      setUpdateExpenses(response.data.id)
+      setVisible(false)
+    })
+  }
+
+  console.log(expense)
+
   return (
     <>
       <CButton size="sm" color="primary" onClick={() => setVisible(true)}>
         <CIcon icon={cilPlus} /> &thinsp;Adicionar despesa
       </CButton>
-      <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
+      <CModal
+        alignment="center"
+        visible={visible}
+        onClose={() => [
+          setVisible(false),
+          setExpense({ patientId: patientId, patientFileId: patientFileId, date: today }),
+        ]}
+      >
         <CModalHeader>
           <CModalTitle>Adicionar despesa</CModalTitle>
         </CModalHeader>
@@ -72,25 +103,25 @@ const AddExpenseModal = ({ patientId = null, patientFullName = null }) => {
               <CFormLabel htmlFor="inputDescription" className="fw-bold">
                 Descrição
               </CFormLabel>
-              <CFormInput id="inputDescription" />
+              <CFormInput id="inputDescription" name="description" onChange={handleChange} />
             </CCol>
             <CCol md={6}>
               <CFormLabel htmlFor="inputAmount" className="fw-bold">
                 Valor
               </CFormLabel>
-              <CFormInput type="decimal" id="inputAmount" className="font-monospace" />
+              <CFormInput type="decimal" id="inputAmount" name="amount" className="font-monospace" onChange={handleChange} />
             </CCol>
             <CCol md={6}>
               <CFormLabel htmlFor="inputDate" className="fw-bold">
                 Data
               </CFormLabel>
-              <PickDate />
+              <CFormInput type="date" id="inputDate" name="date" defaultValue={today} onChange={handleChange} />
             </CCol>
             <CCol md={12}>
               <CFormLabel htmlFor="inputNote" className="fw-bold">
                 Nota
               </CFormLabel>
-              <CFormTextarea />
+              <CFormTextarea id="inputNote" name="note" onChange={handleChange} />
             </CCol>
           </CForm>
         </CModalBody>
@@ -98,7 +129,7 @@ const AddExpenseModal = ({ patientId = null, patientFullName = null }) => {
           <CButton color="secondary" size="sm" variant="outline" onClick={() => setVisible(false)}>
             Fechar
           </CButton>
-          <CButton color="primary" size="sm">
+          <CButton color="primary" size="sm" onClick={handleSubmit}>
             Adicionar
           </CButton>
         </CModalFooter>
@@ -108,6 +139,8 @@ const AddExpenseModal = ({ patientId = null, patientFullName = null }) => {
 }
 
 AddExpenseModal.propTypes = { patientId: PropTypes.number }
+AddExpenseModal.propTypes = { patientFileId: PropTypes.number }
 AddExpenseModal.propTypes = { patientFullName: PropTypes.string }
+AddExpenseModal.propTypes = { setUpdateExpenses: PropTypes.func }
 
 export default AddExpenseModal

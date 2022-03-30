@@ -16,7 +16,6 @@ const PatientReceivables = React.lazy(() => import('src/components/patients/Pati
 
 const PatientsDashboard = () => {
   const { id } = useParams()
-  const { tab } = useParams()
   const [patient, setPatient] = useState({})
   const [error, setError] = useState(null) // TODO: handle errors
   // var [activeTab, setActiveTab] = useState(1)
@@ -35,6 +34,8 @@ const PatientsDashboard = () => {
   }, [id])
 
   const patientScml = patient.covenant === 'scml'
+
+  console.log(patient)
 
   return (
     <>
@@ -76,11 +77,23 @@ const PatientsDashboard = () => {
         <Route path="dados" element={<PatientData patient={patient} />} />
         <Route
           path="despesas"
-          element={<PatientExpenses patientId={patient.id} patientFullName={patient.fullName} />}
+          element={
+            <PatientExpenses
+              patientId={patient.id}
+              patientFiles={patient.files}
+              patientFullName={patient.fullName}
+            />
+          }
         />
         <Route
           path="contas"
-          element={<PatientReceivables patientId={patient.id} patientScml={patientScml} />}
+          element={
+            <PatientReceivables
+              patientId={patient.id}
+              patientFiles={patient.files}
+              patientScml={patientScml}
+            />
+          }
         />
       </Routes>
     </>

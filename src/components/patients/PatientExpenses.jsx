@@ -8,15 +8,17 @@ import { cilMoney } from '@coreui/icons'
 import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
-import AddExpenseModal from './expenses/AddExpenseModal'
+// import AddExpenseModal from './expenses/AddExpenseModal'
+const AddExpenseModal = React.lazy(() => import('./expenses/AddExpenseModal'))
 
-const PatientExpenses = ({ patientId, patientFullName }) => {
+const PatientExpenses = ({ patientId, patientFiles, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
+  const [updateExpenses, setUpdateExpenses] = useState(0)
 
   useEffect(() => {
-    if (patientId) {
+    if (patientId || updateExpenses) {
       api
         .get(`/patient_expenses/patient/${patientId}`)
         .then((response) => {
@@ -26,7 +28,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
           setError(error)
         })
     }
-  }, [patientId])
+  }, [patientId, updateExpenses])
 
   if (expenses.length === 0) {
     return null
@@ -34,6 +36,8 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
 
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false
+
+  console.log(patientFiles)
 
   return (
     <>
@@ -46,7 +50,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
                   <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
                     <CIcon icon={cilMoney} /> &thinsp;Fazer conta
                   </CButton>
-                  <AddExpenseModal patientId={patientId} patientFullName={patientFullName} />
+                  <AddExpenseModal patientId={patientId} patientFileId={patientFiles.pop()} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
@@ -72,6 +76,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
 }
 
 PatientExpenses.propTypes = { patientId: PropTypes.number }
+PatientExpenses.propTypes = { patientFiles: PropTypes.array }
 PatientExpenses.propTypes = { patientFullName: PropTypes.string }
 
 export default PatientExpenses
