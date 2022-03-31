@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   CModal,
@@ -13,6 +14,11 @@ import {
   CTableRow,
   CTableDataCell,
   CPopover,
+  CForm,
+  CCol,
+  CFormLabel,
+  CFormInput,
+  CFormTextarea,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilMoney, cilNotes } from '@coreui/icons'
@@ -21,16 +27,40 @@ import ExpensesTableHead from '../expenses/ExpensesTableHead'
 import { dateFormat, currencyFormat } from 'src/functions'
 
 const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses }) => {
+  const { id } = useParams()
   const [visible, setVisible] = useState(false)
 
-  const handleSubmit = (id) => {
-    api.post('/patient_receivables').then(() => {
-      setUpdateExpenses(id)
-      // setVisible(false) TODO: Unmounted component? The modal closes anyway because of a bug with the Dropdown auto close
+  const monthName = () => {
+    var date = new Date()
+    date.getDate() < 20 && date.setMonth(date.getMonth() - 1, 15)
+    const month = date.toLocaleString('pt', { month: 'long' })
+
+    return month.charAt(0).toUpperCase() + month.slice(1)
+  }
+
+  const [receivable, setReceivable] = useState({
+    patientId: Number(id),
+    description: `Despesas ${monthName()}`,
+  })
+
+  const handleChange = (event) => {
+    setReceivable((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: event.target.value,
+      }
     })
   }
 
-  let expensesSum = 0
+  const handleSubmit = () => {
+    api.post('/patient_receivables/create_from_expenses', receivable).then((response) => {
+      // setReceivable(response.data)
+      setUpdateExpenses(response.data.id)
+      setVisible(false)
+    })
+  }
+
+  var expensesSum = 0
 
   return (
     <>
@@ -49,7 +79,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
           <CModalTitle>Fazer conta</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <CTable align="middle" className="mb-4 bg-white" hover>
+          <CTable align="middle" className="bg-white" hover>
             <ExpensesTableHead />
             <CTableBody>
               {expenses.map((expense) => {
@@ -84,13 +114,31 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
               </CTableRow>
             </CTableBody>
           </CTable>
+          <CForm className="row g-3 mt-3 mb-4">
+            <CCol md={9}>
+              <CFormLabel htmlFor="inputDescription" className="fw-bold">
+                Descrição
+              </CFormLabel>
+              <CFormInput id="inputDescription" name="description" defaultValue="Despesas Março" onChange={handleChange} />
+            </CCol>
+            <CCol md={3}>
+              <CFormLabel htmlFor="inputAmount" className="fw-bold text-end">Valor</CFormLabel>
+              <CFormInput id="inputAmount" name="amount" defaultValue={expensesSum} className="text-end font-monospace" disabled />
+            </CCol>
+            <CCol md={12}>
+              <CFormLabel htmlFor="inputNote" className="fw-bold">
+                Nota
+              </CFormLabel>
+              <CFormTextarea id="inputNote" name="note" onChange={handleChange} />
+            </CCol>
+          </CForm>
           Criar conta de despesas com o valor <span className="font-monospace fw-bold">{expensesSum}</span>?
         </CModalBody>
-        <CModalFooter className="d-flex justify-content-between mt-3">
+        <CModalFooter className="d-flex justify-content-between mt-2">
           <CButton color="secondary" size="sm" variant="outline" onClick={() => setVisible(false)}>
             Fechar
           </CButton>
-          <CButton color="primary" size="sm" onClick={() => handleSubmit}>
+          <CButton color="primary" size="sm" onClick={handleSubmit}>
             Confirmar
           </CButton>
         </CModalFooter>

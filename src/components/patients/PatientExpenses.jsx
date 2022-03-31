@@ -45,8 +45,16 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
             <CCardBody>
               <CRow className="mb-2">
                 <CCol sm="auto" className="ms-auto">
-                  <MakeReceivableModal withoutOpenExpenses={withoutOpenExpenses} expenses={openExpenses} setUpdateExpenses={setUpdateExpenses} />
-                  <AddExpenseModal patientId={patientId} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
+                  <MakeReceivableModal
+                    withoutOpenExpenses={withoutOpenExpenses}
+                    expenses={openExpenses}
+                    setUpdateExpenses={setUpdateExpenses}
+                  />
+                  <AddExpenseModal
+                    patientId={patientId}
+                    patientFullName={patientFullName}
+                    setUpdateExpenses={setUpdateExpenses}
+                  />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
@@ -72,6 +80,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
 }
 
 PatientExpenses.propTypes = { patientId: PropTypes.number }
+PatientExpenses.propTypes = { patientFiles: PropTypes.array }
 PatientExpenses.propTypes = { patientFullName: PropTypes.string }
 
 export default PatientExpenses
