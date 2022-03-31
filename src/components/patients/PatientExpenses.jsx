@@ -9,6 +9,7 @@ import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
 import AddExpenseModal from './expenses/AddExpenseModal'
+import MakeReceivableModal from './receivables/MakeReceivableModal'
 
 const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
@@ -44,9 +45,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
             <CCardBody>
               <CRow className="mb-2">
                 <CCol sm="auto" className="ms-auto">
-                  <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
-                    <CIcon icon={cilMoney} /> &thinsp;Fazer conta
-                  </CButton>
+                  <MakeReceivableModal withoutOpenExpenses={withoutOpenExpenses} expenses={openExpenses} setUpdateExpenses={setUpdateExpenses} />
                   <AddExpenseModal patientId={patientId} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
                 </CCol>
               </CRow>
