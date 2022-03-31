@@ -9,6 +9,7 @@ import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
 import AddExpenseModal from './expenses/AddExpenseModal'
+import MakeReceivableModal from './receivables/MakeReceivableModal'
 
 const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
@@ -29,9 +30,9 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
     }
   }, [patientId, updateExpenses])
 
-  if (expenses.length === 0) {
-    return null
-  }
+  // if (expenses.length === 0) {
+  //   return null
+  // }
 
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false
@@ -44,16 +45,21 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
             <CCardBody>
               <CRow className="mb-2">
                 <CCol sm="auto" className="ms-auto">
-                  <CButton size="sm" variant="outline" color="primary" className="me-2" disabled={withoutOpenExpenses}>
-                    <CIcon icon={cilMoney} /> &thinsp;Fazer conta
-                  </CButton>
-                  <AddExpenseModal patientId={patientId} patientFullName={patientFullName} setUpdateExpenses={setUpdateExpenses} />
+                  <MakeReceivableModal
+                    withoutOpenExpenses={withoutOpenExpenses}
+                    expenses={openExpenses}
+                    setUpdateExpenses={setUpdateExpenses}
+                  />
+                  <AddExpenseModal
+                    patientFullName={patientFullName}
+                    setUpdateExpenses={setUpdateExpenses}
+                  />
                 </CCol>
               </CRow>
               {withoutOpenExpenses ? (
                 <p className="text-center text-secondary my-5">Sem despesas em aberto</p>
               ) : (
-                <OpenExpensesTable expenses={openExpenses} />
+                <OpenExpensesTable expenses={openExpenses} setUpdateExpenses={setUpdateExpenses} />
               )}
               {withClosedExpenses && (
                 <ClosedExpensesTable expenses={closedExpenses} includeTableHeader={withoutOpenExpenses} />
@@ -73,6 +79,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
 }
 
 PatientExpenses.propTypes = { patientId: PropTypes.number }
+PatientExpenses.propTypes = { patientFiles: PropTypes.array }
 PatientExpenses.propTypes = { patientFullName: PropTypes.string }
 
 export default PatientExpenses

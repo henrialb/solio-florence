@@ -1,28 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  CBadge,
-  CDropdown,
-  CDropdownDivider,
-  CDropdownHeader,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-} from '@coreui/react'
+import { CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilMoney,
-  cilOptions,
-  cilDescription,
-  cilEuro,
-  cilPin,
-  cilNotes,
-  cilTrash,
-  cilCheckAlt,
-  cilPencil,
-} from '@coreui/icons'
+import { cilOptions, cilCheckAlt, cilPencil } from '@coreui/icons'
+import DeleteReceivableModal from './DeleteReceivableModal'
 
-const ReceivableOptions = ({ hasNote }) => {
+const ReceivableOptions = ({ receivableId, hasNote, setUpdateReceivables }) => {
   return (
     <CDropdown alignment="end">
       <CDropdownToggle color="transparent" caret={false} className="p-1">
@@ -37,15 +20,17 @@ const ReceivableOptions = ({ hasNote }) => {
           <CIcon icon={cilPencil} className="me-2" />
           {hasNote ? 'Alterar nota' : 'Escrever nota'}
         </CDropdownItem>
-        <CDropdownItem href="#" className="">
-          <CIcon icon={cilTrash} className="me-2" />
-          Eliminar
-        </CDropdownItem>
+        <DeleteReceivableModal
+          receivableId={receivableId}
+          setUpdateReceivables={setUpdateReceivables}
+        />
       </CDropdownMenu>
     </CDropdown>
   )
 }
 
+ReceivableOptions.propTypes = { receivableId: PropTypes.number }
 ReceivableOptions.propTypes = { hasNote: PropTypes.bool }
+ReceivableOptions.propTypes = { setUpdateReceivables: PropTypes.func }
 
 export default ReceivableOptions

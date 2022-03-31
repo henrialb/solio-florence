@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover } from '@coreui/react'
+import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilCheckAlt } from '@coreui/icons'
 import ExpensesTableHead from './ExpensesTableHead'
