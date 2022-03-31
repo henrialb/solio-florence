@@ -51,7 +51,6 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
                     setUpdateExpenses={setUpdateExpenses}
                   />
                   <AddExpenseModal
-                    patientId={patientId}
                     patientFullName={patientFullName}
                     setUpdateExpenses={setUpdateExpenses}
                   />
