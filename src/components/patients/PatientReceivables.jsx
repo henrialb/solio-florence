@@ -9,9 +9,10 @@ import ReceivablesTables from './receivables/ReceivablesTables'
 const PatientReceivables = ({ patientId, patientScml }) => {
   const [receivables, setReceivables] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
+  const [updateReceivables, setUpdateReceivables] = useState(0)
 
   useEffect(() => {
-    if (patientId) {
+    if (patientId || updateReceivables) {
       api
         .get(`/patient_receivables/patient/${patientId}`)
         .then((response) => {
@@ -21,7 +22,7 @@ const PatientReceivables = ({ patientId, patientScml }) => {
           setError(error)
         })
     }
-  }, [patientId])
+  }, [patientId, updateReceivables])
 
   return (
     <>
@@ -35,7 +36,11 @@ const PatientReceivables = ({ patientId, patientScml }) => {
                 </CButton>
               </CCol>
             </CRow>
-            <ReceivablesTables receivables={receivables} patientScml={patientScml} />
+            <ReceivablesTables
+              setUpdateReceivables={setUpdateReceivables}
+              receivables={receivables}
+              patientScml={patientScml}
+            />
           </CCardBody>
         </CCard>
       </CRow>

@@ -29,9 +29,9 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
     }
   }, [patientId, updateExpenses])
 
-  if (expenses.length === 0) {
-    return null
-  }
+  // if (expenses.length === 0) {
+  //   return null
+  // }
 
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false

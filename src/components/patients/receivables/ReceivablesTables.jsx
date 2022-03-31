@@ -17,7 +17,7 @@ import ReceivableStatusBadge from './ReceivableStatusBadge'
 import ReceivablesTableHead from './ReceivablesTableHead'
 import ReceivableOptions from './ReceivableOptions'
 
-const ReceivablesTables = ({ receivables, patientScml }) => {
+const ReceivablesTables = ({ receivables, patientScml, setUpdateReceivables }) => {
   const [receivables1, receivables2] = organiseReceivables(receivables, patientScml)
 
   const ReceivablesTable = ({ title, receivables }) => (
@@ -41,7 +41,11 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
                     <CIcon icon={cilNotes} />
                   </CPopover>
                 )}
-                <ReceivableOptions hasNote={typeof receivable.note !== 'undefined'} />
+                <ReceivableOptions
+                  receivableId={receivable.id}
+                  hasNote={typeof receivable.note !== 'undefined'}
+                  setUpdateReceivables={setUpdateReceivables}
+                />
               </CTableDataCell>
             </CTableRow>
           ))}
@@ -61,5 +65,6 @@ const ReceivablesTables = ({ receivables, patientScml }) => {
 ReceivablesTables.propTypes = { receivables: PropTypes.array }
 ReceivablesTables.propTypes = { title: PropTypes.string }
 ReceivablesTables.propTypes = { patientScml: PropTypes.bool }
+ReceivablesTables.propTypes = { setUpdateReceivables: PropTypes.func }
 
 export default ReceivablesTables
