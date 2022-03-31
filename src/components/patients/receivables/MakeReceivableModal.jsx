@@ -21,10 +21,11 @@ import {
   CFormTextarea,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilMoney, cilNotes } from '@coreui/icons'
+import { cilEuro, cilNotes } from '@coreui/icons'
 import { api } from 'src/Api'
 import ExpensesTableHead from '../expenses/ExpensesTableHead'
 import { dateFormat, currencyFormat } from 'src/functions'
+
 
 const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses }) => {
   const { id } = useParams()
@@ -74,7 +75,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
         disabled={withoutOpenExpenses}
         onClick={() => setVisible(true)}
       >
-        <CIcon icon={cilMoney} /> &thinsp;Fazer conta
+        <CIcon icon={cilEuro} size="sm" /> &thinsp;Fazer conta
       </CButton>
       <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
@@ -110,7 +111,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
                   Total
                 </CTableDataCell>
                 <CTableDataCell className="fw-bold text-end font-monospace">
-                  {expensesSum}
+                  {currencyFormat(expensesSum)}
                 </CTableDataCell>
                 <CTableDataCell></CTableDataCell>
               </CTableRow>
@@ -125,7 +126,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
             </CCol>
             <CCol md={3}>
               <CFormLabel htmlFor="inputAmount" className="fw-bold text-end">Valor</CFormLabel>
-              <CFormInput id="inputAmount" name="amount" defaultValue={expensesSum} className="text-end font-monospace" disabled />
+              <CFormInput id="inputAmount" name="amount" defaultValue={currencyFormat(expensesSum) + ' €'} className="text-end font-monospace" disabled />
             </CCol>
             <CCol md={12}>
               <CFormLabel htmlFor="inputNote" className="fw-bold">
@@ -134,7 +135,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
               <CFormTextarea id="inputNote" name="note" onChange={handleChange} />
             </CCol>
           </CForm>
-          Criar conta de despesas com o valor <span className="font-monospace fw-bold">{expensesSum}</span>?
+          Criar conta de despesas com o valor <span className="font-monospace fw-bold">{currencyFormat(expensesSum)}</span>?
         </CModalBody>
         <CModalFooter className="d-flex justify-content-between mt-2">
           <CButton color="secondary" size="sm" variant="outline" onClick={() => setVisible(false)}>

@@ -66,7 +66,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   return (
     <>
       <CButton size="sm" color="primary" onClick={() => setVisible(true)}>
-        <CIcon icon={cilPlus} /> &thinsp;Adicionar despesa
+        <CIcon icon={cilPlus} size="sm" /> &thinsp;Adicionar despesa
       </CButton>
       <CModal
         alignment="center"
