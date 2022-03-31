@@ -21,7 +21,7 @@ import { cilPlus } from '@coreui/icons'
 // import PickDate from 'src/components/PickDate'
 import { api } from 'src/Api'
 
-const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName = null }) => {
+const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const [visible, setVisible] = useState(false)
   const [patients, setPatients] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
@@ -73,7 +73,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName 
         visible={visible}
         onClose={() => [
           setVisible(false),
-          setExpense({ patientId: patientId, date: today }),
+          setExpense({ patientId: id, date: today }),
         ]}
       >
         <CModalHeader>
@@ -85,15 +85,15 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName 
               <CFormLabel htmlFor="inputPatient" className="fw-bold">
                 Utente
               </CFormLabel>
-              <CFormSelect id="inputPatient" defaultValue={patientId} disabled={patientId !== null}>
-                {patientId === null ? (
+              <CFormSelect id="inputPatient" defaultValue={id} disabled={id !== null}>
+                {id === null ? (
                   patients.map((patient) => (
                     <option key={patient.id} value={patient.id}>
                       {patient.fullName}
                     </option>
                   ))
                 ) : (
-                  <option key={patientId} value={patientId}>
+                  <option key={id} value={id}>
                     {patientFullName}
                   </option>
                 )}
@@ -138,7 +138,6 @@ const AddExpenseModal = ({ setUpdateExpenses, patientId = null, patientFullName 
   )
 }
 
-AddExpenseModal.propTypes = { patientId: PropTypes.number }
 AddExpenseModal.propTypes = { patientFullName: PropTypes.string }
 AddExpenseModal.propTypes = { setUpdateExpenses: PropTypes.func }
 
