@@ -38,9 +38,11 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
     return month.charAt(0).toUpperCase() + month.slice(1)
   }
 
+  const description = 'Despesas ' + monthName()
+
   const [receivable, setReceivable] = useState({
     patientId: Number(id),
-    description: `Despesas ${monthName()}`,
+    description: description,
   })
 
   const handleChange = (event) => {
@@ -119,7 +121,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
               <CFormLabel htmlFor="inputDescription" className="fw-bold">
                 Descrição
               </CFormLabel>
-              <CFormInput id="inputDescription" name="description" defaultValue="Despesas Março" onChange={handleChange} />
+              <CFormInput id="inputDescription" name="description" defaultValue={description} onChange={handleChange} />
             </CCol>
             <CCol md={3}>
               <CFormLabel htmlFor="inputAmount" className="fw-bold text-end">Valor</CFormLabel>
