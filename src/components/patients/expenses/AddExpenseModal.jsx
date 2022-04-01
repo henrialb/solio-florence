@@ -28,7 +28,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const { id } = useParams()
 
   const date = new Date()
-  const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getDate()
+  const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
   const [expense, setExpense] = useState({patientId: Number(id), date: today})
 
   useEffect(() => {
