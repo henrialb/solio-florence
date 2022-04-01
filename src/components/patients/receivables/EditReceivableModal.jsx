@@ -17,13 +17,13 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilPencil } from '@coreui/icons'
-import { dateFormat, currencyFormat } from 'src/functions'
+import { currencyFormat } from 'src/functions'
 import PropTypes from 'prop-types'
 import { api } from 'src/Api'
-import ReceivableStatusBadge from './ReceivableStatusBadge'
 import ReceivableOptions from './ReceivableOptions'
+import AddPaymentModal from '../payments/AddPaymentModal'
 
-const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
+const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientScml }) => {
   const [visible, setVisible] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [receivableDetails, setReceivableDetails] = useState(receivable)
@@ -54,7 +54,12 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
     <>
       <CTableRow key={receivable.id} onClick={() => setVisible(!visible)}>
         <CTableDataCell onClick={(e) => e.stopPropagation()}>
-          <ReceivableStatusBadge paid={receivable.status === 'paid'} />
+          <AddPaymentModal
+            modalTriggerIsButton={false}
+            amount={receivable.amount}
+            setUpdateReceivables={setUpdateReceivables}
+            receivablePaid={receivable.status === 'paid'}
+          />
         </CTableDataCell>
         <CTableDataCell className="fw-semibold pointer">{receivable.description}</CTableDataCell>
         <CTableDataCell className="text-end font-monospace pointer">
@@ -169,5 +174,6 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
 EditReceivableModal.propTypes = { receivable: PropTypes.object }
 EditReceivableModal.propTypes = { table: PropTypes.string }
 EditReceivableModal.propTypes = { setUpdateReceivables: PropTypes.func }
+EditReceivableModal.propTypes = { patientScml: PropTypes.bool }
 
 export default EditReceivableModal

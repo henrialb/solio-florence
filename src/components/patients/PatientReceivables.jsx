@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { api } from 'src/Api'
 import PropTypes from 'prop-types'
-import { CRow, CCol, CCard, CCardBody, CButton } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilMoney } from '@coreui/icons'
+import { CRow, CCol, CCard, CCardBody } from '@coreui/react'
 import ReceivablesTables from './receivables/ReceivablesTables'
+import AddPaymentModal from './payments/AddPaymentModal'
 
 const PatientReceivables = ({ patientId, patientScml }) => {
   const [receivables, setReceivables] = useState([])
@@ -31,9 +30,11 @@ const PatientReceivables = ({ patientId, patientScml }) => {
           <CCardBody>
             <CRow className="mb-2">
               <CCol sm="auto" className="ms-auto">
-                <CButton size="sm" color="primary">
-                  <CIcon icon={cilMoney} size="sm" /> &thinsp;Registar pagamento
-                </CButton>
+                <AddPaymentModal
+                  modalTriggerIsButton={true}
+                  setUpdateReceivables={setUpdateReceivables}
+                  patientScml={patientScml}
+                />
               </CCol>
             </CRow>
             <ReceivablesTables
