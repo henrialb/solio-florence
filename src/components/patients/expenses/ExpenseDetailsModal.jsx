@@ -43,23 +43,12 @@ const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
   const handleSubmit = () => {
     if (expenseDetails.id) {
       api.put(`/patient_expenses/${expenseDetails.id}`, expenseDetails).then((response) => {
-        // setExpenseDetails(response.data)
         setUpdateExpenses(Date.now())
         setVisible(false)
       })
     }
-    // api.post('/patient_expenses', expenseDetails).then((response) => {
-    //   setExpense(response.data)
-    //   setUpdateExpenses(response.data.id)
-    //   setVisible(false)
-    // })
   }
 
-  if (expenseDetails.length === 0) {
-    return null
-  }
-
-  // console.log(expenseDetails)
   return (
     <>
       <CTableRow className="pointer" key={expense.id} onClick={() => setVisible(!visible)}>
