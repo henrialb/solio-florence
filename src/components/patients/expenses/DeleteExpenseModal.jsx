@@ -12,6 +12,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilTrash } from '@coreui/icons'
 import { api } from 'src/Api'
+import CloseModalButton from 'src/components/CloseModalButton'
 
 const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
   const [visible, setVisible] = useState(false)
@@ -35,9 +36,7 @@ const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
         </CModalHeader>
         <CModalBody>Confirma?</CModalBody>
         <CModalFooter className="d-flex justify-content-between mt-3">
-          <CButton color="secondary" size="sm" variant="outline" onClick={() => setVisible(false)}>
-            Fechar
-          </CButton>
+          <CloseModalButton setVisible={setVisible} text="Cancelar" />
           <CButton
             color="danger"
             className="text-white"

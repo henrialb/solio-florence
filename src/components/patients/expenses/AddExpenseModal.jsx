@@ -20,6 +20,7 @@ import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 // import PickDate from 'src/components/PickDate'
 import { api } from 'src/Api'
+import CloseModalButton from 'src/components/CloseModalButton'
 
 const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const [visible, setVisible] = useState(false)
@@ -126,9 +127,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
           </CForm>
         </CModalBody>
         <CModalFooter className="d-flex justify-content-between mt-3">
-          <CButton color="secondary" size="sm" variant="outline" onClick={() => setVisible(false)}>
-            Fechar
-          </CButton>
+          <CloseModalButton setVisible={setVisible} />
           <CButton color="primary" size="sm" onClick={handleSubmit}>
             Adicionar
           </CButton>
