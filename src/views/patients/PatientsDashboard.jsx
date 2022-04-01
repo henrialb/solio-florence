@@ -34,7 +34,7 @@ const PatientsDashboard = () => {
       <CRow>
         <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <CButton size="sm" color="primary">
-            <CIcon icon={cilPlus} />
+            <CIcon icon={cilPlus} size="sm" />
             &ensp;Novo utente
           </CButton>
         </div>
