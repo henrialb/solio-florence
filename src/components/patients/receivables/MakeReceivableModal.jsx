@@ -57,8 +57,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
 
   const handleSubmit = () => {
     api.post('/patient_receivables/create_from_expenses', receivable).then((response) => {
-      // setReceivable(response.data)
-      setUpdateExpenses(response.data.id)
+      setUpdateExpenses(Date.now())
       setVisible(false)
     })
   }
