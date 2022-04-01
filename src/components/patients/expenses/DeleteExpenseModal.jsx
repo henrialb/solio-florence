@@ -18,7 +18,7 @@ const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
 
   const handleSubmit = (id) => {
     api.delete(`/patient_expenses/${id}`).then(() => {
-      setUpdateExpenses(id)
+      setUpdateExpenses(id + 200)
       // setVisible(false) TODO: Unmounted component? The modal closes anyway because of a bug with the Dropdown auto close
     })
   }
