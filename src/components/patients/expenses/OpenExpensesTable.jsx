@@ -6,6 +6,7 @@ import { cilNotes } from '@coreui/icons'
 import ExpensesTableHead from './ExpensesTableHead'
 import { dateFormat, currencyFormat } from 'src/functions'
 import ExpenseOptions from './ExpenseOptions'
+import ExpenseDetailsModal from './ExpenseDetailsModal'
 
 const OpenExpensesTable = ({ expenses, setUpdateExpenses }) => {
   return (
@@ -15,23 +16,11 @@ const OpenExpensesTable = ({ expenses, setUpdateExpenses }) => {
         <ExpensesTableHead />
         <CTableBody>
           {expenses.map((expense) => (
-            <CTableRow className="pointer" key={expense.id}>
-              <CTableDataCell className="font-monospace small text-dark">
-                {dateFormat(expense.date)}
-              </CTableDataCell>
-              <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
-              <CTableDataCell className="text-end font-monospace">
-                {currencyFormat(expense.amount)}
-              </CTableDataCell>
-              <CTableDataCell className="text-end pe-2 text-secondary">
-                {expense.note && (
-                  <CPopover content={expense.note} trigger="hover">
-                    <CIcon icon={cilNotes} />
-                  </CPopover>
-                )}
-                <ExpenseOptions expenseId={expense.id} setUpdateExpenses={setUpdateExpenses} />
-              </CTableDataCell>
-            </CTableRow>
+            <ExpenseDetailsModal
+              expense={expense}
+              key={expense.id}
+              setUpdateExpenses={setUpdateExpenses}
+            />
           ))}
         </CTableBody>
       </CTable>

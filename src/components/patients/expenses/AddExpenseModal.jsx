@@ -110,7 +110,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
               <CFormLabel htmlFor="inputAmount" className="fw-bold">
                 Valor
               </CFormLabel>
-              <CFormInput type="decimal" id="inputAmount" name="amount" className="font-monospace" onChange={handleChange} />
+              <CFormInput id="inputAmount" name="amount" className="font-monospace" onChange={handleChange} />
             </CCol>
             <CCol md={6}>
               <CFormLabel htmlFor="inputDate" className="fw-bold">

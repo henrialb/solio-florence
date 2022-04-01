@@ -25,7 +25,7 @@ const ClosedExpensesTable = ({ expenses, includeTableHeader }) => {
                 </CTableDataCell>
               </CTableRow>
               {expenses.map((expense) => (
-                <CTableRow className="pointer" key={expense.id}>
+                <CTableRow key={expense.id}>
                   <CTableDataCell className="font-monospace small text-dark">{dateFormat(expense.date)}</CTableDataCell>
                   <CTableDataCell className="fw-semibold">{expense.description}</CTableDataCell>
                   <CTableDataCell className="text-end font-monospace">{currencyFormat(expense.amount)}</CTableDataCell>

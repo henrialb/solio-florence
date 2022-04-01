@@ -7,7 +7,7 @@ import DeleteExpenseModal from './DeleteExpenseModal'
 
 const ExpenseOptions = ({ expenseId, setUpdateExpenses }) => {
   return (
-    <CDropdown alignment="end">
+    <CDropdown alignment="end" onClick={(e) => e.stopPropagation()}>
       <CDropdownToggle color="transparent" caret={false} className="p-0">
         <CIcon icon={cilOptions} className="ms-3" />
       </CDropdownToggle>

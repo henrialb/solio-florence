@@ -40,7 +40,7 @@ const PatientData = ({ patient }) => {
                 )}
                 <CCol sm="auto" className="ms-auto">
                   <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
-                    <CIcon icon={cilPencil} /> &thinsp;Alterar dados
+                    <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar dados
                   </CButton>
                 </CCol>
               </CRow>
