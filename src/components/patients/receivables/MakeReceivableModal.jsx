@@ -118,17 +118,17 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
             </CTableBody>
           </CTable>
           <CForm className="row g-3 mt-3 mb-4">
-            <CCol md={9}>
+            <CCol xs={8} s={9}>
               <CFormLabel htmlFor="inputDescription" className="fw-bold">
                 Descrição
               </CFormLabel>
               <CFormInput id="inputDescription" name="description" defaultValue={description} onChange={handleChange} />
             </CCol>
-            <CCol md={3}>
+            <CCol xs={4} s={3}>
               <CFormLabel htmlFor="inputAmount" className="fw-bold text-end">Valor</CFormLabel>
               <CFormInput id="inputAmount" name="amount" defaultValue={currencyFormat(expensesSum) + ' €'} className="text-end font-monospace" disabled />
             </CCol>
-            <CCol md={12}>
+            <CCol xs={12}>
               <CFormLabel htmlFor="inputNote" className="fw-bold">
                 Nota
               </CFormLabel>
