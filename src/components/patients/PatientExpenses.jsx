@@ -15,7 +15,7 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
   const [error, setError] = useState(null) // TODO: handle errors
   const [closedExpenses, openExpenses] = organiseExpenses(expenses)
-  const [updateExpenses, setUpdateExpenses] = useState(0)
+  const [updateExpenses, setUpdateExpenses] = useState(null)
 
   useEffect(() => {
     if (patientId || updateExpenses) {

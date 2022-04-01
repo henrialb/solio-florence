@@ -59,7 +59,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const handleSubmit = () => {
     api.post('/patient_expenses', expense).then((response) => {
       setExpense(response.data)
-      setUpdateExpenses(response.data.id)
+      setUpdateExpenses(Date.now())
       setVisible(false)
     })
   }
