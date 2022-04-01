@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import { CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilOptions, cilTrash, cilPencil } from '@coreui/icons'
+import DeleteExpenseModal from './DeleteExpenseModal'
 
-const ExpenseOptions = () => {
+const ExpenseOptions = ({ expenseId, setUpdateExpenses }) => {
   return (
-    <CDropdown alignment="end">
+    <CDropdown alignment="end" onClick={(e) => e.stopPropagation()}>
       <CDropdownToggle color="transparent" caret={false} className="p-0">
         <CIcon icon={cilOptions} className="ms-3" />
       </CDropdownToggle>
@@ -15,15 +16,13 @@ const ExpenseOptions = () => {
           <CIcon icon={cilPencil} className="me-2" />
           Alterar despesa
         </CDropdownItem>
-        <CDropdownItem href="#" className="">
-          <CIcon icon={cilTrash} className="me-2" />
-          Eliminar
-        </CDropdownItem>
+        <DeleteExpenseModal expenseId={expenseId} setUpdateExpenses={setUpdateExpenses} />
       </CDropdownMenu>
     </CDropdown>
   )
 }
 
-ExpenseOptions.propTypes = { hasNote: PropTypes.bool }
+ExpenseOptions.propTypes = { expenseId: PropTypes.number }
+ExpenseOptions.propTypes = { setUpdateExpenses: PropTypes.func }
 
 export default ExpenseOptions
