@@ -26,40 +26,41 @@ import ReceivableOptions from './ReceivableOptions'
 const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
   const [visible, setVisible] = useState(false)
   const [editMode, setEditMode] = useState(false)
+  const [receivableDetails, setReceivableDetails] = useState(receivable)
   const disableAmountChange = () => (receivable.source === 'expenses' ? true : false)
 
   const handleChange = (event) => {
-    // setExpenseDetails((prevalue) => {
-    //   return {
-    //     ...prevalue,
-    //     [event.target.name]:
-    //       event.target.name !== 'amount'
-    //         ? event.target.value
-    //         : event.target.value.replace(/,/g, '.'),
-    //   }
-    // })
+    setReceivableDetails((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]:
+          event.target.name !== 'amount'
+            ? event.target.value
+            : event.target.value.replace(/,/g, '.'),
+      }
+    })
   }
 
-  // const handleSubmit = () => {
-  //   if (expenseDetails.id) {
-  //     api.put(`/patient_expenses/${expenseDetails.id}`, expenseDetails).then((response) => {
-  //       setUpdateExpenses(Date.now())
-  //       setVisible(false)
-  //     })
-  //   }
-  // }
+  const handleSubmit = () => {
+    if (receivableDetails.id) {
+      api.put(`/patient_receivables/${receivableDetails.id}`, receivableDetails).then(() => {
+        setUpdateReceivables(Date.now())
+        setVisible(false)
+      })
+    }
+  }
 
   return (
     <>
-      <CTableRow className="pointer" key={receivable.id} onClick={() => setVisible(!visible)}>
-        <CTableDataCell>
+      <CTableRow key={receivable.id} onClick={() => setVisible(!visible)}>
+        <CTableDataCell onClick={(e) => e.stopPropagation()}>
           <ReceivableStatusBadge paid={receivable.status === 'paid'} />
         </CTableDataCell>
-        <CTableDataCell className="fw-semibold">{receivable.description}</CTableDataCell>
-        <CTableDataCell className="text-end font-monospace">
+        <CTableDataCell className="fw-semibold pointer">{receivable.description}</CTableDataCell>
+        <CTableDataCell className="text-end font-monospace pointer">
           {currencyFormat(receivable.amount, table === 'Mensalidades' ? 0 : 2)}
         </CTableDataCell>
-        <CTableDataCell className="text-end text-secondary">
+        <CTableDataCell className="text-end text-secondary" onClick={(e) => e.stopPropagation()}>
           {receivable.note && (
             <CPopover content={receivable.note} trigger="hover">
               <CIcon icon={cilNotes} />
@@ -69,6 +70,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
             receivableId={receivable.id}
             hasNote={typeof receivable.note !== 'undefined'}
             setUpdateReceivables={setUpdateReceivables}
+            setVisible={setVisible}
           />
         </CTableDataCell>
       </CTableRow>
@@ -116,6 +118,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
               <CFormTextarea
                 id="inputNote"
                 name="note"
+                defaultValue={receivable.note}
                 onChange={handleChange}
                 disabled={!editMode}
               />
@@ -152,7 +155,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables }) => {
               >
                 Cancelar
               </CButton>
-              <CButton color="primary" size="sm">
+              <CButton color="primary" size="sm" onClick={handleSubmit}>
                 Guardar
               </CButton>
             </>

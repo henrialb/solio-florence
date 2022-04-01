@@ -14,12 +14,10 @@ import { cilNotes } from '@coreui/icons'
 import PropTypes from 'prop-types'
 import { organiseReceivables, currencyFormat } from 'src/functions'
 import ReceivablesTableHead from './ReceivablesTableHead'
-import ReceivableOptions from './ReceivableOptions'
 import EditReceivableModal from './EditReceivableModal'
 
 const ReceivablesTables = ({ receivables, patientScml, setUpdateReceivables }) => {
   const [receivables1, receivables2] = organiseReceivables(receivables, patientScml)
-  const [visible, setVisible] = useState(false)
 
   const ReceivablesTable = ({ title, receivables }) => (
     <CCol>
@@ -49,7 +47,12 @@ const ReceivablesTables = ({ receivables, patientScml, setUpdateReceivables }) =
             //     />
             //   </CTableDataCell>
             // </CTableRow>
-            <EditReceivableModal key={receivable.id} receivable={receivable} table={title} />
+            <EditReceivableModal
+              key={receivable.id}
+              receivable={receivable}
+              table={title}
+              setUpdateReceivables={setUpdateReceivables}
+            />
           ))}
         </CTableBody>
       </CTable>
