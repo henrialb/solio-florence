@@ -21,6 +21,7 @@ import { cilNotes, cilPencil } from '@coreui/icons'
 import { dateFormat, currencyFormat } from 'src/functions'
 import PropTypes from 'prop-types'
 import ExpenseOptions from './ExpenseOptions'
+import { api } from 'src/Api'
 
 const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
   const [visible, setVisible] = useState(false)
@@ -31,12 +32,22 @@ const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
     setExpenseDetails((prevalue) => {
       return {
         ...prevalue,
-        [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
+        [event.target.name]:
+          event.target.name !== 'amount'
+            ? event.target.value
+            : event.target.value.replace(/,/g, '.'),
       }
     })
   }
 
   const handleSubmit = () => {
+    if (expenseDetails.id) {
+      api.put(`/patient_expenses/${expenseDetails.id}`, expenseDetails).then((response) => {
+        // setExpenseDetails(response.data)
+        setUpdateExpenses(Date.now())
+        setVisible(false)
+      })
+    }
     // api.post('/patient_expenses', expenseDetails).then((response) => {
     //   setExpense(response.data)
     //   setUpdateExpenses(response.data.id)

@@ -8,7 +8,7 @@ import { dateFormat, currencyFormat } from 'src/functions'
 import ExpenseOptions from './ExpenseOptions'
 import ExpenseDetailsModal from './ExpenseDetailsModal'
 
-const OpenExpensesTable = ({ expenses }) => {
+const OpenExpensesTable = ({ expenses, setUpdateExpenses }) => {
   return (
     <>
       <CCardTitle>Em aberto</CCardTitle>
@@ -16,7 +16,11 @@ const OpenExpensesTable = ({ expenses }) => {
         <ExpensesTableHead />
         <CTableBody>
           {expenses.map((expense) => (
-            <ExpenseDetailsModal expense={expense} key={expense.id} />
+            <ExpenseDetailsModal
+              expense={expense}
+              key={expense.id}
+              setUpdateExpenses={setUpdateExpenses}
+            />
           ))}
         </CTableBody>
       </CTable>
