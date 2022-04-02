@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
@@ -24,7 +24,7 @@ import { currencyFormat } from 'src/functions'
 
 const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, receivablePaid, setUpdateReceivables }) => {
   const [visible, setVisible] = useState(false)
-  const [error, setError] = useState(null) // TODO: handle errors
+  // const [error, setError] = useState(null) // TODO: handle errors
   const { id } = useParams()
 
   const date = new Date()
@@ -42,6 +42,15 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
       return {
         ...prevalue,
         [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
+      }
+    })
+  }
+
+  const handleChangeInt = (event) => {
+    setPayment((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: +event.target.value
       }
     })
   }
@@ -94,7 +103,7 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
             </CCol>
             <CCol md={12}>
               <CFormLabel htmlFor="inputMethod" className="fw-bold">Método</CFormLabel>
-              <CFormSelect id="inputMethod" name="method" defaultValue={0} onChange={handleChange}>
+              <CFormSelect id="inputMethod" name="method" defaultValue={0} onChange={handleChangeInt}>
                 <option key={0} value={0}>Transferência bancária</option>
                 <option key={1} value={1}>Numerário</option>
                 <option key={3} value={3}>Vale</option>
@@ -105,7 +114,7 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
             {(modalTriggerIsButton && patientScml) && (
               <CCol md={12}>
                 <CFormLabel htmlFor="inputAccountable" className="fw-bold">Pagador</CFormLabel>
-                <CFormSelect id="inputAccountable" name="accountable" defaultValue={0} onChange={handleChange}>
+                <CFormSelect id="inputAccountable" name="accountable" defaultValue={0} onChange={handleChangeInt}>
                   <option key={0} value={0}>Utente</option>
                   <option key={1} value={1}>SCML</option>
                 </CFormSelect>
