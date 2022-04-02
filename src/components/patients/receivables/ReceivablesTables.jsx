@@ -52,6 +52,7 @@ const ReceivablesTables = ({ receivables, patientScml, setUpdateReceivables }) =
               receivable={receivable}
               table={title}
               setUpdateReceivables={setUpdateReceivables}
+              patientScml={patientScml}
             />
           ))}
         </CTableBody>
