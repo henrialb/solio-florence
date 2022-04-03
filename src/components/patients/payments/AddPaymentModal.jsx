@@ -22,7 +22,7 @@ import { api } from 'src/Api'
 import CloseModalButton from 'src/components/CloseModalButton'
 import { currencyFormat } from 'src/functions'
 
-const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, receivablePaid, setUpdateReceivables }) => {
+const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, receivableAccountable, receivablePaid, setUpdateReceivables }) => {
   const [visible, setVisible] = useState(false)
   // const [error, setError] = useState(null) // TODO: handle errors
   const { id } = useParams()
@@ -34,7 +34,7 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
     date: today,
     amount: amount,
     method: 0,
-    accountable: 0,
+    accountable: receivableAccountable,
   })
 
   const handleChange = (event) => {
@@ -64,8 +64,6 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
     })
   }
 
-  console.log(payment)
-
   return (
     <>
       {modalTriggerIsButton ? (
@@ -86,7 +84,7 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
       <CModal
         alignment="center"
         visible={visible}
-        onClose={() => [setVisible(false), setPayment({patientId: Number(id), date: today, amount: amount, method: 0, accountable: 0})]}
+        onClose={() => [setVisible(false), setPayment({patientId: Number(id), date: today, amount: amount, method: 0, accountable: receivableAccountable})]}
       >
         <CModalHeader>
           <CModalTitle>Registar pagamento</CModalTitle>
@@ -142,6 +140,7 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
 AddPaymentModal.propTypes = { amount: PropTypes.number }
 AddPaymentModal.propTypes = { modalTriggerIsButton: PropTypes.bool }
 AddPaymentModal.propTypes = { patientScml: PropTypes.bool }
+AddPaymentModal.propTypes = { receivableAccountable: PropTypes.bool }
 AddPaymentModal.propTypes = { receivablePaid: PropTypes.bool }
 AddPaymentModal.propTypes = { setUpdateReceivables: PropTypes.func }
 
