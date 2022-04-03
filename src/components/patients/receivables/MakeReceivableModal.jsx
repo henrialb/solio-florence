@@ -30,6 +30,7 @@ import CloseModalButton from 'src/components/CloseModalButton'
 const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses }) => {
   const { id } = useParams()
   const [visible, setVisible] = useState(false)
+  const receivableAmount = expenses.reduce((a, b) => a + (Number(b['amount']) || 0), 0)
 
   const monthName = () => {
     var date = new Date()
@@ -44,6 +45,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
   const [receivable, setReceivable] = useState({
     patientId: Number(id),
     description: description,
+    amount: receivableAmount,
   })
 
   const handleChange = (event) => {
@@ -150,5 +152,6 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
 MakeReceivableModal.propTypes = { withoutOpenExpenses: PropTypes.bool }
 MakeReceivableModal.propTypes = { expenses: PropTypes.array }
 MakeReceivableModal.propTypes = { setUpdateExpenses: PropTypes.func }
+MakeReceivableModal.propTypes = { receivableAmount: PropTypes.number }
 
 export default MakeReceivableModal

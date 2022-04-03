@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { api } from 'src/Api'
 import PropTypes from 'prop-types'
-import { CRow, CCard, CCardBody, CContainer, CCol, CButton } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilMoney } from '@coreui/icons'
+import { CRow, CCard, CCardBody, CContainer, CCol } from '@coreui/react'
 import { organiseExpenses } from 'src/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
@@ -29,10 +27,6 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
         })
     }
   }, [patientId, updateExpenses])
-
-  // if (expenses.length === 0) {
-  //   return null
-  // }
 
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false

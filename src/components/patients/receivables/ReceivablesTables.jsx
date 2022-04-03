@@ -26,27 +26,6 @@ const ReceivablesTables = ({ receivables, patientScml, setUpdateReceivables }) =
         <ReceivablesTableHead />
         <CTableBody>
           {receivables.map((receivable) => (
-            // <CTableRow className="pointer" key={receivable.id} onClick={() => setVisible(!visible)}>
-            //   <CTableDataCell>
-            //     <ReceivableStatusBadge paid={receivable.status === 'paid'} />
-            //   </CTableDataCell>
-            //   <CTableDataCell className="fw-semibold">{receivable.description}</CTableDataCell>
-            //   <CTableDataCell className="text-end font-monospace">
-            //     {currencyFormat(receivable.amount, title === 'Mensalidades' ? 0 : 2)}
-            //   </CTableDataCell>
-            //   <CTableDataCell className="text-end text-secondary">
-            //     {receivable.note && (
-            //       <CPopover content={receivable.note} trigger="hover">
-            //         <CIcon icon={cilNotes} />
-            //       </CPopover>
-            //     )}
-            //     <ReceivableOptions
-            //       receivableId={receivable.id}
-            //       hasNote={typeof receivable.note !== 'undefined'}
-            //       setUpdateReceivables={setUpdateReceivables}
-            //     />
-            //   </CTableDataCell>
-            // </CTableRow>
             <EditReceivableModal
               key={receivable.id}
               receivable={receivable}

@@ -36,7 +36,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientS
         [event.target.name]:
           event.target.name !== 'amount'
             ? event.target.value
-            : event.target.value.replace(/,/g, '.'),
+            : +event.target.value.replace(/,/g, '.'),
       }
     })
   }
@@ -59,6 +59,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientS
             amount={receivable.amount}
             setUpdateReceivables={setUpdateReceivables}
             receivablePaid={receivable.status === 'paid'}
+            receivableAccountable={receivable.accountable === 'scml' ? 1 : 0}
           />
         </CTableDataCell>
         <CTableDataCell className="fw-semibold pointer">{receivable.description}</CTableDataCell>
@@ -111,8 +112,9 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientS
               <CFormInput
                 id="inputAmount"
                 name="amount"
-                defaultValue={currencyFormat(receivable.amount) + ' €'}
+                defaultValue={currencyFormat(receivable.amount)}
                 className="text-end font-monospace"
+                onChange={handleChange}
                 disabled={disableAmountChange() || !editMode}
               />
             </CCol>
