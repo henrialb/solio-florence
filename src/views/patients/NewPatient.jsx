@@ -25,25 +25,20 @@ const NewPatient = () => {
     setPatient((prevalue) => {
       return {
         ...prevalue,
-        [event.target.name]: event.target.value,
-      }
-    })
-  }
-
-  const onImageChange = event => {
-    setPatient((prevalue) => {
-      return {
-        ...prevalue,
-        profilePhoto: event.target.files[0]
+        [event.target.name]: event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0],
       }
     })
   }
 
   const handleSubmit = () => {
-    api.post('/patients', patient).then((response) => {
-      // setPayment(response.data)
-      // setUpdateReceivables(Date.now())
-      // setVisible(false)
+    const formData = new FormData()
+    const config = {headers: { 'content-type': 'multipart/form-data' }}
+    formData.append('name', patient.name)
+    formData.append('profile_photo', patient.profilePhoto)
+
+    api.post('/patients', formData, config)
+    .then((response) => {
+      console.log(response)
     })
   }
 
@@ -163,11 +158,14 @@ const NewPatient = () => {
         <CCol md={4} className="mt-3 mt-md-0">
           <CCard>
             <CCardBody>
-              <CFormLabel htmlFor="photo-upload" className="profile-photo">
-                Custom Upload
-              </CFormLabel>
-              <input id="photo-upload" type="file" accept="image/*" multiple={false} onChange={onImageChange} />
-              {patient.name}
+              <CRow className="d-flex justify-content-center">
+                <CFormLabel htmlFor="photo-upload" className="profile-photo">
+                </CFormLabel>
+                <input id="photo-upload" name="profilePhoto" type="file" accept="image/*" multiple={false} onChange={handleChange} />
+              </CRow>
+              <CRow className="d-flex justify-content-center">
+                <h5 className="m-0 fw-bold text-center">{patient.name}</h5>
+              </CRow>
             </CCardBody>
           </CCard>
         </CCol>

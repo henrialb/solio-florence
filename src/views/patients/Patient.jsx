@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-redeclare */
 import React, { useState, useEffect } from 'react'
 import { NavLink, useParams, Routes, Route, Navigate } from 'react-router-dom'
@@ -6,8 +7,6 @@ import { CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
 import { age } from 'src/functions'
-
-import avatar3 from 'src/assets/images/avatars/3.jpg'
 
 const PatientData = React.lazy(() => import('src/components/patients/PatientData'))
 const PatientExpenses = React.lazy(() => import('src/components/patients/PatientExpenses'))
@@ -21,14 +20,13 @@ const PatientsDashboard = () => {
 
   useEffect(() => {
     if (id) {
-      api
-        .get(`/patients/${id}`)
-        .then((response) => {
-          setPatient(response.data)
-        })
-        .catch((error) => {
-          setError(error)
-        })
+      api.get(`/patients/${id}`)
+      .then((response) => {
+        setPatient(response.data)
+      })
+      .catch((error) => {
+        setError(error)
+      })
     }
   }, [id])
 
