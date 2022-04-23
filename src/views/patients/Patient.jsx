@@ -38,7 +38,7 @@ const PatientsDashboard = () => {
     <>
       <CRow className="d-md-flex justify-content-between mb-3 align-items-center">
         <CCol sm="auto" className="d-flex align-items-center">
-          <CAvatar size="xl" src={avatar3} className="p-0" />
+          <CAvatar size="xl" src={patient.profilePhoto} className="p-0" />
           <CCol className="ms-3">
             <h5 className="m-0 fw-bold">{patient.name}</h5>
             <small className="text-medium-emphasis">{age(patient.dob)} anos</small>

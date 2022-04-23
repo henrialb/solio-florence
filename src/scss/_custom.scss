@@ -49,3 +49,9 @@ a {
 .border-success-dark {
   border: $success-dark 1px solid;
 }
+
+.profile-photo {
+  width: 200px;
+  background-color: aqua;
+  border-radius: 50%;
+}
