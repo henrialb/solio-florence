@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
+import { api } from 'src/Api'
 import {
   CRow,
   CCol,
@@ -13,13 +14,15 @@ import {
   CButton,
   CCardFooter
 } from '@coreui/react'
-import { api } from 'src/Api'
+import CIcon from '@coreui/icons-react'
+import { cilCamera } from '@coreui/icons'
 
 const NewPatient = () => {
   const date = new Date()
   // eslint-disable-next-line prettier/prettier
   const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
   const [patient, setPatient] = useState({admissionDate: today, sex: 0, covenant: 0, profilePhoto: null})
+  const [photo, setPhoto] = useState(null)
 
   const handleChange = (event) => {
     setPatient((prevalue) => {
@@ -28,6 +31,8 @@ const NewPatient = () => {
         [event.target.name]: event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0],
       }
     })
+
+    if (event.target.name === 'profilePhoto') { setPhoto(URL.createObjectURL(event.target.files[0])) }
   }
 
   const handleSubmit = () => {
@@ -159,7 +164,12 @@ const NewPatient = () => {
           <CCard>
             <CCardBody>
               <CRow className="d-flex justify-content-center">
-                <CFormLabel htmlFor="photo-upload" className="profile-photo">
+                <CFormLabel htmlFor="photo-upload" className="profile-photo-input p-0 d-flex justify-content-center align-items-center text-secondary">
+                  {photo !== null ? (
+                    <img src={photo} className="patient-photo" alt="Utente" />
+                  ) : (
+                    <CIcon icon={cilCamera} size="xl" />
+                  )}
                 </CFormLabel>
                 <input id="photo-upload" name="profilePhoto" type="file" accept="image/*" multiple={false} onChange={handleChange} />
               </CRow>
