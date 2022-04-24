@@ -5,14 +5,15 @@ import {
   CRow,
   CCol,
   CCard,
+  CCardTitle,
   CCardBody,
+  CCardFooter,
   CForm,
   CFormLabel,
   CFormSelect,
   CFormInput,
   CFormTextarea,
-  CButton,
-  CCardFooter
+  CButton
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilCamera } from '@coreui/icons'
@@ -55,6 +56,7 @@ const NewPatient = () => {
         <CCol md={8}>
           <CCard>
             <CCardBody>
+              <CCardTitle className="mb-3">Abrir processo</CCardTitle>
               <CForm className="row g-3">
                 <CCol sm={6} md={8}>
                   <CFormLabel htmlFor="inputFullName" className="fw-bold">Nome completo</CFormLabel>
@@ -99,7 +101,7 @@ const NewPatient = () => {
                 <CRow className="mt-3">
                   <CCol sm={6} md={4}>
                     <CFormLabel htmlFor="inputCovenant" className="fw-bold">Acordo</CFormLabel>
-                    <CFormSelect id="inputCovenant" name="covenant" onChange={handleChange}>
+                    <CFormSelect id="inputCovenant" name="covenant" defaultValue={0} onChange={handleChange}>
                       <option key={0} value={0}>Privado</option>
                       <option key={1} value={1}>SCML</option>
                     </CFormSelect>
@@ -110,7 +112,8 @@ const NewPatient = () => {
                   </CCol>
                   <CCol sm={6} md={2}>
                     <CFormLabel htmlFor="inputFacility" className="fw-bold">Casa</CFormLabel>
-                    <CFormSelect id="inputFacility" name="facility" onChange={handleChange}>
+                    <CFormSelect id="inputFacility" name="facility" defaultValue={''} onChange={handleChange}>
+                      <option key={-1} value={''}></option>
                       <option key={36} value={0}>36</option>
                       <option key={21} value={1}>21</option>
                     </CFormSelect>
@@ -126,9 +129,8 @@ const NewPatient = () => {
                 </CCol>
               </CForm>
             </CCardBody>
-            <CCardFooter className="d-flex justify-content-between p-3 mt-3 bg-white">
+            <CCardFooter className="d-flex justify-content-start p-3 mt-3 bg-white">
               <CButton color="secondary" size="sm" variant="ghost" href="/utentes">Cancelar</CButton>
-              <CButton color="primary" size="sm" onClick={handleSubmit}>Confirmar</CButton>
             </CCardFooter>
           </CCard>
         </CCol>
@@ -156,13 +158,27 @@ const NewPatient = () => {
                 {patient.sex !== undefined ? (
                   <p><b>Sexo:</b> {parseInt(patient.sex) === 0 ? 'Feminino' : 'Masculino'}</p>
                   ) : null}
+                {patient.clothesTag !== undefined ? (<p><b>Marcação de roupa:</b> {patient.clothesTag}</p>) : null}
                 {patient.citizenNo !== undefined ? (<p><b>Cartão de Cidadão:</b> {patient.citizenNo}</p>) : null}
                 {patient.nifNo !== undefined ? (<p><b>NIF:</b> {patient.nifNo}</p>) : null}
                 {patient.healthNo !== undefined ? (<p><b>Utente de Saúde:</b> {patient.healthNo}</p>) : null}
                 {patient.socialSecurityNo !== undefined ? (<p><b>Segurança Social:</b> {patient.socialSecurityNo}</p>) : null}
-                {patient.clothesTag !== undefined ? (<p><b>Roupa:</b> {patient.clothesTag}</p>) : null}
+                {patient.fullName !== undefined ? (<hr />) : null}
+                {patient.fullName !== undefined ? (<p><b>Data de Admissão:</b> {dateFormat(patient.admissionDate)}</p>) : null}
+                {patient.facility !== undefined ? (<p><b>Casa:</b> {parseInt(patient.facility) === 0 ? '36' : '21'}</p>) : null}
+                {patient.monthlyFee !== undefined ? (<p><b>Mensalidade:</b> {patient.monthlyFee}€</p>) : null}
               </CRow>
             </CCardBody>
+            <CCardFooter className="d-flex justify-content-end p-3 bg-white">
+              <CButton
+                color="primary"
+                size="sm"
+                onClick={handleSubmit}
+                disabled={patient.name === undefined || patient.facility === undefined}
+              >
+                Confirmar
+              </CButton>
+            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
