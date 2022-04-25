@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { api } from 'src/Api'
 import {
   CRow,
@@ -22,8 +23,9 @@ import { age, dateFormat } from 'src/functions'
 const NewPatient = () => {
   const date = new Date()
   const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
-  const [patient, setPatient] = useState({admissionDate: today, covenant: 0, profilePhoto: null})
+  const [patient, setPatient] = useState({admissionDate: today, covenant: 'personal', profilePhoto: null})
   const [photo, setPhoto] = useState(null)
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     setPatient((prevalue) => {
@@ -39,16 +41,34 @@ const NewPatient = () => {
   const handleSubmit = () => {
     const formData = new FormData()
     const config = {headers: { 'content-type': 'multipart/form-data' }}
-    formData.append('name', patient.name)
-    formData.append('profile_photo', patient.profilePhoto)
+    const fields = {
+      fullName: patient.fullName,
+      name: patient.name,
+      dob: patient.dob,
+      sex: patient.sex,
+      clothesTag: patient.clothesTag,
+      citizenNo: patient.citizenNo,
+      nifNo: patient.nifNo,
+      healthNo: patient.healthNo,
+      socialSecurityNo: patient.socialSecurityNo,
+      covenant: patient.covenant,
+      openDate: patient.admissionDate,
+      facility: patient.facility,
+      monthlyFee: patient.monthlyFee,
+      note: patient.notes
+    }
+
+    for (var property in fields) {
+      formData.append(property, fields[property])
+    }
+    patient.profilePhoto && formData.append('profile_photo', patient.profilePhoto)
 
     api.post('/patients', formData, config)
     .then((response) => {
       console.log(response)
+      navigate('/utentes')
     })
   }
-
-  console.log(patient)
 
   return (
     <>
@@ -74,8 +94,8 @@ const NewPatient = () => {
                   <CFormLabel htmlFor="inputSex" className="fw-bold">Sexo</CFormLabel>
                   <CFormSelect id="inputSex" name="sex" defaultValue={''} onChange={handleChange}>
                     <option key={-1} value={''}></option>
-                    <option key={0} value={0}>Feminino</option>
-                    <option key={1} value={1}>Masculino</option>
+                    <option key={0} value="female">Feminino</option>
+                    <option key={1} value="male">Masculino</option>
                   </CFormSelect>
                 </CCol>
                 <CCol sm={6} md={4}>
@@ -102,8 +122,8 @@ const NewPatient = () => {
                   <CCol sm={6} md={4}>
                     <CFormLabel htmlFor="inputCovenant" className="fw-bold">Acordo</CFormLabel>
                     <CFormSelect id="inputCovenant" name="covenant" defaultValue={0} onChange={handleChange}>
-                      <option key={0} value={0}>Privado</option>
-                      <option key={1} value={1}>SCML</option>
+                      <option key={0} value="personal">Privado</option>
+                      <option key={1} value="scml">SCML</option>
                     </CFormSelect>
                   </CCol>
                   <CCol sm={6} md={4}>
@@ -112,10 +132,10 @@ const NewPatient = () => {
                   </CCol>
                   <CCol sm={6} md={2}>
                     <CFormLabel htmlFor="inputFacility" className="fw-bold">Casa</CFormLabel>
-                    <CFormSelect id="inputFacility" name="facility" defaultValue={''} onChange={handleChange}>
-                      <option key={-1} value={''}></option>
-                      <option key={36} value={0}>36</option>
-                      <option key={21} value={1}>21</option>
+                    <CFormSelect id="inputFacility" name="facility" defaultValue={null} onChange={handleChange}>
+                      <option key={0} value={null}></option>
+                      <option key={36} value="36">36</option>
+                      <option key={21} value="21">21</option>
                     </CFormSelect>
                   </CCol>
                   <CCol sm={6} md={2}>
@@ -125,7 +145,7 @@ const NewPatient = () => {
                 </CRow>
                 <CCol md={12}>
                   <CFormLabel htmlFor="inputNote" className="fw-bold">Observações</CFormLabel>
-                  <CFormTextarea id="inputNote" name="note" onChange={handleChange} />
+                  <CFormTextarea id="inputNote" name="notes" onChange={handleChange} />
                 </CCol>
               </CForm>
             </CCardBody>
