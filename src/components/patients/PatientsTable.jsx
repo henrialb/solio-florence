@@ -16,7 +16,7 @@ import CIcon from '@coreui/icons-react'
 import { cilPeople } from '@coreui/icons'
 import { age } from 'src/functions'
 
-import avatar5 from 'src/assets/images/avatars/5.jpg'
+import avatar from 'src/assets/images/avatars/avatar.png'
 
 const PatientsTable = ({ patients }) => {
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ const PatientsTable = ({ patients }) => {
           {patients.map((patient, index) => (
             <CTableRow className="pointer" key={index} onClick={() => handleRowClick(patient.id)}>
               <CTableDataCell className="text-center">
-                <CAvatar size="md" src={avatar5} />
+                <CAvatar size="md" src={patient.profilePhoto ? patient.profilePhoto : avatar} />
               </CTableDataCell>
               <CTableDataCell className="fw-semibold">{patient.name}</CTableDataCell>
               <CTableDataCell className="text-center">{age(patient.dob)}</CTableDataCell>

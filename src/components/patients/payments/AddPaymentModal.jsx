@@ -60,7 +60,6 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
       // setPayment(response.data)
       setUpdateReceivables(Date.now())
       setVisible(false)
-      console.log(response)
     })
   }
 

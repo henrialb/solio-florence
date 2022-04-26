@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-redeclare */
 import React, { useState, useEffect } from 'react'
 import { NavLink, useParams, Routes, Route, Navigate } from 'react-router-dom'
@@ -6,8 +7,7 @@ import { CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
 import { age } from 'src/functions'
-
-import avatar3 from 'src/assets/images/avatars/3.jpg'
+import avatar from 'src/assets/images/avatars/avatar.png'
 
 const PatientData = React.lazy(() => import('src/components/patients/PatientData'))
 const PatientExpenses = React.lazy(() => import('src/components/patients/PatientExpenses'))
@@ -21,14 +21,13 @@ const PatientsDashboard = () => {
 
   useEffect(() => {
     if (id) {
-      api
-        .get(`/patients/${id}`)
-        .then((response) => {
-          setPatient(response.data)
-        })
-        .catch((error) => {
-          setError(error)
-        })
+      api.get(`/patients/${id}`)
+      .then((response) => {
+        setPatient(response.data)
+      })
+      .catch((error) => {
+        setError(error)
+      })
     }
   }, [id])
 
@@ -38,7 +37,7 @@ const PatientsDashboard = () => {
     <>
       <CRow className="d-md-flex justify-content-between mb-3 align-items-center">
         <CCol sm="auto" className="d-flex align-items-center">
-          <CAvatar size="xl" src={avatar3} className="p-0" />
+          <CAvatar size="xl" src={patient.profilePhoto ? patient.profilePhoto : avatar} className="p-0" />
           <CCol className="ms-3">
             <h5 className="m-0 fw-bold">{patient.name}</h5>
             <small className="text-medium-emphasis">{age(patient.dob)} anos</small>
