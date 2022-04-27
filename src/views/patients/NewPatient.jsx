@@ -18,7 +18,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilCamera } from '@coreui/icons'
-import { age, dateFormat } from 'src/functions'
+import { age, dateFormat } from 'src/utils/functions'
 
 const NewPatient = () => {
   const date = new Date()

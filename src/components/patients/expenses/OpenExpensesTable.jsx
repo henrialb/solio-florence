@@ -4,7 +4,7 @@ import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover } f
 import CIcon from '@coreui/icons-react'
 import { cilNotes } from '@coreui/icons'
 import ExpensesTableHead from './ExpensesTableHead'
-import { dateFormat, currencyFormat } from 'src/functions'
+import { dateFormat, currencyFormat } from 'src/utils/functions'
 import ExpenseOptions from './ExpenseOptions'
 import ExpenseDetailsModal from './ExpenseDetailsModal'
 

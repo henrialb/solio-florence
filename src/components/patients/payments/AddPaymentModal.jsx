@@ -20,7 +20,7 @@ import CIcon from '@coreui/icons-react'
 import { cilMoney, cilCheckAlt } from '@coreui/icons'
 import { api } from 'src/Api'
 import CloseModalButton from 'src/components/CloseModalButton'
-import { currencyFormat } from 'src/functions'
+import { currencyFormat } from 'src/utils/functions'
 
 const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, receivableAccountable, receivablePaid, setUpdateReceivables }) => {
   const [visible, setVisible] = useState(false)

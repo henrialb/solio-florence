@@ -14,7 +14,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPeople } from '@coreui/icons'
-import { age } from 'src/functions'
+import { age } from 'src/utils/functions'
 
 import avatar from 'src/assets/images/avatars/avatar.png'
 

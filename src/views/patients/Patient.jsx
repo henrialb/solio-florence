@@ -6,7 +6,7 @@ import { api } from 'src/Api'
 import { CRow, CCol, CAvatar, CNav, CNavItem, CNavLink } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilUser, cilDescription, cilEuro, cilAddressBook } from '@coreui/icons'
-import { age } from 'src/functions'
+import { age } from 'src/utils/functions'
 import avatar from 'src/assets/images/avatars/avatar.png'
 
 const PatientData = React.lazy(() => import('src/components/patients/PatientData'))

@@ -17,7 +17,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilPencil } from '@coreui/icons'
-import { currencyFormat } from 'src/functions'
+import { currencyFormat } from 'src/utils/functions'
 import PropTypes from 'prop-types'
 import { api } from 'src/Api'
 import ReceivableOptions from './ReceivableOptions'

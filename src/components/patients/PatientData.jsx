@@ -14,7 +14,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPencil } from '@coreui/icons'
-import { dateFormat } from 'src/functions'
+import { dateFormat } from 'src/utils/functions'
 
 
 const PatientData = ({ patient }) => {
