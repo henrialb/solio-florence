@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -15,8 +16,33 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { api } from 'src/Api'
+import { readAuthToken, saveAuthToken } from 'src/utils/auth'
 
 const Login = () => {
+  const [loginDetails, setLoginDetails] = useState([])
+  const navigate = useNavigate()
+
+  const handleChange = (event) => {
+    setLoginDetails((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: event.target.value,
+      }
+    })
+  }
+
+  const handleSubmit = () => {
+    const user = { user: loginDetails }
+    api.post('users/sign_in', user).then((response) => {
+      saveAuthToken(response.headers['authorization'])
+    }).then(navigate('/utentes'))
+  }
+
+  if (readAuthToken()) {
+    return <Navigate to="/inicio" />
+  }
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -34,21 +60,28 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Nome de utilizador" autoComplete="username" />
+                      <CFormInput
+                        name="email"
+                        placeholder="Nome de utilizador"
+                        autoComplete="username"
+                        onChange={handleChange}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
+                        name="password"
                         type="password"
                         placeholder="Palavra-passe"
                         autoComplete="current-password"
+                        onChange={handleChange}
                       />
                     </CInputGroup>
                     <CRow className="justify-content-end">
                       <CCol xs={6} className="d-flex justify-content-end">
-                        <CButton color="primary" className="px-4">
+                        <CButton color="primary" className="px-4" onClick={handleSubmit}>
                           Entrar
                         </CButton>
                       </CCol>
@@ -57,18 +90,18 @@ const Login = () => {
                 </CCardBody>
               </CCard>
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
+                <CCardBody className="d-flex align-items-center text-center">
                   <div>
                     <h2>Precisa de ajuda?</h2>
                     <p>
                       Se não se sabe os seus dados de acesso ou não consegue entrar na sua conta,
                       por favor contacte a gestão através do Slack.
                     </p>
-                    <Link to="/register">
+                    {/* <Link to="/register">
                       <CButton color="light" className="mt-3" variant="outline">
                         Abrir Slack
                       </CButton>
-                    </Link>
+                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>

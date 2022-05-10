@@ -1,7 +1,7 @@
-import jwt_decode from 'jwt-decode'
+// import jwt_decode from 'jwt-decode'
 import Cookies from 'js-cookie'
 
-const TOKEN_KEY = '__solio_session_token'
+const TOKEN_KEY = '__florence_session_token'
 const domain = process.env.REACT_APP_DOMAIN
 
 // Stores the jwt token (i.e. "Bearer eyJhbGciOiJIUzI1N...") in cookie
@@ -32,12 +32,12 @@ export const deleteAuthToken = (reason = 'Removed token') => {
   Cookies.remove(TOKEN_KEY, options)
 }
 
-export const readAuthPayload = () => {
-  const token = readAuthToken()
+// export const readAuthPayload = () => {
+//   const token = readAuthToken()
 
-  if (!token) {
-    return {}
-  }
+//   if (!token) {
+//     return {}
+//   }
 
-  return jwt_decode(token)
-}
+//   return jwt_decode(token)
+// }
