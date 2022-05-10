@@ -36,7 +36,8 @@ const Login = () => {
     const user = { user: loginDetails }
     api.post('users/sign_in', user).then((response) => {
       saveAuthToken(response.headers['authorization'])
-    }).then(navigate('/utentes'))
+      navigate('/utentes')
+    })
   }
 
   if (readAuthToken()) {
