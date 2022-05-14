@@ -32,11 +32,18 @@ const Login = () => {
     })
   }
 
+  const handleKeypress = e => {
+    //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      handleSubmit()
+    }
+  }
+
   const handleSubmit = () => {
     const user = { user: loginDetails }
     api.post('users/sign_in', user).then((response) => {
       saveAuthToken(response.headers['authorization'])
-      navigate('/utentes')
+      navigate('/utentes') // TODO: change to /inicio
     })
   }
 
@@ -66,6 +73,7 @@ const Login = () => {
                         placeholder="Nome de utilizador"
                         autoComplete="username"
                         onChange={handleChange}
+                        onKeyDown={handleKeypress}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -78,6 +86,7 @@ const Login = () => {
                         placeholder="Palavra-passe"
                         autoComplete="current-password"
                         onChange={handleChange}
+                        onKeyDown={handleKeypress}
                       />
                     </CInputGroup>
                     <CRow className="justify-content-end">
