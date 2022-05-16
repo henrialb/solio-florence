@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   CModal,
@@ -21,6 +21,7 @@ import { cilPlus } from '@coreui/icons'
 // import PickDate from 'src/components/PickDate'
 import { api } from 'src/Api'
 import CloseModalButton from 'src/components/CloseModalButton'
+import { deleteAuthToken } from 'src/utils/auth'
 
 const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const [visible, setVisible] = useState(false)
@@ -62,6 +63,11 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
       setUpdateExpenses(Date.now())
       setVisible(false)
     })
+  }
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
   }
 
   return (

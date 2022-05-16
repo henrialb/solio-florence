@@ -21,10 +21,12 @@ import { cilMoney, cilCheckAlt } from '@coreui/icons'
 import { api } from 'src/Api'
 import CloseModalButton from 'src/components/CloseModalButton'
 import { currencyFormat } from 'src/utils/functions'
+import { Navigate } from 'react-router-dom'
+import { deleteAuthToken } from 'src/utils/auth'
 
 const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, receivableAccountable, receivablePaid, setUpdateReceivables }) => {
   const [visible, setVisible] = useState(false)
-  // const [error, setError] = useState(null) // TODO: handle errors
+  const [error, setError] = useState(null) // TODO: handle errors
   const { id } = useParams()
 
   const date = new Date()
@@ -56,11 +58,20 @@ const AddPaymentModal = ({ amount = null, modalTriggerIsButton, patientScml, rec
   }
 
   const handleSubmit = () => {
-    api.post('/patient_payments', payment).then((response) => {
+    api.post('/patient_payments', payment)
+    .then((response) => {
       // setPayment(response.data)
       setUpdateReceivables(Date.now())
       setVisible(false)
     })
+    .catch((error) => {
+      setError(error)
+    })
+  }
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
   }
 
   return (

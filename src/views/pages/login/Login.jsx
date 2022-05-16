@@ -45,7 +45,8 @@ const Login = () => {
     .post('users/sign_in', { user: loginDetails })
     .then((response) => {
       saveAuthToken(response.headers['authorization'])
-      navigate('/utentes') // TODO: change to /inicio
+      window.location.pathname = '/utentes'
+      // navigate('/utentes') // TODO: change to /inicio
     })
   }
 
