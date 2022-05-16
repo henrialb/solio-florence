@@ -16,7 +16,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { api } from 'src/Api'
+import axios from 'axios'
 import { readAuthToken, saveAuthToken } from 'src/utils/auth'
 
 const Login = () => {
@@ -33,15 +33,16 @@ const Login = () => {
   }
 
   const handleKeypress = e => {
-    //it triggers by pressing the enter key
+    // it triggers by pressing the enter key
     if (e.keyCode === 13) {
       handleSubmit()
     }
   }
 
   const handleSubmit = () => {
-    const user = { user: loginDetails }
-    api.post('users/sign_in', user).then((response) => {
+    axios.create({ baseURL: 'http://localhost:3000' })
+    .post('users/sign_in', { user: loginDetails })
+    .then((response) => {
       saveAuthToken(response.headers['authorization'])
       navigate('/utentes') // TODO: change to /inicio
     })
