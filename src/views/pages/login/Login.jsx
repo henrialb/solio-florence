@@ -18,6 +18,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
 import { readAuthToken, saveAuthToken } from 'src/utils/auth'
+import { config } from 'src/constants'
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState([])
@@ -40,7 +41,7 @@ const Login = () => {
   }
 
   const handleSubmit = () => {
-    axios.create({ baseURL: 'http://localhost:3000' })
+    axios.create({ baseURL: config.url.API_URL })
     .post('users/sign_in', { user: loginDetails })
     .then((response) => {
       saveAuthToken(response.headers['authorization'])
