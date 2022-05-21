@@ -46,9 +46,9 @@ const PatientData = ({ patient }) => {
               </CRow>
               <CRow>
                 <CCol sm={7}>
-                  <p>Nº CC: {patient.citizenNo}</p>
-                  <p>NIF: {patient.nifNo}</p>
-                  <p>Nº SS: {patient.socialSecurityNo}</p>
+                  <p>Nº CC: {patient.citizenNum}</p>
+                  <p>NIF: {patient.nifNum}</p>
+                  <p>Nº SS: {patient.socialSecurityNum}</p>
                   <p>Mensalidade: {patient.monthlyFee}</p>
                 </CCol>
                 <CCol sm={5}>
