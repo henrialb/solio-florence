@@ -44,13 +44,13 @@ const NewPatient = () => {
     const fields = {
       fullName: patient.fullName,
       name: patient.name,
-      dob: patient.dob,
+      dateOfBirth: patient.dateOfBirth,
       sex: patient.sex,
       clothesTag: patient.clothesTag,
-      citizenNo: patient.citizenNo,
-      nifNo: patient.nifNo,
-      healthNo: patient.healthNo,
-      socialSecurityNo: patient.socialSecurityNo,
+      citizenNum: patient.citizenNum,
+      nifNum: patient.nifNum,
+      healthNum: patient.healthNum,
+      socialSecurityNum: patient.socialSecurityNum,
       covenant: patient.covenant,
       openDate: patient.admissionDate,
       facility: patient.facility,
@@ -87,8 +87,8 @@ const NewPatient = () => {
                   <CFormInput id="inputName" name="name" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputDob" className="fw-bold">Data de nascimento</CFormLabel>
-                  <CFormInput type="date" id="inputDob" name="dob" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputDateOfBirth" className="fw-bold">Data de nascimento</CFormLabel>
+                  <CFormInput type="date" id="inputDateOfBirth" name="dateOfBirth" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
                   <CFormLabel htmlFor="inputSex" className="fw-bold">Sexo</CFormLabel>
@@ -103,20 +103,20 @@ const NewPatient = () => {
                   <CFormInput id="inputClothesTag" name="clothesTag" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputCitizenNo" className="fw-bold">Nº CC</CFormLabel>
-                  <CFormInput id="inputCitizenNo" name="citizenNo" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputCitizenNum" className="fw-bold">Nº CC</CFormLabel>
+                  <CFormInput id="inputCitizenNum" name="citizenNum" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputNifNo" className="fw-bold">NIF</CFormLabel>
-                  <CFormInput id="inputNifNo" name="nifNo" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputNifNum" className="fw-bold">NIF</CFormLabel>
+                  <CFormInput id="inputNifNum" name="nifNum" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputHealthNo" className="fw-bold">Nº Utente de Saúde</CFormLabel>
-                  <CFormInput id="inputHealthNo" name="healthNo" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputHealthNum" className="fw-bold">Nº Utente de Saúde</CFormLabel>
+                  <CFormInput id="inputHealthNum" name="healthNum" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputSocialSecurityNo" className="fw-bold">Nº Seg. Social</CFormLabel>
-                  <CFormInput id="inputSocialSecurityNo" name="socialSecurityNo" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputSocialSecurityNum" className="fw-bold">Nº Seg. Social</CFormLabel>
+                  <CFormInput id="inputSocialSecurityNum" name="socialSecurityNum" onChange={handleChange} />
                 </CCol>
                 <CRow className="mt-3">
                   <CCol sm={6} md={4}>
@@ -172,17 +172,17 @@ const NewPatient = () => {
               </CRow>
               <CRow>
                 {patient.fullName !== undefined ? (<p><b>Nome:</b> {patient.fullName}</p>) : null}
-                {patient.dob !== undefined ? (
-                  <p><b>Data de nascimento:</b> {dateFormat(patient.dob)}&ensp;({age(patient.dob)} anos)</p>
+                {patient.dateOfBirth !== undefined ? (
+                  <p><b>Data de nascimento:</b> {dateFormat(patient.dateOfBirth)}&ensp;({age(patient.dateOfBirth)} anos)</p>
                   ) : null}
                 {patient.sex !== undefined ? (
                   <p><b>Sexo:</b> {parseInt(patient.sex) === 0 ? 'Feminino' : 'Masculino'}</p>
                   ) : null}
                 {patient.clothesTag !== undefined ? (<p><b>Marcação de roupa:</b> {patient.clothesTag}</p>) : null}
-                {patient.citizenNo !== undefined ? (<p><b>Cartão de Cidadão:</b> {patient.citizenNo}</p>) : null}
-                {patient.nifNo !== undefined ? (<p><b>NIF:</b> {patient.nifNo}</p>) : null}
-                {patient.healthNo !== undefined ? (<p><b>Utente de Saúde:</b> {patient.healthNo}</p>) : null}
-                {patient.socialSecurityNo !== undefined ? (<p><b>Segurança Social:</b> {patient.socialSecurityNo}</p>) : null}
+                {patient.citizenNum !== undefined ? (<p><b>Cartão de Cidadão:</b> {patient.citizenNum}</p>) : null}
+                {patient.nifNum !== undefined ? (<p><b>NIF:</b> {patient.nifNum}</p>) : null}
+                {patient.healthNum !== undefined ? (<p><b>Utente de Saúde:</b> {patient.healthNum}</p>) : null}
+                {patient.socialSecurityNum !== undefined ? (<p><b>Segurança Social:</b> {patient.socialSecurityNum}</p>) : null}
                 {patient.fullName !== undefined ? (<hr />) : null}
                 {patient.fullName !== undefined ? (<p><b>Data de Admissão:</b> {dateFormat(patient.admissionDate)}</p>) : null}
                 {patient.facility !== undefined ? (<p><b>Casa:</b> {parseInt(patient.facility) === 0 ? '36' : '21'}</p>) : null}

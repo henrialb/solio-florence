@@ -47,7 +47,7 @@ const PatientsDashboard = () => {
           <CAvatar size="xl" src={patient.profilePhoto ? patient.profilePhoto : avatar} className="p-0" />
           <CCol className="ms-3">
             <h5 className="m-0 fw-bold">{patient.name}</h5>
-            <small className="text-medium-emphasis">{age(patient.dob)} anos</small>
+            <small className="text-medium-emphasis">{age(patient.dateOfBirth)} anos</small>
           </CCol>
         </CCol>
         <CCol className="ms-md-5">

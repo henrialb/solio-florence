@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-const age = (dob) => {
-  var dobdate = new Date(dob)
-  var diff_ms = Date.now() - dobdate.getTime()
+const age = (dateOfBirth) => {
+  var date = new Date(dateOfBirth)
+  var diff_ms = Date.now() - date.getTime()
   var age_dt = new Date(diff_ms)
 
   return Math.abs(age_dt.getUTCFullYear() - 1970)
