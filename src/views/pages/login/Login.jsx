@@ -72,7 +72,7 @@ const Login = () => {
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        name="email"
+                        name="login"
                         placeholder="Nome de utilizador"
                         autoComplete="username"
                         onChange={handleChange}
