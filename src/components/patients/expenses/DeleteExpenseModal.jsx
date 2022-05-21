@@ -13,15 +13,28 @@ import CIcon from '@coreui/icons-react'
 import { cilTrash } from '@coreui/icons'
 import { api } from 'src/Api'
 import CloseModalButton from 'src/components/CloseModalButton'
+import { Navigate } from 'react-router-dom'
+import { deleteAuthToken } from 'src/utils/auth'
 
 const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
+  const [error, setError] = useState(null) // TODO: handle errors
   const [visible, setVisible] = useState(false)
 
   const handleSubmit = (id) => {
-    api.delete(`/patient_expenses/${id}`).then(() => {
-      setUpdateExpenses(Date.now())
-      // setVisible(false) TODO: Unmounted component? The modal closes anyway because of a bug with the Dropdown auto close
-    })
+    api
+      .delete(`/patient_expenses/${id}`)
+      .then(() => {
+        setUpdateExpenses(Date.now())
+        // setVisible(false) TODO: Unmounted component? The modal closes anyway because of a bug with the Dropdown auto close
+      })
+      .catch((error) => {
+        setError(error)
+      })
+  }
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
   }
 
   return (

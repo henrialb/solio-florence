@@ -1,7 +1,13 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
+import { readAuthToken, saveAuthToken } from 'src/utils/auth'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 
 const DefaultLayout = () => {
+  if (!readAuthToken()) {
+    return <Navigate to="/entrar" />
+  }
+
   return (
     <div>
       <AppSidebar />

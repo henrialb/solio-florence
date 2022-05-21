@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+/* eslint-disable prettier/prettier */
+import React, { useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -15,8 +16,44 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import axios from 'axios'
+import { readAuthToken, saveAuthToken } from 'src/utils/auth'
+import { config } from 'src/constants'
 
 const Login = () => {
+  const [loginDetails, setLoginDetails] = useState([])
+  const navigate = useNavigate()
+
+  const handleChange = (event) => {
+    setLoginDetails((prevalue) => {
+      return {
+        ...prevalue,
+        [event.target.name]: event.target.value,
+      }
+    })
+  }
+
+  const handleKeypress = e => {
+    // it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      handleSubmit()
+    }
+  }
+
+  const handleSubmit = () => {
+    axios.create({ baseURL: config.url.API_URL })
+    .post('users/sign_in', { user: loginDetails })
+    .then((response) => {
+      saveAuthToken(response.headers['authorization'])
+      window.location.pathname = '/utentes'
+      // navigate('/utentes') // TODO: change to /inicio
+    })
+  }
+
+  if (readAuthToken()) {
+    return <Navigate to="/inicio" />
+  }
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -26,33 +63,39 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
+                    <h1>Florence</h1>
+                    <p className="text-medium-emphasis">
+                      Entre na sua conta com os dados de acesso
+                    </p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput
+                        name="email"
+                        placeholder="Nome de utilizador"
+                        autoComplete="username"
+                        onChange={handleChange}
+                        onKeyDown={handleKeypress}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
+                        name="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Palavra-passe"
                         autoComplete="current-password"
+                        onChange={handleChange}
+                        onKeyDown={handleKeypress}
                       />
                     </CInputGroup>
-                    <CRow>
-                      <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
-                          Login
-                        </CButton>
-                      </CCol>
-                      <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
+                    <CRow className="justify-content-end">
+                      <CCol xs={6} className="d-flex justify-content-end">
+                        <CButton color="primary" className="px-4" onClick={handleSubmit}>
+                          Entrar
                         </CButton>
                       </CCol>
                     </CRow>
@@ -60,18 +103,18 @@ const Login = () => {
                 </CCardBody>
               </CCard>
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
+                <CCardBody className="d-flex align-items-center text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2>Precisa de ajuda?</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      Se não se sabe os seus dados de acesso ou não consegue entrar na sua conta,
+                      por favor contacte a gestão através do Slack.
                     </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        Register Now!
+                    {/* <Link to="/register">
+                      <CButton color="light" className="mt-3" variant="outline">
+                        Abrir Slack
                       </CButton>
-                    </Link>
+                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>

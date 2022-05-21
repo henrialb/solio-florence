@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { CRow, CCol, CCard, CCardBody } from '@coreui/react'
 import ReceivablesTables from './receivables/ReceivablesTables'
 import AddPaymentModal from './payments/AddPaymentModal'
+import { Navigate } from 'react-router-dom'
+import { deleteAuthToken } from 'src/utils/auth'
 
 const PatientReceivables = ({ patientId, patientScml }) => {
   const [receivables, setReceivables] = useState([])
@@ -22,6 +24,11 @@ const PatientReceivables = ({ patientId, patientScml }) => {
         })
     }
   }, [patientId, updateReceivables])
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
+  }
 
   return (
     <>
