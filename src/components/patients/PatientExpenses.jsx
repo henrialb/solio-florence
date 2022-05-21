@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { api } from 'src/Api'
 import PropTypes from 'prop-types'
 import { CRow, CCard, CCardBody, CContainer, CCol } from '@coreui/react'
-import { organiseExpenses } from 'src/functions'
+import { organiseExpenses } from 'src/utils/functions'
 import OpenExpensesTable from './expenses/OpenExpensesTable'
 import ClosedExpensesTable from './expenses/ClosedExpensesTable'
 import AddExpenseModal from './expenses/AddExpenseModal'
 import MakeReceivableModal from './receivables/MakeReceivableModal'
+import { Navigate } from 'react-router-dom'
+import { deleteAuthToken } from 'src/utils/auth'
 
 const PatientExpenses = ({ patientId, patientFullName }) => {
   const [expenses, setExpenses] = useState([])
@@ -30,6 +32,11 @@ const PatientExpenses = ({ patientId, patientFullName }) => {
 
   const withoutOpenExpenses = openExpenses.length === 0 ? true : false
   const withClosedExpenses = closedExpenses.length !== 0 ? true : false
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
+  }
 
   return (
     <>

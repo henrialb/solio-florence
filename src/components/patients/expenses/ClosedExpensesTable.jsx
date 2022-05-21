@@ -5,7 +5,7 @@ import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover, CD
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilCheckAlt } from '@coreui/icons'
 import ExpensesTableHead from './ExpensesTableHead'
-import { dateFormat, currencyFormat } from 'src/functions'
+import { dateFormat, currencyFormat } from 'src/utils/functions'
 
 const ClosedExpensesTable = ({ expenses, includeTableHeader }) => {
   return (

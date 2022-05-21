@@ -3,6 +3,8 @@ import { api } from '../../Api'
 import { CButton, CRow } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import { Navigate } from 'react-router-dom'
+import { deleteAuthToken } from 'src/utils/auth'
 
 import PatientsTable from 'src/components/patients/PatientsTable'
 
@@ -28,6 +30,11 @@ const PatientsDashboard = () => {
   const patients21 = patients.filter(function (patient) {
     return patient.facility === '21'
   })
+
+  if (error && error.message === 'Request failed with status code 500') {
+    deleteAuthToken()
+    return <Navigate to="/entrar" />
+  }
 
   return (
     <>

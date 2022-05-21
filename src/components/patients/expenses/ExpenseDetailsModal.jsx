@@ -18,7 +18,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilPencil } from '@coreui/icons'
-import { dateFormat, currencyFormat } from 'src/functions'
+import { dateFormat, currencyFormat } from 'src/utils/functions'
 import PropTypes from 'prop-types'
 import ExpenseOptions from './ExpenseOptions'
 import { api } from 'src/Api'

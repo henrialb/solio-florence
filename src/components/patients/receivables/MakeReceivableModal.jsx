@@ -24,7 +24,7 @@ import CIcon from '@coreui/icons-react'
 import { cilEuro, cilNotes } from '@coreui/icons'
 import { api } from 'src/Api'
 import ExpensesTableHead from '../expenses/ExpensesTableHead'
-import { dateFormat, currencyFormat } from 'src/functions'
+import { dateFormat, currencyFormat } from 'src/utils/functions'
 import CloseModalButton from 'src/components/CloseModalButton'
 
 const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses }) => {

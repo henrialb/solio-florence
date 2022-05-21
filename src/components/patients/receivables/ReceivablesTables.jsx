@@ -12,7 +12,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilNotes } from '@coreui/icons'
 import PropTypes from 'prop-types'
-import { organiseReceivables, currencyFormat } from 'src/functions'
+import { organiseReceivables, currencyFormat } from 'src/utils/functions'
 import ReceivablesTableHead from './ReceivablesTableHead'
 import EditReceivableModal from './EditReceivableModal'
 
