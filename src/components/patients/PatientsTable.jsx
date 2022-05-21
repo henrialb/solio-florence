@@ -45,7 +45,7 @@ const PatientsTable = ({ patients }) => {
                 <CAvatar size="md" src={patient.profilePhoto ? patient.profilePhoto : avatar} />
               </CTableDataCell>
               <CTableDataCell className="fw-semibold">{patient.name}</CTableDataCell>
-              <CTableDataCell className="text-center">{age(patient.dob)}</CTableDataCell>
+              <CTableDataCell className="text-center">{age(patient.dateOfBirth)}</CTableDataCell>
               <CTableDataCell className="text-center">
                 <CBadge color="light" className="text-secondary">
                   {patient.covenant !== 'personal' && patient.covenant.toUpperCase()}

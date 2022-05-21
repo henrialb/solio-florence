@@ -44,7 +44,7 @@ const NewPatient = () => {
     const fields = {
       fullName: patient.fullName,
       name: patient.name,
-      dob: patient.dob,
+      dateOfBirth: patient.dateOfBirth,
       sex: patient.sex,
       clothesTag: patient.clothesTag,
       citizenNo: patient.citizenNo,
@@ -87,8 +87,8 @@ const NewPatient = () => {
                   <CFormInput id="inputName" name="name" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputDob" className="fw-bold">Data de nascimento</CFormLabel>
-                  <CFormInput type="date" id="inputDob" name="dob" onChange={handleChange} />
+                  <CFormLabel htmlFor="inputDateOfBirth" className="fw-bold">Data de nascimento</CFormLabel>
+                  <CFormInput type="date" id="inputDateOfBirth" name="dateOfBirth" onChange={handleChange} />
                 </CCol>
                 <CCol sm={6} md={4}>
                   <CFormLabel htmlFor="inputSex" className="fw-bold">Sexo</CFormLabel>
@@ -172,8 +172,8 @@ const NewPatient = () => {
               </CRow>
               <CRow>
                 {patient.fullName !== undefined ? (<p><b>Nome:</b> {patient.fullName}</p>) : null}
-                {patient.dob !== undefined ? (
-                  <p><b>Data de nascimento:</b> {dateFormat(patient.dob)}&ensp;({age(patient.dob)} anos)</p>
+                {patient.dateOfBirth !== undefined ? (
+                  <p><b>Data de nascimento:</b> {dateFormat(patient.dateOfBirth)}&ensp;({age(patient.dateOfBirth)} anos)</p>
                   ) : null}
                 {patient.sex !== undefined ? (
                   <p><b>Sexo:</b> {parseInt(patient.sex) === 0 ? 'Feminino' : 'Masculino'}</p>

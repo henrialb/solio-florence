@@ -29,7 +29,7 @@ const PatientData = ({ patient }) => {
               <CRow className="mb-3">
                 <CCol className="me-1">
                   <CCardTitle>{patient.fullName}</CCardTitle>
-                  <CCardSubtitle className="mb-2 text-medium-emphasis small">{dateFormat(patient.dob)}</CCardSubtitle>
+                  <CCardSubtitle className="mb-2 text-medium-emphasis small">{dateFormat(patient.dateOfBirth)}</CCardSubtitle>
                 </CCol>
                 {covenant && (
                   <CCol>
