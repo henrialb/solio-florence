@@ -23,7 +23,7 @@ import PropTypes from 'prop-types'
 import ExpenseOptions from './ExpenseOptions'
 import { api } from 'src/Api'
 
-const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
+const EditExpenseModal = ({ expense, setUpdateExpenses }) => {
   const [visible, setVisible] = useState(false)
   const [editMode, setEditMode] = useState(false)
   const [expenseDetails, setExpenseDetails] = useState(expense)
@@ -150,7 +150,7 @@ const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
   )
 }
 
-ExpenseDetailsModal.propTypes = { expense: PropTypes.object }
-ExpenseDetailsModal.propTypes = { setUpdateExpenses: PropTypes.func }
+EditExpenseModal.propTypes = { expense: PropTypes.object }
+EditExpenseModal.propTypes = { setUpdateExpenses: PropTypes.func }
 
-export default ExpenseDetailsModal
+export default EditExpenseModal
