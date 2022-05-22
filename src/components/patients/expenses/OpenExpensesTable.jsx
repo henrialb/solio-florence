@@ -1,11 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CTable, CTableRow, CTableBody, CTableDataCell, CCardTitle, CPopover } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilNotes } from '@coreui/icons'
+import { CTable, CTableBody, CCardTitle } from '@coreui/react'
 import ExpensesTableHead from './ExpensesTableHead'
-import { dateFormat, currencyFormat } from 'src/utils/functions'
-import ExpenseOptions from './ExpenseOptions'
 import EditExpenseModal from './EditExpenseModal'
 
 const OpenExpensesTable = ({ expenses, setUpdateExpenses }) => {
