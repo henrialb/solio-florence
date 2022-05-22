@@ -133,14 +133,11 @@ const ExpenseDetailsModal = ({ expense, setUpdateExpenses }) => {
             </CCol>
           </CForm>
         </CModalBody>
-        <CModalFooter className="d-flex justify-content-between mt-3">
+        <CModalFooter className="d-flex justify-content-end mt-3">
           {!editMode ? (
-            <>
-              <CButton color="secondary" size="sm" variant="ghost" onClick={() => setVisible(false)}>Fechar</CButton>
-              <CButton color="primary" variant="ghost" size="sm" onClick={() => setEditMode(!editMode)}>
-                <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar
-              </CButton>
-            </>
+            <CButton color="primary" variant="ghost" size="sm" onClick={() => setEditMode(!editMode)}>
+              <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar
+            </CButton>
           ) : (
             <>
               <CButton color="secondary" size="sm" variant="ghost" onClick={() => setEditMode(!editMode)}>Cancelar</CButton>

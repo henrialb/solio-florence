@@ -12,7 +12,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilTrash } from '@coreui/icons'
 import { api } from 'src/Api'
-import CloseModalButton from 'src/components/CloseModalButton'
 import { Navigate } from 'react-router-dom'
 import { deleteAuthToken } from 'src/utils/auth'
 
@@ -48,8 +47,10 @@ const DeleteReceivableModal = ({ receivableId, setUpdateReceivables }) => {
           <CModalTitle>Eliminar conta</CModalTitle>
         </CModalHeader>
         <CModalBody>Confirma?</CModalBody>
-        <CModalFooter className="d-flex justify-content-between mt-3">
-          <CloseModalButton setVisible={setVisible} text="Cancelar" />
+        <CModalFooter className="d-flex justify-content-end mt-3">
+          <CButton color="secondary" size="sm" variant="ghost" onClick={() => setVisible(false)}>
+            Cancelar
+          </CButton>
           <CButton
             color="danger"
             className="text-white"
