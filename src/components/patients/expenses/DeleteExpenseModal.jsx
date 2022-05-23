@@ -15,9 +15,14 @@ import { api } from 'src/Api'
 import { Navigate } from 'react-router-dom'
 import { deleteAuthToken } from 'src/utils/auth'
 
-const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
+const DeleteExpenseModal = ({
+  expenseId,
+  setUpdateExpenses,
+  openDeleteModal,
+  setOpenDeleteModal,
+}) => {
   const [error, setError] = useState(null) // TODO: handle errors
-  const [visible, setVisible] = useState(false)
+  // const [visible, setVisible] = useState(false)
 
   const handleSubmit = (id) => {
     api
@@ -38,17 +43,23 @@ const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
 
   return (
     <>
-      <CDropdownItem onClick={() => setVisible(true)}>
-        <CIcon icon={cilTrash} className="me-2" />
-        Eliminar
-      </CDropdownItem>
-      <CModal alignment="center" size="sm" visible={visible} onClose={() => setVisible(false)}>
+      <CModal
+        alignment="center"
+        size="sm"
+        visible={openDeleteModal}
+        onClose={() => setOpenDeleteModal(false)}
+      >
         <CModalHeader>
           <CModalTitle>Eliminar despesa</CModalTitle>
         </CModalHeader>
         <CModalBody>Confirma?</CModalBody>
         <CModalFooter className="d-flex justify-content-end mt-3">
-          <CButton color="secondary" size="sm" variant="ghost" onClick={() => setVisible(false)}>
+          <CButton
+            color="secondary"
+            size="sm"
+            variant="ghost"
+            onClick={() => setOpenDeleteModal(false)}
+          >
             Cancelar
           </CButton>
           <CButton
@@ -67,5 +78,7 @@ const DeleteExpenseModal = ({ expenseId, setUpdateExpenses }) => {
 
 DeleteExpenseModal.propTypes = { expenseId: PropTypes.number }
 DeleteExpenseModal.propTypes = { setUpdateExpenses: PropTypes.func }
+DeleteExpenseModal.propTypes = { openDeleteModal: PropTypes.bool }
+DeleteExpenseModal.propTypes = { setOpenDeleteModal: PropTypes.func }
 
 export default DeleteExpenseModal

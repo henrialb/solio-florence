@@ -17,15 +17,17 @@ import {
   CFormTextarea,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilNotes, cilPencil } from '@coreui/icons'
+import { cilNotes, cilPencil, cilTrash } from '@coreui/icons'
 import { dateFormat, currencyFormat } from 'src/utils/functions'
 import PropTypes from 'prop-types'
 import ExpenseOptions from './ExpenseOptions'
 import { api } from 'src/Api'
+import DeleteExpenseModal from './DeleteExpenseModal'
 
 const EditExpenseModal = ({ expense, setUpdateExpenses }) => {
   const [visible, setVisible] = useState(false)
   const [editMode, setEditMode] = useState(false)
+  const [openDeleteModal, setOpenDeleteModal] = useState(false)
   const [expenseDetails, setExpenseDetails] = useState(expense)
 
   const handleChange = (event) => {
@@ -133,19 +135,49 @@ const EditExpenseModal = ({ expense, setUpdateExpenses }) => {
             </CCol>
           </CForm>
         </CModalBody>
-        <CModalFooter className="d-flex justify-content-end mt-3">
-          {!editMode ? (
-            <CButton color="primary" variant="ghost" size="sm" onClick={() => setEditMode(!editMode)}>
+        {!editMode ? (
+          <CModalFooter className="d-flex justify-content-between mt-3">
+            <CButton
+              color="danger"
+              variant="ghost"
+              size="sm"
+              onClick={() => setOpenDeleteModal(true)}
+            >
+              <CIcon icon={cilTrash} size="sm" /> &thinsp;Eliminar
+            </CButton>
+            <CButton
+              color="primary"
+              variant="ghost"
+              size="sm"
+              onClick={() => setEditMode(!editMode)}
+            >
               <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar
             </CButton>
-          ) : (
-            <>
-              <CButton color="secondary" size="sm" variant="ghost" onClick={() => setEditMode(!editMode)}>Cancelar</CButton>
-              <CButton color="primary" size="sm" onClick={handleSubmit}>Guardar</CButton>
-            </>
-          )}
-        </CModalFooter>
+          </CModalFooter>
+        ) : (
+          <CModalFooter className="d-flex justify-content-end mt-3">
+            <CButton
+              color="secondary"
+              size="sm"
+              variant="ghost"
+              onClick={() => setEditMode(!editMode)}
+            >
+              Cancelar
+            </CButton>
+            <CButton color="primary" size="sm" onClick={handleSubmit}>
+              Guardar
+            </CButton>
+          </CModalFooter>
+        )}
       </CModal>
+      {openDeleteModal && (
+        <DeleteExpenseModal
+          expenseId={expense.id}
+          setUpdateExpenses={setUpdateExpenses}
+          openDeleteModal={openDeleteModal}
+          setOpenDeleteModal={setOpenDeleteModal}
+        />
+      )}
     </>
   )
 }
