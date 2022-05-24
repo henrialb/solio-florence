@@ -25,7 +25,6 @@ import { cilEuro, cilNotes } from '@coreui/icons'
 import { api } from 'src/Api'
 import ExpensesTableHead from '../expenses/ExpensesTableHead'
 import { dateFormat, currencyFormat } from 'src/utils/functions'
-import CloseModalButton from 'src/components/CloseModalButton'
 
 const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses }) => {
   const { id } = useParams()
@@ -138,8 +137,7 @@ const MakeReceivableModal = ({ withoutOpenExpenses, expenses, setUpdateExpenses 
           </CForm>
           Criar conta de despesas com o valor <span className="font-monospace fw-bold">{currencyFormat(expensesSum)}</span>?
         </CModalBody>
-        <CModalFooter className="d-flex justify-content-between mt-2">
-          <CloseModalButton setVisible={setVisible} />
+        <CModalFooter className="d-flex justify-content-end mt-2">
           <CButton color="primary" size="sm" onClick={handleSubmit}>
             Confirmar
           </CButton>
