@@ -14,7 +14,7 @@ const AppFooter = () => {
         <span className="me-1 small">
           {process.env.REACT_APP_FLORENCE_VERSION} &ensp;
           <a
-            href={`mailto:henrique@solio.pt?&subject=Reportar erro ${process.env.REACT_APP_FLORENCE_VERSION}`}
+            href={`mailto:henrique@solio.pt?&subject=Reportar erro (${process.env.REACT_APP_FLORENCE_VERSION})`}
           >
             Reportar erro ou sugestão
           </a>
