@@ -15,10 +15,10 @@ const ExpenseOptions = ({ expense, setUpdateExpenses }) => {
           <CIcon icon={cilOptions} className="ms-3" />
         </CDropdownToggle>
         <CDropdownMenu className="py-2" placement="bottom-end">
-          <CDropdownItem href="#">
+          {/* <CDropdownItem href="#">
             <CIcon icon={cilPencil} className="me-2" />
             Alterar despesa
-          </CDropdownItem>
+          </CDropdownItem> */}
           <CDropdownItem onClick={() => setOpenDeleteModal(true)}>
             <CIcon icon={cilTrash} className="me-2" />
             Eliminar

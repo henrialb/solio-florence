@@ -16,9 +16,8 @@ import CIcon from '@coreui/icons-react'
 import { cilPencil } from '@coreui/icons'
 import { dateFormat } from 'src/utils/functions'
 
-
 const PatientData = ({ patient }) => {
-  const covenant = (patient.covenant !== 'personal') ? patient.covenant : false
+  const covenant = patient.covenant !== 'personal' ? patient.covenant : false
 
   return (
     <>
@@ -29,7 +28,9 @@ const PatientData = ({ patient }) => {
               <CRow className="mb-3">
                 <CCol className="me-1">
                   <CCardTitle>{patient.fullName}</CCardTitle>
-                  <CCardSubtitle className="mb-2 text-medium-emphasis small">{dateFormat(patient.dateOfBirth)}</CCardSubtitle>
+                  <CCardSubtitle className="mb-2 text-medium-emphasis small">
+                    {dateFormat(patient.dateOfBirth)}
+                  </CCardSubtitle>
                 </CCol>
                 {covenant && (
                   <CCol>
@@ -39,9 +40,9 @@ const PatientData = ({ patient }) => {
                   </CCol>
                 )}
                 <CCol sm="auto" className="ms-auto">
-                  <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
+                  {/* <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
                     <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar dados
-                  </CButton>
+                  </CButton> */}
                 </CCol>
               </CRow>
               <CRow>
