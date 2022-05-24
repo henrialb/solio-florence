@@ -13,7 +13,7 @@ import {
   CButton,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilMenu, cilAccountLogout, cilPowerStandby } from '@coreui/icons'
+import { cilMenu, cilAccountLogout } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown, AddDropdownMenu } from './header/index'
@@ -36,19 +36,14 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="d-none d-sm-flex me-auto">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink to="/" component={NavLink} className="fs-14">
               Início
             </CNavLink>
-          </CNavItem>
+          </CNavItem> */}
           <CNavItem>
             <CNavLink to="/utentes" component={NavLink} className="fs-14">
               Utentes
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink to="/despesas" component={NavLink} className="fs-14">
-              Despesas
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
