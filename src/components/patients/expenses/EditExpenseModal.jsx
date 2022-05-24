@@ -67,7 +67,7 @@ const EditExpenseModal = ({ expense, setUpdateExpenses }) => {
               <CIcon icon={cilNotes} />
             </CPopover>
           )}
-          <ExpenseOptions expenseId={expense.id} setUpdateExpenses={setUpdateExpenses} />
+          <ExpenseOptions expense={expense} setUpdateExpenses={setUpdateExpenses} />
         </CTableDataCell>
       </CTableRow>
       <CModal
@@ -172,7 +172,7 @@ const EditExpenseModal = ({ expense, setUpdateExpenses }) => {
       </CModal>
       {openDeleteModal && (
         <DeleteExpenseModal
-          expenseId={expense.id}
+          expense={expense}
           setUpdateExpenses={setUpdateExpenses}
           openDeleteModal={openDeleteModal}
           setOpenDeleteModal={setOpenDeleteModal}

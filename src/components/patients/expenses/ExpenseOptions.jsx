@@ -5,7 +5,7 @@ import CIcon from '@coreui/icons-react'
 import { cilOptions, cilTrash, cilPencil } from '@coreui/icons'
 import DeleteExpenseModal from './DeleteExpenseModal'
 
-const ExpenseOptions = ({ expenseId, setUpdateExpenses }) => {
+const ExpenseOptions = ({ expense, setUpdateExpenses }) => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
 
   return (
@@ -27,7 +27,7 @@ const ExpenseOptions = ({ expenseId, setUpdateExpenses }) => {
       </CDropdown>
       {openDeleteModal && (
         <DeleteExpenseModal
-          expenseId={expenseId}
+          expense={expense}
           setUpdateExpenses={setUpdateExpenses}
           openDeleteModal={openDeleteModal}
           setOpenDeleteModal={setOpenDeleteModal}
@@ -37,7 +37,7 @@ const ExpenseOptions = ({ expenseId, setUpdateExpenses }) => {
   )
 }
 
-ExpenseOptions.propTypes = { expenseId: PropTypes.number }
+ExpenseOptions.propTypes = { expense: PropTypes.object }
 ExpenseOptions.propTypes = { setUpdateExpenses: PropTypes.func }
 
 export default ExpenseOptions
