@@ -10,7 +10,6 @@ import { age } from 'src/utils/functions'
 import avatar from 'src/assets/images/avatars/avatar.png'
 import { deleteAuthToken } from 'src/utils/auth'
 
-
 const PatientData = React.lazy(() => import('src/components/patients/PatientData'))
 const PatientExpenses = React.lazy(() => import('src/components/patients/PatientExpenses'))
 const PatientReceivables = React.lazy(() => import('src/components/patients/PatientReceivables'))
@@ -23,13 +22,14 @@ const PatientsDashboard = () => {
 
   useEffect(() => {
     if (id) {
-      api.get(`/patients/${id}`)
-      .then((response) => {
-        setPatient(response.data)
-      })
-      .catch((error) => {
-        setError(error)
-      })
+      api
+        .get(`/patients/${id}`)
+        .then((response) => {
+          setPatient(response.data)
+        })
+        .catch((error) => {
+          setError(error)
+        })
     }
   }, [id])
 
@@ -44,7 +44,11 @@ const PatientsDashboard = () => {
     <>
       <CRow className="d-md-flex justify-content-between mb-3 align-items-center">
         <CCol sm="auto" className="d-flex align-items-center">
-          <CAvatar size="xl" src={patient.profilePhoto ? patient.profilePhoto : avatar} className="p-0" />
+          <CAvatar
+            size="xl"
+            src={patient.profilePhoto ? patient.profilePhoto : avatar}
+            className="p-0"
+          />
           <CCol className="ms-3">
             <h5 className="m-0 fw-bold">{patient.name}</h5>
             <small className="text-medium-emphasis">{age(patient.dateOfBirth)} anos</small>
@@ -57,21 +61,23 @@ const PatientsDashboard = () => {
                 <CIcon icon={cilUser} className="me-1" /> Dados
               </CNavLink>
             </CNavItem>
-            <CNavItem className="tab-item">
-              <CNavLink to="despesas" component={NavLink} disabled={patientScml}>
-                <CIcon icon={cilDescription} className="me-1" /> Despesas
-              </CNavLink>
-            </CNavItem>
+            {!patientScml && (
+              <CNavItem className="tab-item">
+                <CNavLink to="despesas" component={NavLink} disabled={patientScml}>
+                  <CIcon icon={cilDescription} className="me-1" /> Despesas
+                </CNavLink>
+              </CNavItem>
+            )}
             <CNavItem className="tab-item">
               <CNavLink to="contas" component={NavLink}>
                 <CIcon icon={cilEuro} className="me-1" /> Contas
               </CNavLink>
             </CNavItem>
-            <CNavItem className="tab-item">
+            {/* <CNavItem className="tab-item">
               <CNavLink to="contactos" component={NavLink} disabled>
                 <CIcon icon={cilAddressBook} className="me-1" /> Contactos
               </CNavLink>
-            </CNavItem>
+            </CNavItem> */}
           </CNav>
         </CCol>
       </CRow>

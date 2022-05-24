@@ -12,7 +12,10 @@ const AppFooter = () => {
       </div>
       <div className="ms-auto">
         <span className="me-1 small">
-          <a href="mailto:someone@companyname.com?&subject=Reportar erro (v0.1.0)">
+          {process.env.REACT_APP_FLORENCE_VERSION} &ensp;
+          <a
+            href={`mailto:henrique@solio.pt?&subject=Reportar erro (${process.env.REACT_APP_FLORENCE_VERSION})`}
+          >
             Reportar erro ou sugestão
           </a>
         </span>

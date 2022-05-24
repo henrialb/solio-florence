@@ -12,14 +12,14 @@ const ReceivableOptions = ({ receivableId, hasNote, setUpdateReceivables }) => {
         <CIcon icon={cilOptions} className="text-high-emphasis ms-2" />
       </CDropdownToggle>
       <CDropdownMenu className="py-2" placement="bottom-end">
-        <CDropdownItem href="#">
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilCheckAlt} className="me-2" />
           Marcar pago
         </CDropdownItem>
         <CDropdownItem href="#">
           <CIcon icon={cilPencil} className="me-2" />
           {hasNote ? 'Alterar nota' : 'Escrever nota'}
-        </CDropdownItem>
+        </CDropdownItem> */}
         <DeleteReceivableModal
           receivableId={receivableId}
           setUpdateReceivables={setUpdateReceivables}

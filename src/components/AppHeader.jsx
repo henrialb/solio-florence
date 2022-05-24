@@ -10,9 +10,10 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CButton,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilMenu, cilBell } from '@coreui/icons'
+import { cilMenu, cilAccountLogout } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown, AddDropdownMenu } from './header/index'
@@ -35,29 +36,27 @@ const AppHeader = () => {
           <CIcon icon={logo} height={48} alt="Logo" />
         </CHeaderBrand>
         <CHeaderNav className="d-none d-sm-flex me-auto">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink to="/" component={NavLink} className="fs-14">
               Início
             </CNavLink>
-          </CNavItem>
+          </CNavItem> */}
           <CNavItem>
             <CNavLink to="/utentes" component={NavLink} className="fs-14">
               Utentes
             </CNavLink>
           </CNavItem>
-          <CNavItem>
-            <CNavLink to="/despesas" component={NavLink} className="fs-14">
-              Despesas
-            </CNavLink>
-          </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3 align-items-center">
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilBell} />
             </CNavLink>
           </CNavItem>
-          <AddDropdownMenu />
+          <AddDropdownMenu /> */}
+          <CButton href="/sair" size="sm" variant="ghost" color="dark" className="me-1">
+            <CIcon icon={cilAccountLogout} size="sm" /> &thinsp;Sair
+          </CButton>
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>
