@@ -29,8 +29,13 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
   const { id } = useParams()
 
   const date = new Date()
-  const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
-  const [expense, setExpense] = useState({patientId: Number(id), date: today})
+  const today =
+    date.getFullYear() +
+    '-' +
+    String(date.getMonth() + 1).padStart(2, '0') +
+    '-' +
+    String(date.getDate()).padStart(2, '0')
+  const [expense, setExpense] = useState({ patientId: Number(id), date: today })
 
   useEffect(() => {
     if (patientFullName === null) {
@@ -51,7 +56,10 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
     setExpense((prevalue) => {
       return {
         ...prevalue,
-        [event.target.name]: event.target.name !== 'amount' ? event.target.value : event.target.value.replace(/,/g, '.'),
+        [event.target.name]:
+          event.target.name !== 'amount'
+            ? event.target.value
+            : event.target.value.replace(/,/g, '.'),
       }
     })
   }
@@ -77,10 +85,7 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
       <CModal
         alignment="center"
         visible={visible}
-        onClose={() => [
-          setVisible(false),
-          setExpense({ patientId: id, date: today }),
-        ]}
+        onClose={() => [setVisible(false), setExpense({ patientId: id, date: today })]}
       >
         <CModalHeader>
           <CModalTitle>Adicionar despesa</CModalTitle>
@@ -115,13 +120,25 @@ const AddExpenseModal = ({ setUpdateExpenses, patientFullName = null }) => {
               <CFormLabel htmlFor="inputAmount" className="fw-bold">
                 Valor
               </CFormLabel>
-              <CFormInput id="inputAmount" name="amount" className="font-monospace" onChange={handleChange} />
+              <CFormInput
+                id="inputAmount"
+                name="amount"
+                placeholder="0,00"
+                className="font-monospace"
+                onChange={handleChange}
+              />
             </CCol>
             <CCol md={6}>
               <CFormLabel htmlFor="inputDate" className="fw-bold">
                 Data
               </CFormLabel>
-              <CFormInput type="date" id="inputDate" name="date" defaultValue={today} onChange={handleChange} />
+              <CFormInput
+                type="date"
+                id="inputDate"
+                name="date"
+                defaultValue={today}
+                onChange={handleChange}
+              />
             </CCol>
             <CCol md={12}>
               <CFormLabel htmlFor="inputNote" className="fw-bold">
