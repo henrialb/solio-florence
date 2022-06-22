@@ -6,7 +6,6 @@ import {
   CRow,
   CCol,
   CCard,
-  CCardTitle,
   CCardBody,
   CCardFooter,
   CForm,
@@ -28,12 +27,15 @@ const NewPatient = () => {
     String(date.getMonth() + 1).padStart(2, '0') +
     '-' +
     String(date.getDate()).padStart(2, '0')
+
   const [patient, setPatient] = useState({
-    admissionDate: today,
+    openDate: today,
     covenant: 'personal',
     profilePhoto: null
   })
+
   const [photo, setPhoto] = useState(null)
+
   const navigate = useNavigate()
 
   const handleChange = (event) => {
@@ -53,27 +55,11 @@ const NewPatient = () => {
   const handleSubmit = () => {
     const formData = new FormData()
     const config = { headers: { 'content-type': 'multipart/form-data' } }
-    const fields = {
-      fullName: patient.fullName,
-      name: patient.name,
-      dateOfBirth: patient.dateOfBirth,
-      sex: patient.sex,
-      clothesTag: patient.clothesTag,
-      citizenNum: patient.citizenNum,
-      nifNum: patient.nifNum,
-      healthNum: patient.healthNum,
-      socialSecurityNum: patient.socialSecurityNum,
-      covenant: patient.covenant,
-      openDate: patient.admissionDate,
-      facility: patient.facility,
-      monthlyFee: patient.monthlyFee,
-      note: patient.notes
-    }
 
-    for (var property in fields) {
-      formData.append(property, fields[property])
+    // Add patient properties to formData
+    for (var property in patient) {
+      formData.append(property, patient[property])
     }
-    patient.profilePhoto && formData.append('profile_photo', patient.profilePhoto)
 
     api.post('/patients', formData, config).then((response) => {
       console.log(response)
@@ -87,9 +73,7 @@ const NewPatient = () => {
         <CCol md={8}>
           <CCard>
             <CCardBody>
-              <CCardTitle className="mb-4">
-                <h2 className="fw-bold">Novo utente</h2>
-              </CCardTitle>
+              <h2 className="fw-bold mb-4">Novo utente</h2>
               <CForm className="row g-3">
                 <CCol sm={12}>
                   <CFormInput
@@ -193,8 +177,8 @@ const NewPatient = () => {
                 <CCol sm={6} md={4}>
                   <CFormInput
                     type="date"
-                    id="inputAdmissionDate"
-                    name="admissionDate"
+                    id="inputOpenDate"
+                    name="openDate"
                     floatingLabel="Data de admissão"
                     placeholder="Data de admissão"
                     defaultValue={today}
@@ -241,7 +225,7 @@ const NewPatient = () => {
                 <CCol md={12}>
                   <CFormTextarea
                     id="inputNote"
-                    name="notes"
+                    name="note"
                     floatingLabel="Observações"
                     placeholder="Observações"
                     onChange={handleChange}
@@ -323,7 +307,7 @@ const NewPatient = () => {
                   <>
                     <hr />
                     <p>
-                      <b>Data de Admissão:</b> {dateFormat(patient.admissionDate)}
+                      <b>Data de Admissão:</b> {dateFormat(patient.openDate)}
                     </p>
                   </>
                 )}
