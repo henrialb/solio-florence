@@ -87,41 +87,47 @@ const NewPatient = () => {
         <CCol md={8}>
           <CCard>
             <CCardBody>
-              <CCardTitle className="mb-3">Abrir processo</CCardTitle>
+              <CCardTitle className="mb-4">
+                <h2 className="fw-bold">Abrir processo</h2>
+              </CCardTitle>
               <CForm className="row g-3">
                 <CCol sm={6} md={8}>
-                  <CFormLabel htmlFor="inputFullName" className="fw-bold">
-                    Nome completo
-                  </CFormLabel>
-                  <CFormInput id="inputFullName" name="fullName" onChange={handleChange} />
-                </CCol>
-                <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputFullName" className="fw-bold">
-                    Nome de tratamento
-                  </CFormLabel>
                   <CFormInput
-                    id="inputName"
-                    name="name"
-                    floatingLabel="teste"
+                    id="inputFullName"
+                    name="fullName"
+                    floatingLabel="Nome completo"
+                    placeholder="Nome completo"
                     onChange={handleChange}
                   />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputDateOfBirth" className="fw-bold">
-                    Data de nascimento
-                  </CFormLabel>
+                  <CFormInput
+                    id="inputName"
+                    name="name"
+                    floatingLabel="Nome de tratamento"
+                    placeholder="Nome de tratamento"
+                    onChange={handleChange}
+                  />
+                </CCol>
+                <CCol sm={6} md={4}>
                   <CFormInput
                     type="date"
                     id="inputDateOfBirth"
                     name="dateOfBirth"
+                    floatingLabel="Data de nascimento"
+                    placeholder="Data de nascimento"
                     onChange={handleChange}
                   />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputSex" className="fw-bold">
-                    Sexo
-                  </CFormLabel>
-                  <CFormSelect id="inputSex" name="sex" defaultValue={''} onChange={handleChange}>
+                  <CFormSelect
+                    id="inputSex"
+                    name="sex"
+                    defaultValue={''}
+                    floatingLabel="Sexo"
+                    placeholder="Sexo"
+                    onChange={handleChange}
+                  >
                     <option key={-1} value={''}></option>
                     <option key={0} value="female">
                       Feminino
@@ -132,47 +138,57 @@ const NewPatient = () => {
                   </CFormSelect>
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputClothesTag" className="fw-bold">
-                    Marcação de roupa
-                  </CFormLabel>
-                  <CFormInput id="inputClothesTag" name="clothesTag" onChange={handleChange} />
+                  <CFormInput
+                    id="inputClothesTag"
+                    name="clothesTag"
+                    floatingLabel="Marcação de roupa"
+                    placeholder="Marcação de roupa"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputCitizenNum" className="fw-bold">
-                    Nº CC
-                  </CFormLabel>
-                  <CFormInput id="inputCitizenNum" name="citizenNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputCitizenNum"
+                    name="citizenNum"
+                    floatingLabel="Cartão de Cidadão"
+                    placeholder="Cartão de Cidadão"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputNifNum" className="fw-bold">
-                    NIF
-                  </CFormLabel>
-                  <CFormInput id="inputNifNum" name="nifNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputNifNum"
+                    name="nifNum"
+                    floatingLabel="NIF"
+                    placeholder="NIF"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputHealthNum" className="fw-bold">
-                    Nº Utente de Saúde
-                  </CFormLabel>
-                  <CFormInput id="inputHealthNum" name="healthNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputHealthNum"
+                    name="healthNum"
+                    floatingLabel="Utente de Saúde"
+                    placeholder="Utente de Saúde"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputSocialSecurityNum" className="fw-bold">
-                    Nº Seg. Social
-                  </CFormLabel>
                   <CFormInput
                     id="inputSocialSecurityNum"
                     name="socialSecurityNum"
+                    floatingLabel="Segurança Social"
+                    placeholder="Segurança Social"
                     onChange={handleChange}
                   />
                 </CCol>
                 <CRow className="mt-3">
                   <CCol sm={6} md={4}>
-                    <CFormLabel htmlFor="inputCovenant" className="fw-bold">
-                      Acordo
-                    </CFormLabel>
                     <CFormSelect
                       id="inputCovenant"
                       name="covenant"
+                      floatingLabel="Acordo"
+                      placeholder="Acordo"
                       defaultValue={0}
                       onChange={handleChange}
                     >
@@ -185,24 +201,22 @@ const NewPatient = () => {
                     </CFormSelect>
                   </CCol>
                   <CCol sm={6} md={4}>
-                    <CFormLabel htmlFor="inputAdmissionDate" className="fw-bold">
-                      Data de admissão
-                    </CFormLabel>
                     <CFormInput
                       type="date"
                       id="inputAdmissionDate"
                       name="admissionDate"
+                      floatingLabel="Data de admissão"
+                      placeholder="Data de admissão"
                       defaultValue={today}
                       onChange={handleChange}
                     />
                   </CCol>
                   <CCol sm={6} md={2}>
-                    <CFormLabel htmlFor="inputFacility" className="fw-bold">
-                      Casa
-                    </CFormLabel>
                     <CFormSelect
                       id="inputFacility"
                       name="facility"
+                      floatingLabel="Casa"
+                      placeholder="Casa"
                       defaultValue={null}
                       onChange={handleChange}
                     >
@@ -216,22 +230,24 @@ const NewPatient = () => {
                     </CFormSelect>
                   </CCol>
                   <CCol sm={6} md={2}>
-                    <CFormLabel htmlFor="inputMonthlyFee" className="fw-bold">
-                      Mensalidade
-                    </CFormLabel>
                     <CFormInput
                       id="inputMonthlyFee"
                       name="monthlyFee"
                       className="font-monospace"
+                      floatingLabel="Mensalidade"
+                      placeholder="Mensalidade"
                       onChange={handleChange}
                     />
                   </CCol>
                 </CRow>
                 <CCol md={12}>
-                  <CFormLabel htmlFor="inputNote" className="fw-bold">
-                    Observações
-                  </CFormLabel>
-                  <CFormTextarea id="inputNote" name="notes" onChange={handleChange} />
+                  <CFormTextarea
+                    id="inputNote"
+                    name="notes"
+                    floatingLabel="Observações"
+                    placeholder="Observações"
+                    onChange={handleChange}
+                  />
                 </CCol>
               </CForm>
             </CCardBody>
