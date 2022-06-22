@@ -14,7 +14,7 @@ import {
   CFormSelect,
   CFormInput,
   CFormTextarea,
-  CButton,
+  CButton
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilCamera } from '@coreui/icons'
@@ -31,7 +31,7 @@ const NewPatient = () => {
   const [patient, setPatient] = useState({
     admissionDate: today,
     covenant: 'personal',
-    profilePhoto: null,
+    profilePhoto: null
   })
   const [photo, setPhoto] = useState(null)
   const navigate = useNavigate()
@@ -41,7 +41,7 @@ const NewPatient = () => {
       return {
         ...prevalue,
         [event.target.name]:
-          event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0],
+          event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0]
       }
     })
 
@@ -67,7 +67,7 @@ const NewPatient = () => {
       openDate: patient.admissionDate,
       facility: patient.facility,
       monthlyFee: patient.monthlyFee,
-      note: patient.notes,
+      note: patient.notes
     }
 
     for (var property in fields) {
@@ -88,10 +88,10 @@ const NewPatient = () => {
           <CCard>
             <CCardBody>
               <CCardTitle className="mb-4">
-                <h2 className="fw-bold">Abrir processo</h2>
+                <h2 className="fw-bold">Novo utente</h2>
               </CCardTitle>
               <CForm className="row g-3">
-                <CCol sm={6} md={8}>
+                <CCol sm={12}>
                   <CFormInput
                     id="inputFullName"
                     name="fullName"
@@ -139,15 +139,6 @@ const NewPatient = () => {
                 </CCol>
                 <CCol sm={6} md={4}>
                   <CFormInput
-                    id="inputClothesTag"
-                    name="clothesTag"
-                    floatingLabel="Marcação de roupa"
-                    placeholder="Marcação de roupa"
-                    onChange={handleChange}
-                  />
-                </CCol>
-                <CCol sm={6} md={4}>
-                  <CFormInput
                     id="inputCitizenNum"
                     name="citizenNum"
                     floatingLabel="Cartão de Cidadão"
@@ -182,64 +173,71 @@ const NewPatient = () => {
                     onChange={handleChange}
                   />
                 </CCol>
-                <CRow className="mt-3">
-                  <CCol sm={6} md={4}>
-                    <CFormSelect
-                      id="inputCovenant"
-                      name="covenant"
-                      floatingLabel="Acordo"
-                      placeholder="Acordo"
-                      defaultValue={0}
-                      onChange={handleChange}
-                    >
-                      <option key={0} value="personal">
-                        Privado
-                      </option>
-                      <option key={1} value="scml">
-                        SCML
-                      </option>
-                    </CFormSelect>
-                  </CCol>
-                  <CCol sm={6} md={4}>
-                    <CFormInput
-                      type="date"
-                      id="inputAdmissionDate"
-                      name="admissionDate"
-                      floatingLabel="Data de admissão"
-                      placeholder="Data de admissão"
-                      defaultValue={today}
-                      onChange={handleChange}
-                    />
-                  </CCol>
-                  <CCol sm={6} md={2}>
-                    <CFormSelect
-                      id="inputFacility"
-                      name="facility"
-                      floatingLabel="Casa"
-                      placeholder="Casa"
-                      defaultValue={null}
-                      onChange={handleChange}
-                    >
-                      <option key={0} value={null}></option>
-                      <option key={36} value="36">
-                        36
-                      </option>
-                      <option key={21} value="21">
-                        21
-                      </option>
-                    </CFormSelect>
-                  </CCol>
-                  <CCol sm={6} md={2}>
-                    <CFormInput
-                      id="inputMonthlyFee"
-                      name="monthlyFee"
-                      className="font-monospace"
-                      floatingLabel="Mensalidade"
-                      placeholder="Mensalidade"
-                      onChange={handleChange}
-                    />
-                  </CCol>
-                </CRow>
+                <CCol sm={6} md={4}>
+                  <CFormSelect
+                    id="inputCovenant"
+                    name="covenant"
+                    floatingLabel="Acordo"
+                    placeholder="Acordo"
+                    defaultValue={0}
+                    onChange={handleChange}
+                  >
+                    <option key={0} value="personal">
+                      Privado
+                    </option>
+                    <option key={1} value="scml">
+                      SCML
+                    </option>
+                  </CFormSelect>
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    type="date"
+                    id="inputAdmissionDate"
+                    name="admissionDate"
+                    floatingLabel="Data de admissão"
+                    placeholder="Data de admissão"
+                    defaultValue={today}
+                    onChange={handleChange}
+                  />
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormSelect
+                    id="inputFacility"
+                    name="facility"
+                    floatingLabel="Casa"
+                    placeholder="Casa"
+                    defaultValue={null}
+                    onChange={handleChange}
+                  >
+                    <option key={0} value={null}></option>
+                    <option key={36} value="36">
+                      36
+                    </option>
+                    <option key={21} value="21">
+                      21
+                    </option>
+                  </CFormSelect>
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    id="inputClothesTag"
+                    name="clothesTag"
+                    floatingLabel="Marcação de roupa"
+                    placeholder="Marcação de roupa"
+                    onChange={handleChange}
+                  />
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    id="inputMonthlyFee"
+                    name="monthlyFee"
+                    className="font-monospace"
+                    floatingLabel="Mensalidade"
+                    placeholder="Mensalidade"
+                    onChange={handleChange}
+                  />
+                </CCol>
                 <CCol md={12}>
                   <CFormTextarea
                     id="inputNote"
@@ -282,7 +280,7 @@ const NewPatient = () => {
                 />
               </CRow>
               <CRow className="d-flex justify-content-center">
-                <h5 className="mb-3 fw-bold text-center">{patient.name || 'Novo utente'}</h5>
+                <h5 className="mb-3 fw-bold text-center">{patient.name}</h5>
               </CRow>
               <CRow>
                 {patient.fullName && (
