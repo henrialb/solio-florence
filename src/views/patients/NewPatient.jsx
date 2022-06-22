@@ -299,11 +299,6 @@ const NewPatient = () => {
                     <b>Sexo:</b> {patient.sex === 'female' ? 'Feminino' : 'Masculino'}
                   </p>
                 )}
-                {patient.clothesTag && (
-                  <p>
-                    <b>Marcação de roupa:</b> {patient.clothesTag}
-                  </p>
-                )}
                 {patient.citizenNum && (
                   <p>
                     <b>Cartão de Cidadão:</b> {patient.citizenNum}
@@ -335,6 +330,11 @@ const NewPatient = () => {
                 {patient.facility && (
                   <p>
                     <b>Casa:</b> {patient.facility}
+                  </p>
+                )}
+                {patient.clothesTag && (
+                  <p>
+                    <b>Marcação de roupa:</b> {patient.clothesTag}
                   </p>
                 )}
                 {patient.monthlyFee && (
