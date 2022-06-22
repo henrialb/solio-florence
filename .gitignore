@@ -25,3 +25,6 @@ yarn-error.log*
 
 src/scss/_variables_example.scss
 TODO
+
+# Local Netlify folder
+.netlify
