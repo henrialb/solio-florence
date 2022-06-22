@@ -22,8 +22,17 @@ import { age, dateFormat } from 'src/utils/functions'
 
 const NewPatient = () => {
   const date = new Date()
-  const today = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0')
-  const [patient, setPatient] = useState({admissionDate: today, covenant: 'personal', profilePhoto: null})
+  const today =
+    date.getFullYear() +
+    '-' +
+    String(date.getMonth() + 1).padStart(2, '0') +
+    '-' +
+    String(date.getDate()).padStart(2, '0')
+  const [patient, setPatient] = useState({
+    admissionDate: today,
+    covenant: 'personal',
+    profilePhoto: null
+  })
   const [photo, setPhoto] = useState(null)
   const navigate = useNavigate()
 
@@ -31,16 +40,19 @@ const NewPatient = () => {
     setPatient((prevalue) => {
       return {
         ...prevalue,
-        [event.target.name]: event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0],
+        [event.target.name]:
+          event.target.name !== 'profilePhoto' ? event.target.value : event.target.files[0]
       }
     })
 
-    if (event.target.name === 'profilePhoto') { setPhoto(URL.createObjectURL(event.target.files[0])) }
+    if (event.target.name === 'profilePhoto') {
+      setPhoto(URL.createObjectURL(event.target.files[0]))
+    }
   }
 
   const handleSubmit = () => {
     const formData = new FormData()
-    const config = {headers: { 'content-type': 'multipart/form-data' }}
+    const config = { headers: { 'content-type': 'multipart/form-data' } }
     const fields = {
       fullName: patient.fullName,
       name: patient.name,
@@ -63,8 +75,7 @@ const NewPatient = () => {
     }
     patient.profilePhoto && formData.append('profile_photo', patient.profilePhoto)
 
-    api.post('/patients', formData, config)
-    .then((response) => {
+    api.post('/patients', formData, config).then((response) => {
       console.log(response)
       navigate('/utentes')
     })
@@ -76,81 +87,172 @@ const NewPatient = () => {
         <CCol md={8}>
           <CCard>
             <CCardBody>
-              <CCardTitle className="mb-3">Abrir processo</CCardTitle>
+              <CCardTitle className="mb-4">
+                <h2 className="fw-bold">Novo utente</h2>
+              </CCardTitle>
               <CForm className="row g-3">
-                <CCol sm={6} md={8}>
-                  <CFormLabel htmlFor="inputFullName" className="fw-bold">Nome completo</CFormLabel>
-                  <CFormInput id="inputFullName" name="fullName" onChange={handleChange} />
+                <CCol sm={12}>
+                  <CFormInput
+                    id="inputFullName"
+                    name="fullName"
+                    floatingLabel="Nome completo"
+                    placeholder="Nome completo"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputFullName" className="fw-bold">Nome de tratamento</CFormLabel>
-                  <CFormInput id="inputName" name="name" onChange={handleChange} />
+                  <CFormInput
+                    id="inputName"
+                    name="name"
+                    floatingLabel="Nome de tratamento"
+                    placeholder="Nome de tratamento"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputDateOfBirth" className="fw-bold">Data de nascimento</CFormLabel>
-                  <CFormInput type="date" id="inputDateOfBirth" name="dateOfBirth" onChange={handleChange} />
+                  <CFormInput
+                    type="date"
+                    id="inputDateOfBirth"
+                    name="dateOfBirth"
+                    floatingLabel="Data de nascimento"
+                    placeholder="Data de nascimento"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputSex" className="fw-bold">Sexo</CFormLabel>
-                  <CFormSelect id="inputSex" name="sex" defaultValue={''} onChange={handleChange}>
+                  <CFormSelect
+                    id="inputSex"
+                    name="sex"
+                    defaultValue={''}
+                    floatingLabel="Sexo"
+                    placeholder="Sexo"
+                    onChange={handleChange}
+                  >
                     <option key={-1} value={''}></option>
-                    <option key={0} value="female">Feminino</option>
-                    <option key={1} value="male">Masculino</option>
+                    <option key={0} value="female">
+                      Feminino
+                    </option>
+                    <option key={1} value="male">
+                      Masculino
+                    </option>
                   </CFormSelect>
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputClothesTag" className="fw-bold">Marcação de roupa</CFormLabel>
-                  <CFormInput id="inputClothesTag" name="clothesTag" onChange={handleChange} />
+                  <CFormInput
+                    id="inputCitizenNum"
+                    name="citizenNum"
+                    floatingLabel="Cartão de Cidadão"
+                    placeholder="Cartão de Cidadão"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputCitizenNum" className="fw-bold">Nº CC</CFormLabel>
-                  <CFormInput id="inputCitizenNum" name="citizenNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputNifNum"
+                    name="nifNum"
+                    floatingLabel="NIF"
+                    placeholder="NIF"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputNifNum" className="fw-bold">NIF</CFormLabel>
-                  <CFormInput id="inputNifNum" name="nifNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputHealthNum"
+                    name="healthNum"
+                    floatingLabel="Utente de Saúde"
+                    placeholder="Utente de Saúde"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputHealthNum" className="fw-bold">Nº Utente de Saúde</CFormLabel>
-                  <CFormInput id="inputHealthNum" name="healthNum" onChange={handleChange} />
+                  <CFormInput
+                    id="inputSocialSecurityNum"
+                    name="socialSecurityNum"
+                    floatingLabel="Segurança Social"
+                    placeholder="Segurança Social"
+                    onChange={handleChange}
+                  />
                 </CCol>
                 <CCol sm={6} md={4}>
-                  <CFormLabel htmlFor="inputSocialSecurityNum" className="fw-bold">Nº Seg. Social</CFormLabel>
-                  <CFormInput id="inputSocialSecurityNum" name="socialSecurityNum" onChange={handleChange} />
+                  <CFormSelect
+                    id="inputCovenant"
+                    name="covenant"
+                    floatingLabel="Acordo"
+                    placeholder="Acordo"
+                    defaultValue={0}
+                    onChange={handleChange}
+                  >
+                    <option key={0} value="personal">
+                      Privado
+                    </option>
+                    <option key={1} value="scml">
+                      SCML
+                    </option>
+                  </CFormSelect>
                 </CCol>
-                <CRow className="mt-3">
-                  <CCol sm={6} md={4}>
-                    <CFormLabel htmlFor="inputCovenant" className="fw-bold">Acordo</CFormLabel>
-                    <CFormSelect id="inputCovenant" name="covenant" defaultValue={0} onChange={handleChange}>
-                      <option key={0} value="personal">Privado</option>
-                      <option key={1} value="scml">SCML</option>
-                    </CFormSelect>
-                  </CCol>
-                  <CCol sm={6} md={4}>
-                    <CFormLabel htmlFor="inputAdmissionDate" className="fw-bold">Data de admissão</CFormLabel>
-                    <CFormInput type="date" id="inputAdmissionDate" name="admissionDate" defaultValue={today} onChange={handleChange} />
-                  </CCol>
-                  <CCol sm={6} md={2}>
-                    <CFormLabel htmlFor="inputFacility" className="fw-bold">Casa</CFormLabel>
-                    <CFormSelect id="inputFacility" name="facility" defaultValue={null} onChange={handleChange}>
-                      <option key={0} value={null}></option>
-                      <option key={36} value="36">36</option>
-                      <option key={21} value="21">21</option>
-                    </CFormSelect>
-                  </CCol>
-                  <CCol sm={6} md={2}>
-                    <CFormLabel htmlFor="inputMonthlyFee" className="fw-bold">Mensalidade</CFormLabel>
-                    <CFormInput id="inputMonthlyFee" name="monthlyFee" className="font-monospace" onChange={handleChange} />
-                  </CCol>
-                </CRow>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    type="date"
+                    id="inputAdmissionDate"
+                    name="admissionDate"
+                    floatingLabel="Data de admissão"
+                    placeholder="Data de admissão"
+                    defaultValue={today}
+                    onChange={handleChange}
+                  />
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormSelect
+                    id="inputFacility"
+                    name="facility"
+                    floatingLabel="Casa"
+                    placeholder="Casa"
+                    defaultValue={null}
+                    onChange={handleChange}
+                  >
+                    <option key={0} value={null}></option>
+                    <option key={36} value="36">
+                      36
+                    </option>
+                    <option key={21} value="21">
+                      21
+                    </option>
+                  </CFormSelect>
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    id="inputClothesTag"
+                    name="clothesTag"
+                    floatingLabel="Marcação de roupa"
+                    placeholder="Marcação de roupa"
+                    onChange={handleChange}
+                  />
+                </CCol>
+                <CCol sm={6} md={4}>
+                  <CFormInput
+                    id="inputMonthlyFee"
+                    name="monthlyFee"
+                    className="font-monospace"
+                    floatingLabel="Mensalidade"
+                    placeholder="Mensalidade"
+                    onChange={handleChange}
+                  />
+                </CCol>
                 <CCol md={12}>
-                  <CFormLabel htmlFor="inputNote" className="fw-bold">Observações</CFormLabel>
-                  <CFormTextarea id="inputNote" name="notes" onChange={handleChange} />
+                  <CFormTextarea
+                    id="inputNote"
+                    name="notes"
+                    floatingLabel="Observações"
+                    placeholder="Observações"
+                    onChange={handleChange}
+                  />
                 </CCol>
               </CForm>
             </CCardBody>
             <CCardFooter className="d-flex justify-content-start p-3 mt-3 bg-white">
-              <CButton color="secondary" size="sm" variant="ghost" href="/utentes">Cancelar</CButton>
+              <CButton color="secondary" size="sm" variant="ghost" href="/utentes">
+                Cancelar
+              </CButton>
             </CCardFooter>
           </CCard>
         </CCol>
@@ -158,35 +260,88 @@ const NewPatient = () => {
           <CCard>
             <CCardBody>
               <CRow className="d-flex justify-content-center">
-                <CFormLabel htmlFor="photo-upload" className="profile-photo-input p-0 d-flex justify-content-center align-items-center text-secondary">
+                <CFormLabel
+                  htmlFor="photo-upload"
+                  className="profile-photo-input p-0 d-flex justify-content-center align-items-center text-secondary"
+                >
                   {photo !== null ? (
                     <img src={photo} className="patient-photo" alt="Utente" />
                   ) : (
                     <CIcon icon={cilCamera} size="xl" />
                   )}
                 </CFormLabel>
-                <input id="photo-upload" name="profilePhoto" type="file" accept="image/*" multiple={false} onChange={handleChange} />
+                <input
+                  id="photo-upload"
+                  name="profilePhoto"
+                  type="file"
+                  accept="image/*"
+                  multiple={false}
+                  onChange={handleChange}
+                />
               </CRow>
               <CRow className="d-flex justify-content-center">
-                <h5 className="mb-3 fw-bold text-center">{patient.name || 'Novo utente'}</h5>
+                <h5 className="mb-3 fw-bold text-center">{patient.name}</h5>
               </CRow>
               <CRow>
-                {patient.fullName !== undefined ? (<p><b>Nome:</b> {patient.fullName}</p>) : null}
-                {patient.dateOfBirth !== undefined ? (
-                  <p><b>Data de nascimento:</b> {dateFormat(patient.dateOfBirth)}&ensp;({age(patient.dateOfBirth)} anos)</p>
-                  ) : null}
-                {patient.sex !== undefined ? (
-                  <p><b>Sexo:</b> {parseInt(patient.sex) === 0 ? 'Feminino' : 'Masculino'}</p>
-                  ) : null}
-                {patient.clothesTag !== undefined ? (<p><b>Marcação de roupa:</b> {patient.clothesTag}</p>) : null}
-                {patient.citizenNum !== undefined ? (<p><b>Cartão de Cidadão:</b> {patient.citizenNum}</p>) : null}
-                {patient.nifNum !== undefined ? (<p><b>NIF:</b> {patient.nifNum}</p>) : null}
-                {patient.healthNum !== undefined ? (<p><b>Utente de Saúde:</b> {patient.healthNum}</p>) : null}
-                {patient.socialSecurityNum !== undefined ? (<p><b>Segurança Social:</b> {patient.socialSecurityNum}</p>) : null}
-                {patient.fullName !== undefined ? (<hr />) : null}
-                {patient.fullName !== undefined ? (<p><b>Data de Admissão:</b> {dateFormat(patient.admissionDate)}</p>) : null}
-                {patient.facility !== undefined ? (<p><b>Casa:</b> {parseInt(patient.facility) === 0 ? '36' : '21'}</p>) : null}
-                {patient.monthlyFee !== undefined ? (<p><b>Mensalidade:</b> {patient.monthlyFee}€</p>) : null}
+                {patient.fullName && (
+                  <p>
+                    <b>Nome:</b> {patient.fullName}
+                  </p>
+                )}
+                {patient.dateOfBirth && (
+                  <p>
+                    <b>Data de nascimento:</b> {dateFormat(patient.dateOfBirth)}&ensp;(
+                    {age(patient.dateOfBirth)} anos)
+                  </p>
+                )}
+                {patient.sex && (
+                  <p>
+                    <b>Sexo:</b> {patient.sex === 'female' ? 'Feminino' : 'Masculino'}
+                  </p>
+                )}
+                {patient.clothesTag && (
+                  <p>
+                    <b>Marcação de roupa:</b> {patient.clothesTag}
+                  </p>
+                )}
+                {patient.citizenNum && (
+                  <p>
+                    <b>Cartão de Cidadão:</b> {patient.citizenNum}
+                  </p>
+                )}
+                {patient.nifNum && (
+                  <p>
+                    <b>NIF:</b> {patient.nifNum}
+                  </p>
+                )}
+                {patient.healthNum && (
+                  <p>
+                    <b>Utente de Saúde:</b> {patient.healthNum}
+                  </p>
+                )}
+                {patient.socialSecurityNum && (
+                  <p>
+                    <b>Segurança Social:</b> {patient.socialSecurityNum}
+                  </p>
+                )}
+                {patient.fullName && (
+                  <>
+                    <hr />
+                    <p>
+                      <b>Data de Admissão:</b> {dateFormat(patient.admissionDate)}
+                    </p>
+                  </>
+                )}
+                {patient.facility && (
+                  <p>
+                    <b>Casa:</b> {patient.facility}
+                  </p>
+                )}
+                {patient.monthlyFee && (
+                  <p>
+                    <b>Mensalidade:</b> {patient.monthlyFee}€
+                  </p>
+                )}
               </CRow>
             </CCardBody>
             <CCardFooter className="d-flex justify-content-end p-3 bg-white">
