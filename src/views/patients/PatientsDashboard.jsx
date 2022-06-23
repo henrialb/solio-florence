@@ -23,6 +23,17 @@ const PatientsDashboard = () => {
       })
   }, [])
 
+  // Sort patients by name
+  patients.sort((a, b) => {
+    let nameA = a.name.toLowerCase(),
+      nameB = b.name.toLowerCase()
+
+    if (nameA < nameB) return -1
+    if (nameA > nameB) return 1
+    return 0
+  })
+
+  // Separate patients by facility: 36 -> Sólio Lar; 21 -> Sólio XXI
   const patients36 = patients.filter(function (patient) {
     return patient.facility === '36'
   })
