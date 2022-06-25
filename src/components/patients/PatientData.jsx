@@ -8,9 +8,8 @@ import {
   CCardBody,
   CContainer,
   CButton,
-  CCardTitle,
   CCardSubtitle,
-  CBadge,
+  CBadge
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPencil } from '@coreui/icons'
@@ -24,21 +23,17 @@ const PatientData = ({ patient }) => {
       <CRow>
         <CCol md={9}>
           <CCard>
-            <CCardBody>
+            <CCardBody className="position-relative">
+              {covenant && (
+                <CBadge color="light" className="text-secondary position-absolute end-0 me-3">
+                  {covenant.toUpperCase()}
+                </CBadge>
+              )}
               <CRow className="mb-3">
-                <CCol className="me-1">
-                  <CCardTitle>{patient.fullName}</CCardTitle>
-                  <CCardSubtitle className="mb-2 text-medium-emphasis small">
-                    {dateFormat(patient.dateOfBirth)}
-                  </CCardSubtitle>
-                </CCol>
-                {covenant && (
-                  <CCol>
-                    <CBadge color="light" className="text-secondary">
-                      {covenant.toUpperCase()}
-                    </CBadge>
-                  </CCol>
-                )}
+                <h4>{patient.fullName}</h4>
+                <CCardSubtitle className="mb-2 text-medium-emphasis ">
+                  {dateFormat(patient.dateOfBirth)}
+                </CCardSubtitle>
                 <CCol sm="auto" className="ms-auto">
                   {/* <CButton size="sm" variant="ghost" color="primary" className="me-2" disabled>
                     <CIcon icon={cilPencil} size="sm" /> &thinsp;Alterar dados
