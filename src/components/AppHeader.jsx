@@ -10,7 +10,7 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
-  CButton,
+  CButton
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilMenu, cilAccountLogout } from '@coreui/icons'

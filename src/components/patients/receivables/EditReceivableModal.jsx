@@ -13,11 +13,11 @@ import {
   CCol,
   CFormLabel,
   CFormInput,
-  CFormTextarea,
+  CFormTextarea
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilNotes, cilPencil } from '@coreui/icons'
-import { currencyFormat } from 'src/utils/functions'
+import { currencyFormat, isNumberWhole } from 'src/utils/functions'
 import PropTypes from 'prop-types'
 import { api } from 'src/Api'
 import ReceivableOptions from './ReceivableOptions'
@@ -36,7 +36,7 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientS
         [event.target.name]:
           event.target.name !== 'amount'
             ? event.target.value
-            : +event.target.value.replace(/,/g, '.'),
+            : +event.target.value.replace(/,/g, '.')
       }
     })
   }
@@ -64,7 +64,10 @@ const EditReceivableModal = ({ receivable, table, setUpdateReceivables, patientS
         </CTableDataCell>
         <CTableDataCell className="fw-semibold pointer">{receivable.description}</CTableDataCell>
         <CTableDataCell className="text-end font-monospace pointer">
-          {currencyFormat(receivable.amount, table === 'Mensalidades' ? 0 : 2)}
+          {currencyFormat(
+            receivable.amount,
+            table === 'Mensalidades' && isNumberWhole(receivable.amount) ? 0 : 2
+          )}
         </CTableDataCell>
         <CTableDataCell className="text-end text-secondary" onClick={(e) => e.stopPropagation()}>
           {receivable.note && (
