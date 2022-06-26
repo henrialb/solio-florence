@@ -17,6 +17,8 @@ const currencyFormat = (num, decimals = 2) =>
     maximumFractionDigits: decimals,
   })
 
+const isNumberWhole = (num) => num - Math.floor(num) === 0
+
 const organiseExpenses = (expenses) => {
   const patientReceivableIds = expenses.map((expense) => expense.patientReceivableId)
   const uniquePatientReceivableIds = Array.from(new Set(patientReceivableIds))
@@ -67,6 +69,7 @@ export {
   age,
   dateFormat,
   currencyFormat,
+  isNumberWhole,
   organiseExpenses,
   organiseReceivables,
 }

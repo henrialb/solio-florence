@@ -13,6 +13,7 @@ import {
   CFormSelect,
   CFormInput,
   CFormTextarea,
+  CBadge,
   CButton
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -242,7 +243,12 @@ const NewPatient = () => {
         </CCol>
         <CCol md={4} className="mt-3 mt-md-0">
           <CCard>
-            <CCardBody>
+            <CCardBody className="position-relative">
+              {patient.covenant !== 'personal' && (
+                <CBadge color="light" className="text-secondary position-absolute end-0 me-3">
+                  {patient.covenant.toUpperCase()}
+                </CBadge>
+              )}
               <CRow className="d-flex justify-content-center">
                 <CFormLabel
                   htmlFor="photo-upload"
